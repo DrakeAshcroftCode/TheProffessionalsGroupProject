@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div id="logoutButtonContainer" style="display: none;">
+        <button id="logoutButton">Logout</button>
+    </div>
+    <div id="timerDisplay"
+        style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
+        Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
+    </div>
+    <div>
+        <header>
+            <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+        </header>
+        <nav>
+            <ul id="navList">
+                <li data-link="Home"><a href="index.html">Home
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Create NCR"><a href="qualityInspector.html">Create NCR
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Storage
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Engineering"><a href="engineering.html">Engineering
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Operations"><a href="operations.html">Operations
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+            </ul>
+        </nav>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <div id="formContainer">
+                    <div id="loginForm">
+                        <h2>Login</h2>
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                        <button id="loginButton">Login</button>
+                        <p>No account? <a href="#" id="showRegister">Register</a></p>
+                    </div>
+                    <div id="registerForm" style="display:none;">
+                        <h2>Register</h2>
+                        <input type="text" id="registerUsername" placeholder="Username" required>
+                        <input type="email" id="registerEmail" placeholder="Email" required>
+                        <input type="password" id="registerPassword" placeholder="Password" required>
+
+                        <label for="registerRole">Select Role:</label>
+                        <select id="registerRole" required>
+                            <option value="">--Select Role--</option>
+                            <option value="Quality Inspector">Quality Inspector</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Operations Manager">Operations Manager</option>
+                        </select>
+
+                        <button id="registerButton">Register</button>
+                        <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main>
+
+            <h1>Welcome to the CROSSFIRE NCR Form Management Utility</h1>
+
+
+        </main>
+    </div>
+    <script src="scripts/session.js"></script>
+    <script src="scripts/homeLogin.js"></script>
+</body>
+
+</html>

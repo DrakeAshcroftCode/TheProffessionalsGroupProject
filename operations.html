@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crossfire - Operations</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div id="logoutButtonContainer" style="display: none;">
+        <button id="logoutButton">Logout</button>
+    </div>
+    <div id="timerDisplay"
+        style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
+        Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
+    </div>
+    <div>
+
+        <header>
+            <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+        </header>
+        <nav>
+            <ul id="navList">
+                <li data-link="Home"><a href="index.html">Home
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Create NCR"><a href="qualityInspector.html">Create NCR
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Storage
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Engineering"><a href="engineering.html">Engineering
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Operations"><a href="operations.html">Operations
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+            </ul>
+        </nav>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="formContainer">
+                    <div id="loginForm">
+                        <h2>Login</h2>
+                        <input type="email" placeholder="(ex) johnwick@kickbutt.ca" required>
+                        <input type="password" placeholder="(ex) ThisIsMyPassword123" required>
+                        <button id="loginButton">Login</button>
+                        <p>No account? <a href="#" id="showRegister">Register</a></p>
+                    </div>
+                    <div id="registerForm" style="display:none;">
+                        <h2>Register</h2>
+                        <input type="text" placeholder="(ex) ThisIsMyUserName" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button id="registerButton">Register</button>
+                        <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main>
+            <h1>Operations - NCR Form</h1>
+            <p>All required fields marked with a (*)</p>
+            <div id="form-sections">
+                <form action="https://webdevbasics.net/scripts/demo.php" method="post" enctype="multipart/form-data">
+                    <div id="formContainer">
+                        <fieldset class="supplier-product-info">
+
+                            <legend>Supplier and Product Info.</legend>
+                            <div>
+                                <label for="supName">Supplier Name*</label>
+                                <input id="supName" name="supName" placeholder="Pepsi Co.." type="text" required>
+                                <span id="supNameError" style="color: red;"></span>
+                            </div>
+                            <div>
+                                <label for="ncrNo">NCR No.*</label>
+                                <input id="ncrNo" name="ncrNo" placeholder="65789" type="text" required>
+                                <span id="ncrNoError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="prodNo">PO or Prod. No.*</label>
+                                <input id="prodNo" name="prodNo" placeholder="product number" type="text" required>
+                                <span id="prodNoError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="saleOrderNo">Sales Order No.*</label>
+                                <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text" required>
+                                <span id="saleOrderNoError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="quantityR">Quantity Received:*</label>
+                                <input id="quantityR" name="quantityR" placeholder="10" type="text" required>
+                                <span id="quantityRError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="quantityD">Quantity Defective*</label>
+                                <input id="quantityD" name="quantityD" placeholder="15" type="text" required>
+                                <span id="quantityDError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Report Details</legend>
+                            <div>
+                                <label>Identify Process applicable</label>
+                                <br>
+                                <label for="rdoIPA">Supplier or Rec-Insp*</label>
+                                <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp">
+
+                                <label for="rdoIPA">WIP(Production Order)*</label>
+                                <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP">
+                                <span id="rdoIPAError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="sapNo">SAP No.*</label>
+                                <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
+                                <span id="sapNoError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="itemDescription">Description of Item*</label>
+                                <textarea id="itemDescription" name="itemDescription"
+                                    placeholder="Please describe the item here" required></textarea>
+                                <span id="itemDescriptionError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="defectDescription">Description of Defect*</label>
+                                <textarea id="defectDescription" name="defectDescription"
+                                    placeholder="In as much detail possible, describe the item's defect"
+                                    required></textarea>
+                                <span id="defectDescriptionError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="nrcImage">Choose a Nonconformity image to upload*</label>
+                                <input type="file" id="nrcImage" name="nrcImage" accept="image/*">
+                                <span id="nrcImageError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <div>
+                                <label>Item marked Nonconforming*</label>
+                                <label for="rdoConformingYes">Yes</label>
+                                <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
+                                <label for="rdoConformingNo">No</label>
+                                <input type="radio" id="rdoConformingNo" name="conforming" value="No">
+                                <span id="rdoConformingError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="reportDate">Date of Report*</label>
+                                <input id="reportDate" name="reportDate" type="date">
+                                <span id="reportDateError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="repName">Quality Representative's Name:*</label>
+                                <input type="text" id="repName" name="repName" placeholder="John Wick" required>
+                                <span id="repNameError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <p>Hit "Submit" when all fields are done to satisfaction and the report will be saved and an
+                                Email notification will be sent to Engineering and Operations Manager for review
+                                Please ensure all fields are filled out and accurate.
+                                If you would like to save a partial report select "*Insert button here*"
+                                Saved and partial reports can be found on the **blank** page.
+                            </p>
+                        </fieldset>
+                        <fieldset>
+                            <Legend>Engineering - Action</Legend>
+                            <div>
+                                <label for="selectDisposition">Review by CF Engineery*</label>
+                                <select id="selectDisposition">
+                                    <option value="UseAsIs">Use as Is</option>
+                                    <option value="repair">Repair</option>
+                                    <option value="rework">Rework</option>
+                                    <option value="scrap">Scrap</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="dispositionDescription">*</label>
+                                <textarea id="dispositionDescription" name="dispositionDescription"
+                                    placeholder="(ex)Sequence of work steps required when 'repair' or 'rework' indicated"
+                                    required></textarea>
+                                <span id="dispositionError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="selectNotification">Does Customer require notification? y/n?</label>
+                                <p>If "Yes" raise message to customer detailing issues</p>
+                                <select id="selectNotification">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Does the drawing require updating?</label>
+                                <label for="rdoRedrawYes">Yes</label>
+                                <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes">
+                                <label for="rdoRedrawNo">No</label>
+                                <input type="radio" id="rdoRedrawNo" name="redraw" value="No">
+                                <span id="rdoDrawingError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Engineering - Details</legend>
+                            <div>
+                                <label for="txtOrgRevNo">Original Rev. Number</label>
+                                <input type="text" id="txtOrgRevNo" name="txtOrgRevNo" placeholder="(ex)5556667722">
+                            </div>
+                            <div>
+                                <label for="txtUpRevNo">Original Rev. Number</label>
+                                <input type="text" id="txtUpRevNo" name="txtUpRevNo" placeholder="(ex)5556667722">
+                            </div>
+                            <div>
+                                <label for="revisionDate">Revision Date*</label>
+                                <input id="revisionDate" name="revisionDate" type="date">
+                                <span id="revisionDateError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="txtEngName">Name of Engineer</label>
+                                <input type="text" id="txtEngName" name="txtEngName" placeholder="(ex)Imma DaBoss"
+                                    required>
+                                <span id="txtEngNameError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="formContainer">
+                        <fieldset>
+                            <legend>Operations - Action</legend>
+                            <div>
+                                <label for="purchDecision">Purchasing's Prelim Decision</label>
+                                <select id="purchDecision">
+                                    <option value="return">Return To Supplier</option>
+                                    <option value="rwkInHouse">Rework in House</option>
+                                    <option value="scrpInHouse">Scrap in House</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="CAR">Was a CAR raise?</label>
+                                <select id="CAR">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                                <span id="CARError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <p>If "Yes" indicate CAR#</p>
+                                <label for="carNumber">Car No.</label>
+                                <input type="text" id="carNumber" name="carNumber" placeholder="(ex)optional CAR NO">
+                            </div>
+                            <div>
+                                <label for="followUp">Follow-Up Required?*</label>
+                                <select id="followUp">
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="txtOpName">Operations Manager*</label>
+                                <input type="text" id="txtOpName" name="txtOpName" placeholder="(ex)Imma DaBoss"
+                                    required>
+                                <span id="txtOpNameError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="operationsDate">Revision Date*</label>
+                                <input id="operationsDate" name="revisionDate" type="date">
+                                <span id="operationsDateError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="formContainer">
+                        <fieldset>
+                            <legend>Final</legend>
+                            <div>
+                                <label for="reInspect">Re-Inspect Acceptable?</label>
+                                <select id="reInspect">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                                <span id="reInspectError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <p>If "No" then record new NCR number</p>
+                                <label for="newNCRnumber">New NCR No.</label>
+                                <input type="text" id="newNCRnumber" name="newNCRnumber"
+                                    placeholder="(ex)new NCR number">
+                            </div>
+                            <hr>
+                            <div>
+                                <label for="txtInspectorName">Inspectors Name</label>
+                                <input type="text" id="txtInspectorName" name="txtInspectorName"
+                                    placeholder="(ex)Jeremy Irons" required>
+                                <span id="txtInspectorNameError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="finalInspectorDate">Inspector Date*</label>
+                                <input id="finalInspectorDate" name="inspectorDate" type="date">
+                                <span id="finalInspectorDateError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <hr>
+                            <div>
+                                <label for="txtQualityName">Quality Department</label>
+                                <input type="text" id="txtQualityName" name="txtQualityName"
+                                    placeholder="(ex)Jeremy Irons" required>
+                                <span id="txtQualityNameError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="qualityDate">Quality Dept Date*</label>
+                                <input id="qualityDate" name="inspectorDate" type="date">
+                                <span id="qualityDateError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="button-container">
+                        <label for="status">Status:</label>
+                        <select id="status">
+                            <option value="active">Active</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                        <button type="button" id="btnSave" value="Save Report">Save</button>
+                        <!-- <button type="submit" id="btnSubmit">Save & Send</button> -->
+                        <button type="button" id="btnClear" value="Clear Report">Clear</button>
+
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/session.js"></script>
+
+
+</body>
+
+</html>
