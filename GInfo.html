@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="css/helpStyle.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/weHelp.css">
+
+    <!--FONT-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="logoutButtonContainer" style="display: none;">
+        <button id="logoutButton">Logout</button>
+    </div>
+    <div id="timerDisplay"
+        style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
+        Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
+    </div>
+    <div>
+        <header>
+            <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+        </header>
+        <nav>
+            <ul id="navList">
+                <li data-link="Home"><a href="index.html">Home
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Create NCR"><a href="qualityInspector.html">Create NCR
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Storage
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Engineering"><a href="engineering.html">Engineering
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Operations"><a href="operations.html">Operations
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="FAQ's"><a href="help.html">FAQ
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+
+            </ul>
+        </nav>
+    </div>
+
+    <!--Questions-->
+    <div class="helpBorder">
+
+        <!--1.-->
+        <div class="helpItem">
+            <div class="question">Do I need to Login/Register?</div>
+            <ul class="answer">
+                <li>Yes, You have to login/register to use our services and to make a record book.</li>
+            </ul>
+        </div>
+
+        <!--2.-->
+        <div class="helpItem">
+            <div class="question">How can I create a NCR form?</div>
+            <ul class="answer">
+                <li>Firstly, Login to our website then click on <a href="createNCR.html">Create NCR form</a>.</li>
+                <li>It will automatically save your record.</li>
+            </ul>
+        </div>
+
+        <!--3.-->
+        <div class="helpItem">
+            <div class="question">Where do I find my records?</div>
+            <ul class="answer">
+                <li>Go to <a href="NCR storage.html">NCR storage</a>.</li>
+                <li>Search your record by Year, 3 digit #extension and Supplier Name.</li>
+                <li>Make sure the details are correct.</li>
+            </ul>
+        </div>
+
+        <!--4.-->
+        <div class="helpItem">
+            <div class="question">How can I edit or delete a form after submission?</div>
+            <ul class="answer">
+                <li>Go to <a href="NCR storage.html">NCR storage</a>, fill the details and click search.</li>
+                <li>In the records list, you will see the options for edit and delete.</li>
+            </ul>
+        </div>
+
+        <!--5.-->
+        <div class="helpItem">
+            <div class="question">Is there any limit on numbers of form that I can make?</div>
+            <ul class="answer">
+                <li>No, You can create as more as you want.</li>
+            </ul>
+        </div>
+
+        <!--6.-->
+        <div class="helpItem">
+            <div class="question">Is my data safe and secure?</div>
+            <div class="answer">
+                Only authorized personnel have access to the data, and we use strict authentication protocols to prevent
+                unauthorized access.
+            </div>
+        </div>
+
+    <!--JS files-->
+    <script src="Js/GInfo.js"></script>
+    <script src="Js/help.js"></script>
+
+    <!--Footer-->
+    <footer> <a href="help.html">Back to Main</a></footer>
+</body>
