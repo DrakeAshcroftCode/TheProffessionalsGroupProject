@@ -70,32 +70,32 @@
                                 <legend>Supplier and Product Info.</legend>
                                 <div>
                                     <label for="supName">Supplier Name</label>
-                                    <input id="supName" name="supName" placeholder="Pepsi Co.." type="text" required>
+                                    <input id="supName" name="supName" placeholder="Pepsi Co.." type="text"  >
                                     <span id="supNameError" style="color: red;"></span>
                                 </div>
                                 <div>
                                     <label for="ncrNo">NCR No.</label>
-                                    <input id="ncrNo" name="ncrNo" placeholder="65789" type="text" required>
+                                    <input id="ncrNo" name="ncrNo" placeholder="65789" type="text"  >
                                     <span id="ncrNoError" style="color: red;"></span>
                                 </div>
                                 <div>
                                     <label for="prodNo">PO or Prod. No.</label>
-                                    <input id="prodNo" name="prodNo" placeholder="product number" type="text" required>
+                                    <input id="prodNo" name="prodNo" placeholder="product number" type="text"  >
                                     <span id="prodNoError" style="color: red;"></span>
                                 </div>
                                 <div>
                                     <label for="saleOrderNo">Sales Order No.</label>
-                                    <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text" required>
+                                    <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text"  >
                                     <span id="saleOrderNoError" style="color: red;"></span>
                                 </div>
                                 <div>
                                     <label for="quantityR">Quantity Received:</label>
-                                    <input id="quantityR" name="quantityR" placeholder="10" type="text" required>
+                                    <input id="quantityR" name="quantityR" placeholder="10" type="text"  >
                                     <span id="quantityRError" style="color: red;"></span>
                                 </div>
                                 <div>
                                     <label for="quantityD">Quantity Defective</label>
-                                    <input id="quantityD" name="quantityD" placeholder="15" type="text" required>
+                                    <input id="quantityD" name="quantityD" placeholder="15" type="text"  >
                                     <span id="quantityDError" style="color: red;"></span>
                                 </div>
                             </fieldset>
@@ -119,13 +119,13 @@
                                 </div>
                                 <div>
                                     <label for="sapNo">SAP No.</label>
-                                    <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
+                                    <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text"  >
                                     <span id="sapNoError" style="color: red;"></span>
                                 </div>
                                 <div class="textarea-container">
                                     <label for="itemDescription">Description of Item</label>
                                     <textarea id="itemDescription" name="itemDescription"
-                                              placeholder="Please describe the item here" required></textarea>
+                                              placeholder="Please describe the item here"  ></textarea>
                                     <span id="itemDescriptionError" style="color: red;"></span>
                                 </div>
 
@@ -133,7 +133,7 @@
                                     <label for="defectDescription">Description of Defect</label>
                                     <textarea id="defectDescription" name="defectDescription"
                                               placeholder="In as much detail as possible, describe the item's defect"
-                                              required></textarea>
+                                               ></textarea>
                                     <span id="defectDescriptionError" style="color: red;"></span>
                                 </div>
 
@@ -168,7 +168,7 @@
                                 </div>
                                 <div>
                                     <label for="repName">Quality Representative's Name:</label>
-                                    <input type="text" id="repName" name="repName" placeholder="John Wick" required>
+                                    <input type="text" id="repName" name="repName" placeholder="John Wick"  >
                                     <span id="repNameError" style="color: red;"></span>
                                 </div>
                                 <p>This completed NCR will be forwarded to HBC Engineering and Operations Manager with any
@@ -181,7 +181,9 @@
 
                 <div class="button-container">
                     <button type="button" id="btnSave" value="Save Report">Save</button>
+                    <button id="btnSavePartial">Save Incomplete NCR</button>
                     <button type="button" id="btnClear">Clear Form</button>
+
                 </div>
             </form>
         </main>

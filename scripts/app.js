@@ -1,7 +1,6 @@
-//This massive block of code handle the logic for the form and retrieving data from it,
-//validation, and other fun stuff.
+// This massive block of code handles the logic for the form, retrieving data, validation, and other functions.
 
-//should just be called save function. But this function is the bread and butter of our app, retrieving and storing form data.
+// This function saves or updates NCR form data based on whether the NCR already exists.
 function saveSendFunction() {
     var supplierName = document.getElementById('supName').value;
     var ncrNumber = document.getElementById('ncrNo').value;
@@ -46,7 +45,6 @@ function saveSendFunction() {
             quantityReceived: quantityReceived,
             quantityDefective: quantityDefective,
         },
-
         reportDetails: {
             processApplicable: rdoOneValue,
             sapNo: sapNo,
@@ -54,7 +52,6 @@ function saveSendFunction() {
             descriptionOfDefect: defectDescription,
             nonConformityImage: ncrImage,
         },
-
         nonConformanceDetails: {
             isNonConforming: rdoTwoValue,
             dateOfReport: reportDate,
@@ -70,7 +67,7 @@ function validation(ncrForm) {
     let isValid = true;
     let firstErrorElement = null;
 
-    // Grab error span elements
+    // Error elements
     const supNameError = document.getElementById('supNameError');
     const ncrNoError = document.getElementById('ncrNoError');
     const prodNoError = document.getElementById('prodNoError');
@@ -86,7 +83,7 @@ function validation(ncrForm) {
     const rdoConformingError = document.getElementById('rdoConformingError');
     const nrcImageError = document.getElementById('nrcImageError');
 
-    // Clear previous error messages
+    // Clear error messages
     supNameError.textContent = "";
     ncrNoError.textContent = "";
     prodNoError.textContent = "";
@@ -102,7 +99,7 @@ function validation(ncrForm) {
     rdoConformingError.textContent = "";
     nrcImageError.textContent = "";
 
-    // Supplier Name validation
+    // Validation checks
     if (ncrForm.supplierInfo.supplierName === "") {
         supNameError.textContent = "You must enter a name";
         isValid = false;
@@ -115,26 +112,18 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('supName');
     }
 
-    // NCR Number validation
     if (ncrForm.supplierInfo.ncrNumber === "") {
         ncrNoError.textContent = "You must enter an NCR number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('ncrNo');
     }
 
-    if (ncrForm.supplierInfo.ncrNumber.length !== 5) {
-        ncrNoError.textContent = "Your NCR number must be 5 digits";
+    if (ncrForm.supplierInfo.ncrNumber.length !== 8) {
+        ncrNoError.textContent = "Your NCR number must be 8 characters";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('ncrNo');
     }
 
-    if (isNaN(ncrForm.supplierInfo.ncrNumber)) {
-        ncrNoError.textContent = "Your NCR number must be a number";
-        isValid = false;
-        if (!firstErrorElement) firstErrorElement = document.getElementById('ncrNo');
-    }
-
-    // PO or Product Number validation
     if (ncrForm.supplierInfo.poOrProductNumber === "") {
         prodNoError.textContent = "You must enter a product number";
         isValid = false;
@@ -147,7 +136,6 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('prodNo');
     }
 
-    // Sales Order Number validation
     if (ncrForm.supplierInfo.salesOrderNumber === "") {
         saleOrderNoError.textContent = "You must enter a sales order number";
         isValid = false;
@@ -166,7 +154,6 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('saleOrderNo');
     }
 
-    // Quantity Received validation
     if (ncrForm.supplierInfo.quantityReceived === "") {
         quantityRError.textContent = "You must enter a quantity";
         isValid = false;
@@ -179,7 +166,6 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('quantityR');
     }
 
-    // Quantity Defective validation
     if (ncrForm.supplierInfo.quantityDefective === "") {
         quantityDError.textContent = "You must enter a defective quantity";
         isValid = false;
@@ -192,7 +178,6 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('quantityD');
     }
 
-    // SAP Number validation
     if (ncrForm.reportDetails.sapNo === "") {
         sapNoError.textContent = "You must enter a SAP number";
         isValid = false;
@@ -205,7 +190,6 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('sapNo');
     }
 
-    // Item Description validation
     if (ncrForm.reportDetails.itemDescription === "") {
         itemDescriptionError.textContent = "You must enter an item description";
         isValid = false;
@@ -218,7 +202,6 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('itemDescription');
     }
 
-    // Defect Description validation
     if (ncrForm.reportDetails.descriptionOfDefect === "") {
         defectDescriptionError.textContent = "You must enter a description of the defect";
         isValid = false;
@@ -231,14 +214,12 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('defectDescription');
     }
 
-    // File Upload (Image) validation
     if (!ncrForm.reportDetails.nonConformityImage || ncrForm.reportDetails.nonConformityImage.length === 0) {
         nrcImageError.textContent = "You must upload an image";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('nrcImage');
     }
 
-    // Quality Representative's Name validation
     if (ncrForm.nonConformanceDetails.qualityRepresentativeName === "") {
         repNameError.textContent = "You must enter a name";
         isValid = false;
@@ -251,28 +232,24 @@ function validation(ncrForm) {
         if (!firstErrorElement) firstErrorElement = document.getElementById('repName');
     }
 
-    // Date of Report validation
     if (ncrForm.nonConformanceDetails.dateOfReport === "") {
         reportDateError.textContent = "You must select a date";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('reportDate');
     }
 
-    // Process Applicable (Radio Buttons) validation
     if (ncrForm.reportDetails.processApplicable === "") {
         rdoIPAError.textContent = "You must select one of the options";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementsByName('rdoIPA')[0];
     }
 
-    // Is Non-Conforming (Radio Buttons) validation
     if (ncrForm.nonConformanceDetails.isNonConforming === "") {
         rdoConformingError.textContent = "You must select one of the options";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementsByName('conforming')[0];
     }
 
-    // If there was any error, scroll to the first element with an error
     if (firstErrorElement) {
         firstErrorElement.scrollIntoView({ behavior: "smooth" });
     }
@@ -280,58 +257,67 @@ function validation(ncrForm) {
     return isValid;
 }
 
+// Store function that checks for editing existing NCRs by NCR number
 function storeFormData(ncrForm) {
-    delete ncrForm.reportDetails.nonConformityImage;
+    let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+    const existingIndex = storedNCRs.findIndex(ncr => ncr.supplierInfo.ncrNumber === ncrForm.supplierInfo.ncrNumber);
 
-    var storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
-
-    storedNCRs.push(ncrForm);
+    if (existingIndex !== -1) {
+        storedNCRs[existingIndex] = ncrForm; // Update existing NCR
+    } else {
+        storedNCRs.push(ncrForm); // Add new NCR
+    }
 
     localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
-
-    localStorage.setItem("storedForm", JSON.stringify(ncrForm));
 }
-//function to retrieve data
+
+// Load form data
 function loadFormData() {
-    var storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
-    if (storedNCRs.length > 0) {
-        var storedForm = storedNCRs[storedNCRs.length - 1]; 
-        var supplierInfo = storedForm.supplierInfo;
-        var reportDetails = storedForm.reportDetails;
-        var nonConformanceDetails = storedForm.nonConformanceDetails;
+    const editIndex = localStorage.getItem('currentEditIndex');
+    if (editIndex !== null) {
+        const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+        const ncrForm = storedNCRs[parseInt(editIndex, 10)];
 
-        document.getElementById('supName').value = supplierInfo.supplierName;
-        document.getElementById('ncrNo').value = supplierInfo.ncrNumber;
-        document.getElementById('prodNo').value = supplierInfo.poOrProductNumber;
-        document.getElementById('saleOrderNo').value = supplierInfo.salesOrderNumber;
-        document.getElementById('quantityR').value = supplierInfo.quantityReceived;
-        document.getElementById('quantityD').value = supplierInfo.quantityDefective;
+        if (ncrForm) {
+            document.getElementById('supName').value = ncrForm.supplierInfo.supplierName;
+            const ncrNoField = document.getElementById('ncrNo');
+            ncrNoField.value = ncrForm.supplierInfo.ncrNumber;
+            ncrNoField.disabled = true;
 
-        if (reportDetails.processApplicable === 'recInsp') {
-            document.getElementById('rdoRecInsp').checked = true;
-        }
-        if (reportDetails.processApplicable === 'WIP') {
-            document.getElementById('rdoWIP').checked = true;
-        }
-        document.getElementById('sapNo').value = reportDetails.sapNo;
-        document.getElementById('itemDescription').value = reportDetails.itemDescription;
-        document.getElementById('defectDescription').value = reportDetails.descriptionOfDefect;
+            document.getElementById('prodNo').value = ncrForm.supplierInfo.poOrProductNumber;
+            document.getElementById('saleOrderNo').value = ncrForm.supplierInfo.salesOrderNumber;
+            document.getElementById('quantityR').value = ncrForm.supplierInfo.quantityReceived;
+            document.getElementById('quantityD').value = ncrForm.supplierInfo.quantityDefective;
 
-        if (nonConformanceDetails.isNonConforming === 'Yes') {
-            document.getElementById('rdoConformingYes').checked = true;
+            if (ncrForm.reportDetails.processApplicable === 'recInsp') {
+                document.getElementById('rdoRecInsp').checked = true;
+            }
+            if (ncrForm.reportDetails.processApplicable === 'WIP') {
+                document.getElementById('rdoWIP').checked = true;
+            }
+            document.getElementById('sapNo').value = ncrForm.reportDetails.sapNo;
+            document.getElementById('itemDescription').value = ncrForm.reportDetails.itemDescription;
+            document.getElementById('defectDescription').value = ncrForm.reportDetails.descriptionOfDefect;
+
+            if (ncrForm.nonConformanceDetails.isNonConforming === 'Yes') {
+                document.getElementById('rdoConformingYes').checked = true;
+            }
+            if (ncrForm.nonConformanceDetails.isNonConforming === 'No') {
+                document.getElementById('rdoConformingNo').checked = true;
+            }
+            document.getElementById('reportDate').value = ncrForm.nonConformanceDetails.dateOfReport;
+            document.getElementById('repName').value = ncrForm.nonConformanceDetails.qualityRepresentativeName;
         }
-        if (nonConformanceDetails.isNonConforming === 'No') {
-            document.getElementById('rdoConformingNo').checked = true;
-        }
-        document.getElementById('reportDate').value = nonConformanceDetails.dateOfReport;
-        document.getElementById('repName').value = nonConformanceDetails.qualityRepresentativeName;
     }
 }
-
-
-
-
-//I kept the savesendfunction but deleted the save/send buttons like Dave requested, so this single button/event handles saving the thingy.
+function savePartialNCR() {
+    var ncrForm = saveSendFunction();
+    incompleteNCRs.push(ncrForm);
+    localStorage.setItem("incompleteNCRs", JSON.stringify(incompleteNCRs));
+    alert("Incomplete NCR saved successfully.");
+    displayNCRList(incompleteNCRs, false);
+}
+// Save button event
 document.getElementById("btnSave").addEventListener("click", function (event) {
     event.preventDefault();
     var ncrForm = saveSendFunction();
@@ -345,8 +331,7 @@ document.getElementById("btnSave").addEventListener("click", function (event) {
     }
 });
 
-
-//button to reset the form inputs to empty so that the user doesn't have to laboriously do it manually.
+// Clear button event
 document.getElementById("btnClear").addEventListener("click", function (event) {
     event.preventDefault();
     document.querySelector('form').reset();
@@ -358,6 +343,7 @@ document.getElementById("btnClear").addEventListener("click", function (event) {
     lastCheckedRadioConforming = null;
 });
 
+// Auto-expand text areas
 function autoExpandTextarea(textarea) {
     function resize() {
         textarea.style.height = 'auto';
@@ -366,11 +352,13 @@ function autoExpandTextarea(textarea) {
     textarea.addEventListener('input', resize);
     resize();
 }
+
+// Handle radio button selection
 let lastCheckedRadioIPA = null;
 let lastCheckedRadioConforming = null;
 handleDeselectRadioButton('rdoIPA', { value: lastCheckedRadioIPA });
-
 handleDeselectRadioButton('conforming', { value: lastCheckedRadioConforming });
+
 function handleDeselectRadioButton(radioGroupName, lastCheckedRadioRef) {
     document.querySelectorAll(`input[name="${radioGroupName}"]`).forEach(function (radio) {
         radio.addEventListener('click', function () {
@@ -383,7 +371,8 @@ function handleDeselectRadioButton(radioGroupName, lastCheckedRadioRef) {
         });
     });
 }
-//on load i reset the timer, but I also loadFormData, which I'm a little worried might be brittle on other pages that use this.
+
+// Onload function to reset timer, load form data, and auto-expand text areas
 window.onload = function () {
     resetTimer();
     loadFormData();
@@ -395,8 +384,6 @@ window.onload = function () {
     autoExpandTextarea(itemDescriptionTextarea);
     autoExpandTextarea(defectDescriptionTextarea);
 
-
     handleDeselectRadioButton('rdoIPA', { value: lastCheckedRadioIPA });
     handleDeselectRadioButton('conforming', { value: lastCheckedRadioConforming });
-}
-
+};
