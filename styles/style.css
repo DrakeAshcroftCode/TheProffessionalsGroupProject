@@ -370,6 +370,9 @@ textarea::-webkit-scrollbar-thumb:hover {
     color: red;
 }
 
+#btnClear {
+    background-color:firebrick;
+}
 /*Engineering page
  QI drop down
 And Engineering forms.*/
