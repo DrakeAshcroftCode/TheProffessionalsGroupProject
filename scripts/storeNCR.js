@@ -128,7 +128,5 @@ displayNCRList(storedNCRs);
 // Making sure the user timer resets for accessibility purposes.
 window.onload = function () {
     resetTimer();
-    document.getElementById('timerDisplay').classList.add('hidden');
-
 
 }

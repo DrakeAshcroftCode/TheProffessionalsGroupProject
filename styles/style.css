@@ -4,27 +4,7 @@ body {
     overflow-x: hidden;
     background-color: #f4f4f4;
     margin-top: 50px;
-}
-
-#logoutButtonContainer {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-}
-
-#logoutButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #ff4d4d;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#logoutButton:hover {
-    background-color: #e60000;
+    
 }
 
 nav {
@@ -36,7 +16,7 @@ nav {
     position: relative;
     overflow: hidden;
     border-radius: 60px;
-    border-color: #4da6ff;
+
 
 }
 
@@ -103,44 +83,6 @@ nav ul li a:hover .button-lines div {
     box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background-color: #5897c9;
-    margin: 15% auto;
-    padding: 10px;
-    border: 2px solid #888;
-    width: 400px;
-    position: relative;
-    border-radius: 30px;
-}
-
-#timerDisplay {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    font-size: 16px;
-    background: #fff;
-    padding: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-#timerDisplay.hidden {
-    display: none;
-}
-
 header {
     text-align: center;
     margin: 0;
@@ -154,30 +96,6 @@ header img {
     height: auto;
     max-width: 100%;
 }
-.accordion-section {
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-}
-
-.accordion-header {
-    background-color: #f1f1f1;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    border: 2px solid #5897c9;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-.accordion-content {
-    display: none; /* Initially hidden */
-    padding: 10px;
-    background-color: #c9c9c9;
-    border: 2px solid #5897c9;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
 
 main {
     display: flex;
@@ -187,39 +105,60 @@ main {
 }
 
 form {
-    width: 80%;
+    width: fit-content;
     max-width: 1600px;
-    margin: 10px auto;
+    margin: 20px auto;
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #c9c9c9;
+    border: 4px solid #5897c9;
     border-radius: 5px;
-    box-sizing: border-box;
+    font-size: 20px;
 }
-
+#ncrList {
+    width: fit-content;
+    max-width: 1600px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #c9c9c9;
+    border: 4px solid #5897c9;
+    border-radius: 5px;
+    font-size: 20px;
+}
 #form-sections {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
-
-#formContainer {
-
+#form-sections>div {
     flex: 1;
-    padding: 8px;
-    border-radius: 10px;
     margin: 10px;
     min-width: 300px;
-    background-color: #c9c9c9;
 }
 
-#form-sections > div {
-    width: 100%; 
-    max-width: 1000px; 
-    margin: 10px 0; 
-    background-color: #c9c9c9;
-    border-radius: 5px;
+#logoutButtonContainer {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
 
+#logoutButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#logoutButton:hover {
+    background-color: #e60000;
 }
 
 #form-sections fieldset {
@@ -227,11 +166,6 @@ form {
     border-radius: 5px;
     padding: 10px;
     margin: 0;
-}
-
-#form-sections legend {
-    font-weight: bold;
-    margin-bottom: 10px;
 }
 
 #form-sections label {
@@ -284,7 +218,6 @@ form button:hover {
     background-color: #000;
     border-color: #222;
     cursor: pointer;
-    color: #fff;
 }
 
 form div.button-container {
@@ -326,6 +259,12 @@ textarea::-webkit-scrollbar-thumb:hover {
     }
 }
 
+fieldset {
+    border: 4px solid #5897c9;
+    border-radius: 5px;
+    padding: 10px;
+}
+
 .supplier-product-info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -341,31 +280,32 @@ textarea::-webkit-scrollbar-thumb:hover {
     margin-bottom: 5px;
 }
 
-.textarea-container {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-
-.textarea-container textarea {
+.ncr-table {
     width: 100%;
-    resize: none;
-    overflow: hidden;
-    min-height: 50px;
-    max-height: 500px;
-    box-sizing: border-box;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 2px solid #5897c9;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.textarea-container label {
-    margin-bottom: 5px;
-    font-weight: bold;
+.ncr-table th,
+.ncr-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
-.textarea-container span {
-    color: red;
+.ncr-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.ncr-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.ncr-table tr:hover {
+    background-color: #ddd;
+}
+
+.ncr-table button {
+    margin-right: 5px;
+    padding: 5px 10px;
 }
