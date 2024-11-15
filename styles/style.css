@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Poppins', sans-serif;
     padding: 0;
@@ -36,7 +37,7 @@ nav {
     position: relative;
     overflow: hidden;
     border-radius: 60px;
-
+    border-color: #4da6ff;
 
 }
 
@@ -103,7 +104,6 @@ nav ul li a:hover .button-lines div {
     box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-
 .modal {
     display: none;
     position: fixed;
@@ -155,6 +155,30 @@ header img {
     height: auto;
     max-width: 100%;
 }
+.accordion-section {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.accordion-header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid #5897c9;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.accordion-content {
+    display: none; /* Initially hidden */
+    padding: 10px;
+    background-color: #c9c9c9;
+    border: 2px solid #5897c9;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
 
 main {
     display: flex;
@@ -164,9 +188,9 @@ main {
 }
 
 form {
-    width: 90%;
+    width: 80%;
     max-width: 1600px;
-    margin: 20px auto;
+    margin: 10px auto;
     padding: 20px;
     border-radius: 5px;
     box-sizing: border-box;
@@ -174,11 +198,11 @@ form {
 
 #form-sections {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
+
 
 #formContainer {
 
@@ -190,13 +214,12 @@ form {
     background-color: #c9c9c9;
 }
 
-#form-sections>div {
-    flex: 1;
-    padding: 8px;
-    border-radius: 10px;
-    margin: 10px;
-    min-width: 300px;
+#form-sections > div {
+    width: 100%; 
+    max-width: 1000px; 
+    margin: 10px 0; 
     background-color: #c9c9c9;
+    border-radius: 5px;
 
 }
 
@@ -347,10 +370,10 @@ textarea::-webkit-scrollbar-thumb:hover {
 .textarea-container span {
     color: red;
 }
-
 #btnClear {
     background-color:firebrick;
 }
+
 /*Engineering page
  QI drop down
 And Engineering forms.*/
