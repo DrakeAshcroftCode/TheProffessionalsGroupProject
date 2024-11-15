@@ -14,7 +14,7 @@ function checkSession() {
         sessionExpiration = session.expiration;
         startTimer();
         hideModal();
-        document.getElementById('timerDisplay').classList.add('hidden');
+        document.getElementById('timerDisplay').classList.remove('hidden');
         showLogoutButton();
 
         adjustNavBarForRole(session.role);
@@ -123,8 +123,6 @@ function updateTimerDisplay() {
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
     //padzero used here to ensure if the time is something like 09:09 it doesn't show as 9:9, which would be dumb.
     document.getElementById('timeLeft').textContent = `${padZero(minutes)}:${padZero(seconds)}`;
-    document.getElementById('timerDisplay').classList.add('hidden');
-
 }
 //function for time formatting.
 function padZero(num) {

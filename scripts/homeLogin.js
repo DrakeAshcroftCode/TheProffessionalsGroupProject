@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function ()
             hideModal();
             startTimer();
             showLogoutButton();
-            // document.getElementById('timerDisplay').classList.remove('hidden');
+            document.getElementById('timerDisplay').classList.remove('hidden');
 
             adjustNavBarForRole(newUser.role);
         }
