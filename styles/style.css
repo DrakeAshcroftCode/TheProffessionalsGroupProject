@@ -370,9 +370,12 @@ textarea::-webkit-scrollbar-thumb:hover {
 .textarea-container span {
     color: red;
 }
+<<<<<<< Updated upstream
 #btnClear {
     background-color:firebrick;
 }
+=======
+>>>>>>> Stashed changes
 
 /*Engineering page
  QI drop down
@@ -540,6 +543,7 @@ details[open] summary {
 #Engineer-forms label[for] {
     display: inline-block;       
     margin-right: 10px;          
+<<<<<<< Updated upstream
 }
 .icon{
     display: grid;
@@ -579,3 +583,6 @@ details[open] summary {
 .icon a:active .img {
     border-color: #00d6e1;
 }
+=======
+}
+>>>>>>> Stashed changes

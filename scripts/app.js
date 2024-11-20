@@ -22,6 +22,15 @@ function saveSendFunction() {
     var reportDate = document.getElementById('reportDate').value;
     var repName = document.getElementById('repName').value;
 
+    var selectDisposition = document.getElementById('selectDisposition');
+    var dispositionDescription = document.getElementById('dispositionDescription');
+
+    var txtUpRevNo = document.getElementById('txtUpRevNo');
+    var revisionDate = document.getElementById('revisionDate');
+    var txtEngName = document.getElementById('txtEngName');
+    var status = document.getElementById('status');
+
+
     var rdoOneValue = '';
     if (rdoRecInsp.checked) {
         rdoOneValue = 'recInsp';
@@ -56,6 +65,16 @@ function saveSendFunction() {
             isNonConforming: rdoTwoValue,
             dateOfReport: reportDate,
             qualityRepresentativeName: repName,
+        },
+        engineering: {
+            selectDisposition: selectDisposition,
+            dispositionDescription: dispositionDescription,
+        },
+        engDetails: {
+            txtUpRevNo: txtUpRevNo,
+            revisionDate: revisionDate, 
+            txtEngName: txtEngName,
+            status: status
         }
     };
 
@@ -67,7 +86,11 @@ function validation(ncrForm) {
     let isValid = true;
     let firstErrorElement = null;
 
+<<<<<<< Updated upstream
     // Error elements
+=======
+    // Grab error span elements Operations
+>>>>>>> Stashed changes
     const supNameError = document.getElementById('supNameError');
     const ncrNoError = document.getElementById('ncrNoError');
     const prodNoError = document.getElementById('prodNoError');
@@ -83,7 +106,21 @@ function validation(ncrForm) {
     const rdoConformingError = document.getElementById('rdoConformingError');
     const nrcImageError = document.getElementById('nrcImageError');
 
+<<<<<<< Updated upstream
     // Clear error messages
+=======
+    // Grab error span elements Engineering
+    const selectDispositionError = document.getElementById('selectDispositionError');
+    const dispositionError = document.getElementById('dispositionError');
+    const txtUpRevNoError = document.getElementById('txtUpRevNoError');
+    const revisionDateError = document.getElementById('revisionDateError');
+    const txtEngNameError = document.getElementById('txtEngNameError');
+    const statusError = document.getElementById('statusError');
+
+    // Grab error span elements Quality Inspector
+
+    // Clear previous error messages Operations
+>>>>>>> Stashed changes
     supNameError.textContent = "";
     ncrNoError.textContent = "";
     prodNoError.textContent = "";
@@ -99,7 +136,20 @@ function validation(ncrForm) {
     rdoConformingError.textContent = "";
     nrcImageError.textContent = "";
 
+<<<<<<< Updated upstream
     // Validation checks
+=======
+    // Clear previous error messages Engineering
+    selectDispositionError.textContent = "";
+    dispositionError.textContent = "";
+    txtUpRevNoError.textContent = "";
+    revisionDateError.textContent = "";
+    txtEngNameError.textContent = "";
+    statusError.textContent = "";
+    // Clear previous error messages Quality Inspector
+
+    // Supplier Name validation
+>>>>>>> Stashed changes
     if (ncrForm.supplierInfo.supplierName === "") {
         supNameError.textContent = "You must enter a name";
         isValid = false;
@@ -254,6 +304,45 @@ function validation(ncrForm) {
         firstErrorElement.scrollIntoView({ behavior: "smooth" });
     }
 
+    //Validation starting for engineering
+
+    //Validation for Selecting disposition
+    if (ncrForm.engineering.selectDisposition === "") {
+        selectDisposition.textContent = "You must select a disposition";
+        isValid = false;
+        if (!firstErrorElement) firstErrorElement = document.getElementById('selectDisposition');
+    }
+
+    //Validation for disposition description
+    if (ncrForm.engineering.dispositionDescription === "") {
+        dispositionDescription.textContent = "You must enter a description of your disposition";
+        isValid = false;
+        if (!firstErrorElement) firstErrorElement = document.getElementById('dispositionDescription');
+    }
+    //Validation for revision number
+    if (ncrForm.engineering.txtUpRevNo === "") {
+        txtUpRevNo.textContent = "You must enter a Revision number.";
+        isValid = false;
+        if (!firstErrorElement) firstErrorElement = document.getElementById('txtUpRevNo');
+    }
+    //Validation for the revision date
+    if (ncrForm.engineering.revisionDate === "") {
+        revisionDate.textContent = "You must select a revision date";
+        isValid = false;
+        if (!firstErrorElement) firstErrorElement = document.getElementById('revisionDate');
+    }
+    //Validation for the engineer's name
+    if (ncrForm.engineering.txtEngName === "") {
+        txtEngName.textContent = "You must enter a engineer's name";
+        isValid = false;
+        if (!firstErrorElement) firstErrorElement = document.getElementById('txtEngName');
+    }
+    //Validation for the status
+    if (ncrForm.engineering.status === "") {
+        status.textContent = "You must select a revision date";
+        isValid = false;
+        if (!firstErrorElement) firstErrorElement = document.getElementById('status');
+    }
     return isValid;
 }
 
@@ -310,6 +399,7 @@ function loadFormData() {
         }
     }
 }
+<<<<<<< Updated upstream
 function savePartialNCR() {
     var ncrForm = saveSendFunction();
     incompleteNCRs.push(ncrForm);
@@ -318,6 +408,48 @@ function savePartialNCR() {
     displayNCRList(incompleteNCRs, false);
 }
 // Save button event
+=======
+
+//NICKS ADDED FUNCTIONS
+
+//function to make the qaulity inspector section in engineering read only
+function InspectorSectionReadOnly() {
+    var inspectorSection = document.getElementById('popout-form-sections');
+
+    if (inspectorSection) {
+        // Select all form elements within the inspector section
+        var inputs = inspectorSection.querySelectorAll('input, select, textarea');
+        
+        // Loop through all the elements and make them read-only
+        inputs.forEach(function(input) {
+            input.disabled = true;
+        });
+    } else {
+        console.error("Inspector section not found!");
+    }
+}
+//Checks to see when the engineering page is loaded and then runs the inspectorSectionReadOnly function
+document.addEventListener('DOMContentLoaded', function(){
+    if (document.title === "Crossfire - Engineering") {
+        InspectorSectionReadOnly();
+    }
+});
+
+//engineering submit button - not working
+document.getElementById("btnSubmit").addEventListener("click", function (event){
+
+    event.preventDefault();
+
+    var ncrForm = saveSendFunction();
+
+    if (validation(ncrForm))
+        console.log("form is valid!")
+    else 
+        console.log("form in invalid")
+});
+
+//I kept the savesendfunction but deleted the save/send buttons like Dave requested, so this single button/event handles saving the thingy.
+>>>>>>> Stashed changes
 document.getElementById("btnSave").addEventListener("click", function (event) {
     event.preventDefault();
     var ncrForm = saveSendFunction();
