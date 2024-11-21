@@ -266,8 +266,12 @@ function storeFormData(ncrForm) {
 
     if (existingIndex !== -1) {
         storedNCRs[existingIndex] = ncrForm; // Update existing NCR
+        notifyOnNewNCR(ncrForm);
+
     } else {
         storedNCRs.push(ncrForm); // Add new NCR
+        notifyOnNewNCR(ncrForm);
+
     }
 
     localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
