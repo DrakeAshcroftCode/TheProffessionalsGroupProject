@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NCR Storage</title>
+    <title>NCR Log</title>
     <link rel="stylesheet" href="styles/storeNCRstyle.css">
 </head>
+
 <body>
     <div id="logoutButtonContainer" style="display: none;">
         <button id="logoutButton">Logout</button>
     </div>
-    <div id="timerDisplay" style="position: fixed; top: 10px; left: 10px; font-size: 16px; visibility: hidden; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
+    <div id="timerDisplay"
+        style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
         Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
     </div>
     <div>
@@ -19,72 +21,92 @@
         </header>
         <nav>
             <ul id="navList">
-                <li data-link="Home"><a href="index.html">Home
-                    <div class="button-lines"><div></div><div></div><div></div></div>
-                </a></li>
+                <li data-link="Home"><a href="index.html">Dashboard
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
                 <li data-link="Create NCR"><a href="qualityInspector.html">Create NCR
-                    <div class="button-lines"><div></div><div></div><div></div></div>
-                </a></li>
-                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Storage
-                    <div class="button-lines"><div></div><div></div><div></div></div>
-                </a></li>
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Log
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
                 <li data-link="Engineering"><a href="engineering.html">Engineering
-                    <div class="button-lines"><div></div><div></div><div></div></div>
-                </a></li>
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
                 <li data-link="Operations"><a href="operations.html">Operations
-                    <div class="button-lines"><div></div><div></div><div></div></div>
-                </a></li>
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
             </ul>
         </nav>
 
+
         <main>
-            <h1>NCR Storage</h1>
+            <h1>NCR Log</h1>
 
             <form>
-                <fieldset>
-                    <legend>NCR Search</legend>
-                    <p>Search for a saved NCR by year, 3-digit log #, or supplier name.</p>
-                    <div>
-                        <label for="yearSearch">Year</label>
-                        <select id="yearSearch">
-                            <option value="">All Years</option>
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                            <option value="2021">2021</option>
-                            <option value="2020">2020</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="codeSearch">3-digit Extension</label>
-                        <input id="codeSearch" name="codeSearch" placeholder="(ex)253" type="text">
-                        <span id="codeSearchError" style="color: rgb(67, 174, 217);"></span>
-                    </div>
-                    <div>
-                        <label for="supplierSearch">Supplier Name</label>
-                        <select id="supplierSearch">
-                            <option value="">All Suppliers</option>
-                            <option value="Pepsi Co.">Pepsi Co.</option>
-                            <option value="PetsMart">PetsMart</option>
-                            <option value="Milwaukee">Milwaukee</option>
-                            <option value="Idaho Potatoes">Idaho Potatoes</option>
-                            <option value="Food Basics">Food Basics</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button type="submit" id="btnSearch">Search</button>
-                    </div>
-                </fieldset>
+                <div id="form-sections">
+                    <fieldset>
+                        <legend>NCR Search</legend>
+                        <p>Search for a saved NCR by year, 3-digit log #, or supplier name.</p>
+                        <div>
+                            <label for="yearSearch">Year</label>
+                            <select id="yearSearch">
+                                <option value="">All Years</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="codeSearch">3-digit Extension</label>
+                            <input id="codeSearch" name="codeSearch" placeholder="(ex)253" type="text">
+                            <span id="codeSearchError" style="color: red;"></span>
+                        </div>
+                        <div>
+                            <label for="supplierSearch">Supplier Name</label>
+                            <select id="supplierSearch">
+                                <option value="">All Suppliers</option>
+                                <option value="Pepsi Co..">Pepsi Co..</option>
+                                <option value="PetsMart">PetsMart</option>
+                                <option value="Milwaukee">Milwaukee</option>
+                                <option value="Idaho Potatos">Idaho Potatos</option>
+                                <option value="Food Basics">Food Basics</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" id="btnSearch">Search</button>
+                        </div>
+                    </fieldset>
+                </div>
             </form>
 
-            <h2>NCRs</h2>
             <div id="ncrList"></div>
-
-            <h2>Incomplete NCRs</h2>
-            <div id="incompleteNcrList"></div>
         </main>
     </div>
     <script src="scripts/storeNCR.js"></script>
     <script src="scripts/session.js"></script>
 </body>
+
 </html>
