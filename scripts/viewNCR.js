@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Set up the Edit button to redirect to the edit page
-    const editButton = document.getElementById('viewEditButton');
+    const editButton = document.getElementById('editButton');
     editButton.addEventListener('click', function () {
         localStorage.setItem('currentEditIndex', index);
         window.location.href = 'qualityInspector.html'; // Redirect to the edit page
     });
-    const backButton = document.getElementById('viewBackButton');
+    const backButton = document.getElementById('backButton');
     backButton.addEventListener('click', function () {
         window.location.href = 'storeNCR.html'; // Redirect to the storage page
     });

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="styles/storeNCRstyle.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/weHelp.css">
+
+    <!--FONT-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="logoutButtonContainer" style="display: none;">
+        <button id="logoutButton">Logout</button>
+    </div>
+    <div id="timerDisplay"
+        style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
+        Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
+    </div>
+    <div>
+        <header>
+            <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+        </header>
+        <nav>
+            <ul id="navList">
+                <li data-link="Home"><a href="index.html">Home
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Create NCR"><a href="qualityInspector.html">Create NCR
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Storage
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Engineering"><a href="engineering.html">Engineering
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="Operations"><a href="operations.html">Operations
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+                <li data-link="FAQ's"><a href="help.html">FAQ
+                        <div class="button-lines">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </a></li>
+
+            </ul>
+        </nav>
+    </div>
+
+    <!--Questions-->
+    <div class="helpBorder">
+
+        <!--1.-->
+        <div class="helpItem">
+            <div class="question">Can I save a draft of my form before submission?</div>
+            <ul class="answer">
+                <li>Yes, You can save it and work on it later.</li>
+            </ul>
+        </div>
+
+        <!--2.-->
+        <div class="helpItem">
+            <div class="question">How can I save my records in draft and work on it later ?</div>
+            <ul class="answer">
+                <li>After creating a form, click on Save Incomplete NCR.</li>
+                <li>Go to NCR Storage and find the record. There is an option of edit and delete by which you can work on your incomplete files.</li>
+            </ul>
+        </div>
+         
+        <!--3.-->
+         <div class="helpItem">
+            <div class="question">Can i get notification from this website</div>
+            <ul class="answer">
+                <li>Yes, You can get notification.</li>
+                <li>Go to <a href="engineering.html"> Engineering Page</a> and mark 'Yes' on the question where they are asking for any notification from the site.</li>
+            </ul>
+        </div>
+
+
+        <!--JS files-->
+        <script src="scripts/GInfo.js"></script>
+        <script src="scripts/help.js"></script>
+
+        <!--Footer-->
+        <footer> <a href="help.html">Back to Main</a></footer>
+</body>
