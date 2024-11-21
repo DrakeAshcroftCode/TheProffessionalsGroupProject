@@ -234,7 +234,26 @@ function editNCR(index) {
         displayNCRList(storedNCRs);
     });
 }
+let ncrCounter = 0;
+function generateNCRNumber() {
+    const year = new Date().getFullYear();
+    const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
 
+    // Filter NCRs from the current year to find the highest existing NCR number
+    const currentYearNCRs = storedNCRs
+        .filter(ncr => ncr.supplierInfo.ncrNumber.startsWith(`${year}-`))
+        .map(ncr => parseInt(ncr.supplierInfo.ncrNumber.split('-')[1], 10)); // Extract the counter part after the hyphen
+
+    const lastNumber = currentYearNCRs.length > 0 ? Math.max(...currentYearNCRs) : 0;
+
+    if (ncrCounter === 0) {
+        ncrCounter = lastNumber;
+    }
+
+    ncrCounter += 1;
+
+    return `${year}-${String(ncrCounter).padStart(3, '0')}`;
+}
 // Function to seed NCRs if there are none
 function seedNCRs() {
     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
