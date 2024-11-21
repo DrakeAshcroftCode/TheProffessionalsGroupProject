@@ -5,8 +5,7 @@ window.SESSION_TIMEOUT = 15 * 60 * 1000;
 
 window.sessionTimer = null;
 window.sessionExpiration = null;
-//check if there is an active/not timed out session, if so display the timer etc. 
-//If not get rid of the irrelevant logout button and kick their butts back to index/login.
+//check if there is an active/not timed out session, if so display the timer etc. If not get rid of the irrelevant logout button and kick their butts back to index/login.
 function checkSession() {
     const session = JSON.parse(localStorage.getItem('session'));
     const now = Date.now();
@@ -15,7 +14,7 @@ function checkSession() {
         sessionExpiration = session.expiration;
         startTimer();
         hideModal();
-        document.getElementById('timerDisplay').classList.add('hidden');
+        document.getElementById('timerDisplay').classList.remove('hidden');
         showLogoutButton();
 
         adjustNavBarForRole(session.role);
@@ -124,8 +123,6 @@ function updateTimerDisplay() {
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
     //padzero used here to ensure if the time is something like 09:09 it doesn't show as 9:9, which would be dumb.
     document.getElementById('timeLeft').textContent = `${padZero(minutes)}:${padZero(seconds)}`;
-    document.getElementById('timerDisplay').classList.add('hidden');
-
 }
 //function for time formatting.
 function padZero(num) {
