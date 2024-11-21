@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,21 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/homeStyle.css">
 </head>
 
 <body>
     <header>
-    <div id="logoutButtonContainer" style="display: none;">
-        <button id="logoutButton">Logout</button>
-    </div>
-    <div id="timerDisplay"
-        style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
-        Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
-    </div>
-    <div>
-
-            <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+        <div id="logoutButtonContainer">
+            <button id="logoutButton">Logout</button>
+        </div>
+        <div id="timerDisplay"
+            style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
+            Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
+        </div>
+    
+            <img src="/images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
             <div id="notifications" style="position: fixed; top: 10px; right: 10px; cursor: pointer;">
                 <img src="images/notif-icon.png" alt="Notifications" id="notifIcon" />
                 <span id="notifBadge" style="background-color: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">0</span>
@@ -28,11 +28,12 @@
                     <ul id="notifList" style="list-style: none; padding: 0; margin: 0;"></ul>
                 </div>
             </div>
-            
         </header>
+    <div>
+
         <nav>
             <ul id="navList">
-                <li data-link="Home"><a href="index.html">Home
+                <li data-link="Home"><a href="index.html">Dashboard
                         <div class="button-lines">
                             <div></div>
                             <div></div>
@@ -46,7 +47,7 @@
                             <div></div>
                         </div>
                     </a></li>
-                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Storage
+                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Log
                         <div class="button-lines">
                             <div></div>
                             <div></div>
@@ -102,9 +103,16 @@
         </div>
         <main>
 
-            <h1>Welcome to the CROSSFIRE NCR Form Management Utility</h1>
 
-
+            <section class="icon">
+                <a href="index.html"><img src="Images/DASHBOARD.png" class="img"></a>
+                <a href="qualityInspector.html"><img src="Images/CREATE.png" class="img"></a>
+                <a href="storeNCR.html"><img src="Images/NCR Log.png" class="img"></a>
+                <a href="engineering.html"><img src="Images/ENGINEERING.png"class="img"></a>
+                <a href="operations.html"><img src="Images/OPERATIONS.png" class="img"></a>
+                <a href="operations.html"><img src="Images/HELP.png" class="img" ></a>
+    
+            </section>
         </main>
     </div>
     <script src="scripts/session.js"></script>

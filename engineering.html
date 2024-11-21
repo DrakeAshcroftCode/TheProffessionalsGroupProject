@@ -135,7 +135,6 @@
     <script src="scripts/session.js"></script>
     <script src="scripts/notif.js"></script>
     <script>
-        // Initialize Accordion Functionality
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".accordion-header").forEach(header => {
                 header.addEventListener("click", () => {
@@ -144,7 +143,6 @@
                 });
             });
 
-            // Initially collapse all sections except the first one
             document.querySelectorAll(".accordion-content").forEach((content, index) => {
                 content.style.display = index === 0 ? "block" : "none";
             });
