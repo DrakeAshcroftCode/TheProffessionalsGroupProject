@@ -26,14 +26,7 @@ body {
 #logoutButton:hover {
     background-color: #e60000;
 }
-#notifIcon {
-    position: fixed;
-    top: -45px; 
-    right: 35px; 
-    width: 70px;
-    height: 70px;
-    z-index: 1000; 
-}
+
 nav {
     background-color: #007BFF;
     width: 80vw;

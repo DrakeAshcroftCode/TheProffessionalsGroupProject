@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
+    <header>
     <div id="logoutButtonContainer" style="display: none;">
         <button id="logoutButton">Logout</button>
     </div>
@@ -15,8 +16,17 @@
         Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
     </div>
     <div>
-        <header>
+
             <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+            <div id="notifications" style="position: fixed; top: 10px; right: 10px; cursor: pointer;">
+                <img src="images/notif-icon.png" alt="Notifications" id="notifIcon" />
+                <span id="notifBadge" style="background-color: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">0</span>
+                <div id="notifDropdown" style="display: none; position: absolute; top: 30px; right: 0; background: white; border: 1px solid #ccc; padding: 10px; max-width: 300px;">
+                    <h4>Notifications</h4>
+                    <ul id="notifList" style="list-style: none; padding: 0; margin: 0;"></ul>
+                </div>
+            </div>
+            
         </header>
         <nav>
             <ul id="navList">
@@ -191,23 +201,21 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/session.js"></script>
+    <script src="scripts/notif.js"></script>
 
     <script>
-        // Function to initialize accordion behavior with tab navigation
+        
         function initializeAccordion() {
-            // Toggle the visibility of sections when headers are clicked
             document.querySelectorAll('.accordion-header').forEach((header, index) => {
                 header.addEventListener('click', () => {
                     toggleSection(header);
                 });
             });
     
-            // Set the initial display: first section open
             document.querySelectorAll('.accordion-content').forEach((content, index) => {
                 content.style.display = index === 0 ? 'block' : 'none';
             });
     
-            // Add event listeners to move between sections on "Tab" from last field
             const allSections = document.querySelectorAll('.accordion-content');
             allSections.forEach((section, sectionIndex) => {
                 const focusableElements = section.querySelectorAll('input, select, textarea, button');
@@ -218,10 +226,8 @@
                         if (event.key === 'Tab' && !event.shiftKey) {
                             event.preventDefault();
                             if (sectionIndex < allSections.length - 1) {
-                                // Move to the next section if it's not the last one
                                 moveToNextSection(sectionIndex);
                             } else {
-                                // If this is the last section, move focus to the Save button
                                 focusOnButtonArea();
                             }
                         }
@@ -229,7 +235,6 @@
                 }
             });
     
-            // Add event listener on "Save" button to handle Shift + Tab back to the last section
             const saveButton = document.getElementById('btnSave');
             const lastSectionElements = allSections[allSections.length - 1].querySelectorAll('input, select, textarea, button');
             if (saveButton && lastSectionElements.length > 0) {
@@ -242,20 +247,16 @@
             }
         }
     
-        // Toggle section visibility
         function toggleSection(header) {
             const content = header.nextElementSibling;
             content.style.display = content.style.display === 'none' || !content.style.display ? 'block' : 'none';
         }
     
-        // Move to the next section in the form
         function moveToNextSection(currentIndex) {
             const allSections = document.querySelectorAll('.accordion-content');
             
-            // Close the current section
             allSections[currentIndex].style.display = 'none';
     
-            // Open next section if available
             if (currentIndex + 1 < allSections.length) {
                 allSections[currentIndex + 1].style.display = 'block';
                 // Move focus to the first input in new section
@@ -266,7 +267,6 @@
             }
         }
     
-        // Move focus to the Save and Clear Form buttons area
         function focusOnButtonArea() {
             const saveButton = document.getElementById('btnSave');
             if (saveButton) {

@@ -8,25 +8,7 @@ body {
 
 
 
-#logoutButtonContainer {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
 
-}
-
-#logoutButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    border-color: #000;
-    
-}
 #notifIcon {
     position: fixed;
     top: -45px; 
@@ -35,9 +17,7 @@ body {
     height: 70px;
     z-index: 1000; 
 }
-#logoutButton:hover {
-    background-color: #e60000;
-}
+
 
 nav {
     background-color: #007BFF;
@@ -397,4 +377,28 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 .icon a:active .img {
     border-color: #00d6e1;
+}
+#logoutButtonContainer {
+    display: block !important;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+
+#logoutButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border-color: #000;
+    
+}
+
+#logoutButton:hover {
+    background-color: #e60000;
 }
