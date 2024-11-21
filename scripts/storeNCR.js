@@ -3,6 +3,7 @@
 var storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
 var incompleteNCRs = JSON.parse(localStorage.getItem("incompleteNCRs")) || [];
 
+// this fairly large function checks whether any NCRs are stored, and if so, it retrieves and lists them using DOM
 // Function to display the list of NCRs
 function displayNCRList(ncrList, isComplete = true) {
     var ncrListContainer = document.getElementById(isComplete ? "ncrList" : "incompleteNcrList");
@@ -161,7 +162,48 @@ function editNCR(index) {
     });
 }
 
+// Function to seed NCRs if there are none
+function seedNCRs() {
+    let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+
+    if (storedNCRs.length > 0) {
+        console.log("NCRs are already seeded. Skipping seeding process.");
+        return;
+    }
+
+    for (let i = 1; i <= 10; i++) {
+        const newNCR = {
+            supplierInfo: {
+                ncrNumber: generateNCRNumber(),
+                supplierName: `Supplier ${i}`,
+                poOrProductNumber: `${1000 + i}`,
+                salesOrderNumber: `${10000000 + i}`,
+                quantityReceived: Math.floor(Math.random() * 100) + 1,
+                quantityDefective: Math.floor(Math.random() * 10),
+            },
+            reportDetails: {
+                processApplicable: 'recInsp',
+                sapNo: `${3000 + i}`,
+                itemDescription: `Item description ${i}`,
+                descriptionOfDefect: `Defect description ${i}`,
+                nonConformityImage: `image${i}.jpg`
+            },
+            nonConformanceDetails: {
+                isNonConforming: 'Yes',
+                dateOfReport: new Date().toISOString().split('T')[0],
+                qualityRepresentativeName: `Rep ${i}`,
+            }
+        };
+
+        storedNCRs.push(newNCR);
+    }
+
+    localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
+    console.log("NCRs seeded successfully.");
+}
 // Function to view NCR details
+// I used to have a lot more code here but I broke it out into a separate JS file (ViewNCR.js) for better
+// functionality across pages.
 function viewNCR(index) {
     localStorage.setItem("currentViewIndex", index);
     window.location.href = "viewNCR.html";
@@ -222,3 +264,4 @@ document.addEventListener("DOMContentLoaded", function () {
     displayNCRList(storedNCRs, true);
     displayNCRList(incompleteNCRs, false);
 });
+seedNCRs();

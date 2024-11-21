@@ -5,7 +5,8 @@ window.SESSION_TIMEOUT = 15 * 60 * 1000;
 
 window.sessionTimer = null;
 window.sessionExpiration = null;
-//check if there is an active/not timed out session, if so display the timer etc. If not get rid of the irrelevant logout button and kick their butts back to index/login.
+//check if there is an active/not timed out session, if so display the timer etc. 
+//If not get rid of the irrelevant logout button and kick their butts back to index/login.
 function checkSession() {
     const session = JSON.parse(localStorage.getItem('session'));
     const now = Date.now();

@@ -369,6 +369,3 @@ textarea::-webkit-scrollbar-thumb:hover {
 .textarea-container span {
     color: red;
 }
-#btnClear {
-    background-color:firebrick;
-}
