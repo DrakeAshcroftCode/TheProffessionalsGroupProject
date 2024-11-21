@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quality Inspector - Create NCR</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
     <div id="logoutButtonContainer" style="display: none;">
         <button id="logoutButton">Logout</button>
     </div>
     <div id="timerDisplay"
-         style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
+        style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
         Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
     </div>
     <div>
         <header>
-            <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+            <img src="../images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
         </header>
         <nav>
             <ul id="navList">
-                <li data-link="Home"><a href="index.html">Home
+                <li data-link="Home"><a href="index.html">Dashboard
                         <div class="button-lines">
                             <div></div>
                             <div></div>
                             <div></div>
                         </div>
                     </a></li>
-                <li data-link="Create NCR"><a href="qualityInspector.html">Create NCR
+                <li data-link="Create NCR"><a href="qualityInspector.html">Create Log
                         <div class="button-lines">
                             <div></div>
                             <div></div>
                             <div></div>
                         </div>
                     </a></li>
-                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Storage
+                <li data-link="NCR Storage"><a href="storeNCR.html">NCR Log
                         <div class="button-lines">
                             <div></div>
                             <div></div>
@@ -60,130 +62,119 @@
 
         <main>
             <h1>Create NCR Form</h1>
-            <form id="accordion-form" action="https://webdevbasics.net/scripts/demo.php" method="post" enctype="multipart/form-data">
+            <form action="https://webdevbasics.net/scripts/demo.php" method="post" enctype="multipart/form-data">
                 <div id="form-sections">
-                    <!-- Supplier and Product Info Section -->
-                    <div class="accordion-section">
-                        <div class="accordion-header">Supplier and Product Info.</div>
-                        <div class="accordion-content">
-                            <fieldset class="supplier-product-info">
-                                <legend>Supplier and Product Info.</legend>
-                                <div>
-                                    <label for="supName">Supplier Name</label>
-                                    <input id="supName" name="supName" placeholder="Pepsi Co.." type="text"  >
-                                    <span id="supNameError" style="color: red;"></span>
-                                </div>
-                                <div>
-                                    <label for="ncrNo">NCR No.</label>
-                                    <input id="ncrNo" name="ncrNo" placeholder="65789" type="text"  >
-                                    <span id="ncrNoError" style="color: red;"></span>
-                                </div>
-                                <div>
-                                    <label for="prodNo">PO or Prod. No.</label>
-                                    <input id="prodNo" name="prodNo" placeholder="product number" type="text"  >
-                                    <span id="prodNoError" style="color: red;"></span>
-                                </div>
-                                <div>
-                                    <label for="saleOrderNo">Sales Order No.</label>
-                                    <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text"  >
-                                    <span id="saleOrderNoError" style="color: red;"></span>
-                                </div>
-                                <div>
-                                    <label for="quantityR">Quantity Received:</label>
-                                    <input id="quantityR" name="quantityR" placeholder="10" type="text"  >
-                                    <span id="quantityRError" style="color: red;"></span>
-                                </div>
-                                <div>
-                                    <label for="quantityD">Quantity Defective</label>
-                                    <input id="quantityD" name="quantityD" placeholder="15" type="text"  >
-                                    <span id="quantityDError" style="color: red;"></span>
-                                </div>
-                            </fieldset>
-                        </div>
+                    <div id="supplier-product-info">
+                        <fieldset class="supplier-product-info">
+                            <legend>Supplier and Product Info.</legend>
+                            <div>
+                                <label for="supName">Supplier Name</label>
+                                <input id="supName" name="supName" placeholder="Pepsi Co.." type="text" required>
+                                <span id="supNameError" style="color: red;"></span>
+                            </div>
+                            <div>
+                                <label for="ncrNo">NCR No.</label>
+                                <input id="ncrNo" name="ncrNo" placeholder="65789" type="text" required>
+                                <span id="ncrNoError" style="color: red;"></span>
+                            </div>
+                            <div>
+                                <label for="prodNo">PO or Prod. No.</label>
+                                <input id="prodNo" name="prodNo" placeholder="product number" type="text" required>
+                                <span id="prodNoError" style="color: red;"></span>
+                            </div>
+                            <div>
+                                <label for="saleOrderNo">Sales Order No.</label>
+                                <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text" required>
+                                <span id="saleOrderNoError" style="color: red;"></span>
+                            </div>
+                            <div>
+                                <label for="quantityR">Quantity Received:</label>
+                                <input id="quantityR" name="quantityR" placeholder="10" type="text" required>
+                                <span id="quantityRError" style="color: red;"></span>
+                            </div>
+                            <div>
+                                <label for="quantityD">Quantity Defective</label>
+                                <input id="quantityD" name="quantityD" placeholder="15" type="text" required>
+                                <span id="quantityDError" style="color: red;"></span>
+                            </div>
+                        </fieldset>
                     </div>
 
-                    <!-- Report Details Section -->
-                    <div class="accordion-section">
-                        <div class="accordion-header">Report Details</div>
-                        <div class="accordion-content">
-                            <fieldset>
-                                <legend>Report Details</legend>
-                                <div>
-                                    <label>Identify Process Applicable</label><br>
-                                    <label for="rdoRecInsp">Supplier or Rec-Insp</label>
-                                    <input type="radio" id="rdoRecInsp" name="rdoIPA" value="recInsp">
-                                    <label for="rdoWIP">WIP (Production Order)</label>
-                                    <input type="radio" id="rdoWIP" name="rdoIPA" value="WIP">
-                                    <span id="rdoIPAError" style="color: red;"></span>
-                                    <hr>
-                                </div>
-                                <div>
-                                    <label for="sapNo">SAP No.</label>
-                                    <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text"  >
-                                    <span id="sapNoError" style="color: red;"></span>
-                                </div>
-                                <div class="textarea-container">
-                                    <label for="itemDescription">Description of Item</label>
-                                    <textarea id="itemDescription" name="itemDescription"
-                                              placeholder="Please describe the item here"  ></textarea>
-                                    <span id="itemDescriptionError" style="color: red;"></span>
-                                </div>
+                    <div id="detailsDiv">
+                        <fieldset>
+                            <legend>Report Details</legend>
+                            <div>
+                                <label>Identify Process Applicable</label>
+                                <br>
+                                <label for="rdoRecInsp">Supplier or Rec-Insp</label>
+                                <input type="radio" id="rdoRecInsp" name="rdoIPA" value="recInsp">
+                                <label for="rdoWIP">WIP (Production Order)</label>
+                                <input type="radio" id="rdoWIP" name="rdoIPA" value="WIP">
+                                <span id="rdoIPAError" style="color: red;"></span>
+                                <hr>
+                            </div>
+                            <div>
+                                <label for="sapNo">SAP No.</label>
+                                <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
+                                <span id="sapNoError" style="color: red;"></span>
+                            </div>
+                            <div class="textarea-container">
+                                <label for="itemDescription">Description of Item</label>
+                                <textarea id="itemDescription" name="itemDescription"
+                                    placeholder="Please describe the item here" required></textarea>
+                                <span id="itemDescriptionError" style="color: red;"></span>
+                            </div>
 
-                                <div class="textarea-container">
-                                    <label for="defectDescription">Description of Defect</label>
-                                    <textarea id="defectDescription" name="defectDescription"
-                                              placeholder="In as much detail as possible, describe the item's defect"
-                                               ></textarea>
-                                    <span id="defectDescriptionError" style="color: red;"></span>
-                                </div>
+                            <div class="textarea-container">
+                                <label for="defectDescription">Description of Defect</label>
+                                <textarea id="defectDescription" name="defectDescription"
+                                    placeholder="In as much detail as possible, describe the item's defect"
+                                    required></textarea>
+                                <span id="defectDescriptionError" style="color: red;"></span>
+                            </div>
 
-                                <div>
-                                    <label for="nrcImage">Choose a Nonconformity Image to Upload</label>
-                                    <input type="file" id="nrcImage" name="nrcImage" accept="image/*">
-                                    <span id="nrcImageError" style="color: red;"></span>
-                                </div>
-                            </fieldset>
-                        </div>
+                            <div>
+                                <label for="nrcImage">Choose a Nonconformity Image to Upload</label>
+                                <input type="file" id="nrcImage" name="nrcImage" accept="image/*">
+                                <span id="nrcImageError" style="color: red;"></span>
+                            </div>
+                        </fieldset>
                     </div>
 
-                    <!-- Nonconformance Details Section -->
-                    <div class="accordion-section">
-                        <div class="accordion-header">Nonconformance Details</div>
-                        <div class="accordion-content">
-                            <fieldset>
-                                <legend>Nonconformance Details</legend>
-                                <div>
-                                    <label>Item Marked Nonconforming</label>
-                                    <label for="rdoConformingYes">Yes</label>
-                                    <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
-                                    <label for="rdoConformingNo">No</label>
-                                    <input type="radio" id="rdoConformingNo" name="conforming" value="No">
-                                    <span id="rdoConformingError" style="color: red;"></span>
-                                    <hr>
-                                </div>
-                                <div>
-                                    <label for="reportDate">Date of Report</label>
-                                    <input id="reportDate" name="reportDate" type="date">
-                                    <span id="reportDateError" style="color: red;"></span>
-                                </div>
-                                <div>
-                                    <label for="repName">Quality Representative's Name:</label>
-                                    <input type="text" id="repName" name="repName" placeholder="John Wick"  >
-                                    <span id="repNameError" style="color: red;"></span>
-                                </div>
-                                <p>This completed NCR will be forwarded to HBC Engineering and Operations Manager with any
-                                    relevant documents attached. Please ensure all fields are filled out and accurate.
-                                </p>
-                            </fieldset>
-                        </div>
+                    <div id="conformDiv">
+                        <fieldset>
+                            <legend>Nonconformance Details</legend>
+                            <div>
+                                <label>Item Marked Nonconforming</label>
+                                <label for="rdoConformingYes">Yes</label>
+                                <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
+                                <label for="rdoConformingNo">No</label>
+                                <input type="radio" id="rdoConformingNo" name="conforming" value="No">
+                                <span id="rdoConformingError" style="color: red;"></span>
+                                <hr>
+                            </div>
+                            <div>
+                                <label for="reportDate">Date of Report</label>
+                                <input id="reportDate" name="reportDate" type="date">
+                                <span id="reportDateError" style="color: red;"></span>
+                            </div>
+                            <div>
+                                <label for="repName">Quality Representative's Name:</label>
+                                <input type="text" id="repName" name="repName" placeholder="John Wick" required>
+                                <span id="repNameError" style="color: red;"></span>
+                            </div>
+                            <p>This completed NCR will be forwarded to HBC Engineering and Operations Manager with any
+                                relevant documents attached.
+                                Please ensure all fields are filled out and accurate.
+                            </p>
+                        </fieldset>
                     </div>
                 </div>
 
                 <div class="button-container">
                     <button type="button" id="btnSave" value="Save Report">Save</button>
-                    <button id="btnSavePartial">Save Incomplete NCR</button>
+                    <!--   <button type="submit" id="btnSubmit">Save & Send</button>-->
                     <button type="button" id="btnClear">Clear Form</button>
-
                 </div>
             </form>
         </main>
@@ -191,91 +182,6 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/session.js"></script>
-
-    <script>
-        // Function to initialize accordion behavior with tab navigation
-        function initializeAccordion() {
-            // Toggle the visibility of sections when headers are clicked
-            document.querySelectorAll('.accordion-header').forEach((header, index) => {
-                header.addEventListener('click', () => {
-                    toggleSection(header);
-                });
-            });
-    
-            // Set the initial display: first section open
-            document.querySelectorAll('.accordion-content').forEach((content, index) => {
-                content.style.display = index === 0 ? 'block' : 'none';
-            });
-    
-            // Add event listeners to move between sections on "Tab" from last field
-            const allSections = document.querySelectorAll('.accordion-content');
-            allSections.forEach((section, sectionIndex) => {
-                const focusableElements = section.querySelectorAll('input, select, textarea, button');
-                if (focusableElements.length > 0) {
-                    const lastElement = focusableElements[focusableElements.length - 1];
-                    
-                    lastElement.addEventListener('keydown', (event) => {
-                        if (event.key === 'Tab' && !event.shiftKey) {
-                            event.preventDefault();
-                            if (sectionIndex < allSections.length - 1) {
-                                // Move to the next section if it's not the last one
-                                moveToNextSection(sectionIndex);
-                            } else {
-                                // If this is the last section, move focus to the Save button
-                                focusOnButtonArea();
-                            }
-                        }
-                    });
-                }
-            });
-    
-            // Add event listener on "Save" button to handle Shift + Tab back to the last section
-            const saveButton = document.getElementById('btnSave');
-            const lastSectionElements = allSections[allSections.length - 1].querySelectorAll('input, select, textarea, button');
-            if (saveButton && lastSectionElements.length > 0) {
-                saveButton.addEventListener('keydown', (event) => {
-                    if (event.key === 'Tab' && event.shiftKey) {
-                        event.preventDefault();
-                        lastSectionElements[lastSectionElements.length - 1].focus();
-                    }
-                });
-            }
-        }
-    
-        // Toggle section visibility
-        function toggleSection(header) {
-            const content = header.nextElementSibling;
-            content.style.display = content.style.display === 'none' || !content.style.display ? 'block' : 'none';
-        }
-    
-        // Move to the next section in the form
-        function moveToNextSection(currentIndex) {
-            const allSections = document.querySelectorAll('.accordion-content');
-            
-            // Close the current section
-            allSections[currentIndex].style.display = 'none';
-    
-            // Open next section if available
-            if (currentIndex + 1 < allSections.length) {
-                allSections[currentIndex + 1].style.display = 'block';
-                // Move focus to the first input in new section
-                const firstElementInNextSection = allSections[currentIndex + 1].querySelector('input, select, textarea, button');
-                if (firstElementInNextSection) {
-                    firstElementInNextSection.focus();
-                }
-            }
-        }
-    
-        // Move focus to the Save and Clear Form buttons area
-        function focusOnButtonArea() {
-            const saveButton = document.getElementById('btnSave');
-            if (saveButton) {
-                saveButton.focus();
-            }
-        }
-    
-        // load that DOM
-        document.addEventListener('DOMContentLoaded', initializeAccordion);
-    </script>
 </body>
+
 </html>
