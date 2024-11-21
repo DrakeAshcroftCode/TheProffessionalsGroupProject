@@ -9,18 +9,21 @@ body {
 #logoutButtonContainer {
     position: fixed;
     top: 10px;
-    right: 10px;
+    left: 10px;
     z-index: 1000;
+
 }
 
 #logoutButton {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #ff4d4d;
+    background-color: #dc3545;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    border-color: #000;
+    
 }
 
 #logoutButton:hover {
@@ -103,6 +106,15 @@ nav ul li a:hover .button-lines div {
     box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+#notifIcon {
+    position: fixed;
+    top: -45px; 
+    right: 35px; 
+    width: 70px;
+    height: 70px;
+    z-index: 1000; 
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -142,6 +154,8 @@ nav ul li a:hover .button-lines div {
 }
 
 header {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -154,6 +168,7 @@ header img {
     height: auto;
     max-width: 100%;
 }
+
 .accordion-section {
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -171,7 +186,8 @@ header img {
 }
 
 .accordion-content {
-    display: none; /* Initially hidden */
+    display: none;
+   
     padding: 10px;
     background-color: #c9c9c9;
     border: 2px solid #5897c9;
@@ -187,21 +203,30 @@ main {
 }
 
 form {
-    width: 80%;
-    max-width: 1600px;
-    margin: 10px auto;
+    width: 1200px;
+    max-width: 1200px;
+    margin: 20px auto;
     padding: 20px;
-    border-radius: 5px;
-    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    border: 4px solid #5897c9;
+    font-size: 18px; 
 }
 
 #form-sections {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
 }
-
+#ncrDetailsContainer {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+    margin: 10px;
+    width:fit-content;
+    background-color: #c9c9c9;
+}
 
 #formContainer {
 
@@ -213,31 +238,40 @@ form {
     background-color: #c9c9c9;
 }
 
-#form-sections > div {
-    width: 100%; 
-    max-width: 1000px; 
-    margin: 10px 0; 
+#form-sections>div {
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px 0;
     background-color: #c9c9c9;
     border-radius: 5px;
 
 }
 
 #form-sections fieldset {
+    margin: 20px 0;
     border: 4px solid #5897c9;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 0;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-size: 18px;
 }
 
 #form-sections legend {
+    font-size: 20px; 
     font-weight: bold;
-    margin-bottom: 10px;
+    padding: 0 10px;
+    color: #007bff;
+    border: 2px solid #5897c9;
+    background-color: #ffffff;
+    border-radius: 5px;
 }
 
 #form-sections label {
-    display: block;
-    margin-bottom: 5px;
+    font-size: 18px; 
     font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: #333;
 }
 
 #form-sections input[type="text"],
@@ -248,14 +282,15 @@ form {
     background-color: #ffffff;
     border: 2px solid #5897c9;
     border-radius: 8px;
-    padding: 10px;
+    padding: 15px; 
     box-sizing: border-box;
-    margin-bottom: 10px;
+    font-size: 16px; 
+    margin-bottom: 15px;
 }
-
 #form-sections input[type="radio"],
 #form-sections input[type="checkbox"] {
-    margin-right: 5px;
+    margin-right: 10px;
+    transform: scale(1.2); 
 }
 
 #form-sections input[type="file"] {
@@ -266,8 +301,13 @@ form {
 #form-sections .custom-file-upload {
     background-color: #ffb703;
 }
-
-form button {
+#viewVeewVoowVoo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#viewEditButton{
     display: inline-block;
     padding: 10px 20px;
     text-align: center;
@@ -279,12 +319,43 @@ form button {
     transition: all 0.3s ease;
     margin: 0 10px;
 }
-
-form button:hover {
+#viewBackButton{
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    border: 2px solid #444;
+    background-color: #ffb703;
+    color: #000;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+}
+#viewBackButton:hover{
     background-color: #000;
     border-color: #222;
     cursor: pointer;
     color: #fff;
+}
+#viewEditButton:hover{
+    background-color: #000;
+    border-color: #222;
+    cursor: pointer;
+    color: #fff;
+}
+form button {
+    padding: 15px 30px; 
+    font-weight: bold;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
 }
 
 form div.button-container {
@@ -293,8 +364,9 @@ form div.button-container {
 }
 
 textarea {
-    scrollbar-width: thin;
-    scrollbar-color: #ffb703 #916b0c;
+    min-height: 100px;
+    max-height: 300px;
+    resize: vertical;
 }
 
 textarea::-webkit-scrollbar {
@@ -329,7 +401,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 .supplier-product-info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+    grid-gap: 20px; 
 }
 
 .supplier-product-info div {
@@ -365,305 +437,10 @@ textarea::-webkit-scrollbar-thumb:hover {
     margin-bottom: 5px;
     font-weight: bold;
 }
-
+#btnClear{
+    background-color:#dc3545;
+    color: white;
+}
 .textarea-container span {
     color: red;
 }
-
-/*Engineering page
- QI drop down
-And Engineering forms.*/
-
-details {
-    margin-bottom: 10px;
-    padding: 0;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    background-color: #f9f9f9;
-    width: auto;  
-    transition: width 0.3s ease; 
-}
-
-
-details summary {
-    padding: 10px;
-    font-size: 1.2em;
-    background-color: #5897c9;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    width: 100%;  
-    box-sizing: border-box; 
-}
-
-details p,
-details form,
-details fieldset {
-    padding: 15px;
-    background-color: #fafafa;
-    border-top: 1px solid #ccc;
-    margin-top: 5px;
-    overflow: visible;
-    width: 100%; 
-}
-
-
-details[open] {
-    overflow: visible;
-    width: 100%
-}
-
-details[open] summary {
-    background-color: #ddd; 
-}
-
-#popout-form-sections {
-    display: flex;                  
-    justify-content: center;        
-    align-items: stretch;           
-    gap: 20px;                      
-    width: 100%;       
-}
-
-#popout-form-sections #left-side {
-    flex: 0 1 40%; 
-    display: flex;
-    flex-direction: column; 
-    gap: 20px;
-}
-#popout-form-sections #left-side > div {
-    flex: 1;
-}
-
-#popout-form-sections #left-side,
-#popout-form-sections #reportDetails {
-    flex: 1 1 48%;                  
-    padding: 10px;                  
-    border-radius: 10px;            
-    box-sizing: border-box;       
-    
-}
-
-#popout-form-sections #reportDetails fieldset {
-    flex-grow: 1; 
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-#popout-form-sections textarea {
-    width: 100%;
-    background-color: #ffffff;
-    border: 2px solid #5897c9;
-    border-radius: 8px;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    height: 100%; 
-    resize: vertical; 
-    font-size: 16px;
-    color: #000;
-}
-
-
-#popout-form-sections > div {
-    flex: 1 1 30%;                     
-    box-sizing: border-box;            
-    padding: 8px;
-    border-radius: 10px;    
-    margin-bottom: 20px;               
-}
-
-
-#popout-form-sections fieldset {
-    border: 4px solid #5897c9;
-    border-radius: 5px;
-    width: 100%;                       
-    padding: 10px;
-    margin: 0;                         
-}
-
-#Engineer-forms label,
-#popout-form-sections label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-#Engineer-forms legend,
-#popout-form-sections legend {
-    font-weight: bold; 
-    font-size: 1.2em;  
-    margin-bottom: 10px; 
-    color: #333; 
-}
-
-#Engineer-forms button[title]:hover::after{
-    content: attr(title);  
-    position: absolute;
-    background-color: #333;
-    color: #fff;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 14px;
-    top: 100%;  
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap; 
-    z-index: 1000;
-}
-
-#Engineer-forms button[title]:hover::before{
-    content: "";
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #333;
-}
-
-#popout-form-sections input[type="text"],
-#popout-form-sections input[type="date"],
-#popout-form-sections select {
-    width: 100%;
-    background-color: #ffffff;
-    border: 2px solid #5897c9;
-    border-radius: 8px;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-}
-
-#itemDescription,
-#defectDescription {
-    width: 100%;
-    background-color: #ffffff;
-    border: 2px solid #5897c9;
-    border-radius: 8px;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    height: 200px; 
-    resize: vertical; 
-    min-height: 150px; 
-}
-
-#popout-form-sections input[type="radio"],
-#popout-form-sections input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-
-#popout-form-sections input[type="file"] {
-    display: block;
-    margin-bottom: 10px;
-}
-
-#Engineer-forms {
-    display: flex;                           
-    flex-wrap: nowrap;                       
-    justify-content: space-between;          
-    gap: 20px;                               
-    padding: 0;
-    width: 75%;                             
-    box-sizing: border-box;                  
-}
-
-#Engineer-forms button{
-    display: inline-block;
-    padding: 15px 30px;              
-    text-align: center;
-    font-size: 18px;                 
-    border: 2px solid #444;
-    background-color: #5897c9;
-    color: #000;
-    border-radius: 10px;             
-    outline: none;
-    transition: all 0.3s ease;
-    margin: 10px 15px;               
-}
-
-#Engineer-forms button:hover{
-    background-color: #000;
-    border-color: #222;
-    cursor: pointer;
-    color: #fff;
-}
-#Engineer-forms > div {
-    flex: 1 1 48%;                           
-    box-sizing: border-box;                  
-    border-radius: 10px;
-    margin-bottom: 20px;                     
-}
-
-
-#Engineer-forms fieldset {
-    border: 4px solid #5897c9;
-    border-radius: 5px;
-    width: 100%;                             
-    padding: 10px;
-    margin: 0;                               
-}
-
-
-#popout-form-sections label,
-#Engineer-forms label {
-    margin-bottom: 10; 
-    display: inline-block; 
-}
-
-
-#Engineer-forms input[type="text"],
-#Engineer-forms textarea,
-#Engineer-forms input[type="date"],
-#Engineer-forms select {
-    width: 100%;
-    background-color: #ffffff;
-    border: 2px solid #5897c9;
-    border-radius: 8px;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-}
-
-
-#Engineer-forms input[type="radio"],
-#Engineer-forms input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-#popout-form-sections div > div.radio-group,
-#Engineer-forms div > div.radio-group {
-    display: flex;              
-    gap: 10px;                   
-    align-items: center;         
-}
-
-
-#Engineer-forms input[type="radio"] {
-    margin-right: 5px;           
-}
-
-#popout-form-sections div > div.radio-group,
-#Engineer-forms label[for] {
-    display: inline-block;       
-    margin-right: 10px;          
-}
-
-
-
-/* stack Details pop-out on smaller screen*/
-@media (max-width: 768px) {
-    #popout-form-sections,
-    #Engineer-forms {
-        flex-direction: column;
-    }
-
-    #popout-form-sections > div,
-    #Engineer-forms > div {
-        flex: 1 1 100%;
-    }
-}
-
-/*End Engineering form styling*/

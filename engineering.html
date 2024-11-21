@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crossfire - Engineering</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
+    <header>
     <div id="logoutButtonContainer" style="display: none;">
         <button id="logoutButton">Logout</button>
     </div>
@@ -19,8 +18,17 @@
         Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
     </div>
     <div>
-        <header>
-            <img src="/images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+
+            <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+            <div id="notifications" style="position: fixed; top: 10px; right: 10px; cursor: pointer;">
+                <img src="images/notif-icon.png" alt="Notifications" id="notifIcon"/>
+                <span id="notifBadge" style="background-color: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">0</span>
+                <div id="notifDropdown" style="display: none; position: absolute; top: 30px; right: 0; background: white; border: 1px solid #ccc; padding: 10px; max-width: 300px;">
+                    <h4>Notifications</h4>
+                    <ul id="notifList" style="list-style: none; padding: 0; margin: 0;"></ul>
+                </div>
+            </div>
+            
         </header>
         <nav>
             <ul id="navList">
@@ -85,182 +93,189 @@
             </div>
         </div>
         <main>
-
             <h1>Engineering - NCR Form</h1>
-
-
-            <details class="accordion">
-                <summary><strong>QI Form</strong></summary>
-                <p>All required fields marked with a (*)</p>
+            <p>All required fields marked with a (*)</p>
+            <div id="form-sections">
                 <form action="https://webdevbasics.net/scripts/demo.php" method="post" enctype="multipart/form-data">
-            
-                    <div id="popout-form-sections">
-                        <!-- Left Side: Supplier Info and Details Cont. -->
-                        <div id="left-side">
-                            <div id="supplier-product-info">
-                                <fieldset class="supplier-product-info">
-                                    <legend>Supplier and Product Info.</legend>
-                                    <div>
-                                        <label for="supName">Supplier Name*</label>
-                                        <input id="supName" name="supName" placeholder="Pepsi Co.." type="text" required>
-                                    </div>
-                                    <div>
-                                        <label for="ncrNo">NCR No.*</label>
-                                        <input id="ncrNo" name="ncrNo" placeholder="65789" type="text" required>
-                                    </div>
-                                    <div>
-                                        <label for="prodNo">PO or Prod. No.*</label>
-                                        <input id="prodNo" name="prodNo" placeholder="product number" type="text" required>
-                                    </div>
-                                    <div>
-                                        <label for="saleOrderNo">Sales Order No.*</label>
-                                        <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text" required>
-                                    </div>
-                                    <div>
-                                        <label for="quantityR">Quantity Received:*</label>
-                                        <input id="quantityR" name="quantityR" placeholder="10" type="text" required>
-                                    </div>
-                                    <div>
-                                        <label for="quantityD">Quantity Defective*</label>
-                                        <input id="quantityD" name="quantityD" placeholder="15" type="text" required>
-                                    </div>
-                                </fieldset>
-                            </div>
-            
-                            <div id="conformDiv">
-                                <fieldset>
-                                    <legend>Report Details</legend>
-                                    <div>
-                                        <label>Item marked Nonconforming*</label>
-                                        <label for="rdoConformingYes">Yes</label>
-                                        <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
-                                        <label for="rdoConformingNo">No</label>
-                                        <input type="radio" id="rdoConformingNo" name="conforming" value="No">
-                                    </div>
-                                    <div>
-                                        <label for="reportDate">Date of Report*</label>
-                                        <input id="reportDate" name="reportDate" type="date" required>
-                                    </div>
-                                    <div>
-                                        <label for="repName">Quality Representative's Name:*</label>
-                                        <input type="text" id="repName" name="repName" placeholder="John Wick" required>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-            
-                        <!-- Right Side: Report Details -->
-                        <div id="reportDetails">
-                            <fieldset>
-                                <legend>Details Cont.</legend>
-                                <div>
-                                    <label for="rdoIPA">Supplier or Rec-Insp*</label>
-                                    <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp">
-                                    <label for="rdoIPA">WIP(Production Order)*</label>
-                                    <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP">
-                                </div>
-                                <div>
-                                    <label for="sapNo">SAP No.*</label>
-                                    <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
-                                </div>
-                                <div >
-                                    <label for="itemDescription">Description of Item*</label>
-                                    <textarea id="itemDescription" name="itemDescription" placeholder="Please describe the item here" required></textarea>
-                                </div>
-                                <div>
-                                    <label for="defectDescription">Description of Defect*</label>
-                                    <textarea id="defectDescription" name="defectDescription" placeholder="In as much detail possible, describe the item's defect" required></textarea>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-            
-                </form> 
-            </details> <!-- QI Form Accordion ends here -->
+                    <div id="formContainer">
+                        <fieldset class="supplier-product-info">
 
-            <!--Start of Engineering action fields-->
-            <div id="Engineer-forms">
-                <fieldset>
-                    <Legend>Engineering</Legend>
-                    <div>
-                        <label for="selectDisposition">Review by CF Engineery*</label>
-                        <select id="selectDisposition">
-                            <option value="UseAsIs">Use as Is</option>
-                            <option value="repair">Repair</option>
-                            <option value="rework">Rework</option>
-                            <option value="scrap">Scrap</option>
-                        </select>
+                            <legend>Supplier and Product Info.</legend>
+                            <div>
+                                <label for="supName">Supplier Name*</label>
+                                <input id="supName" name="supName" placeholder="Pepsi Co.." type="text" required>
+                                <span id="supNameError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="ncrNo">NCR No.*</label>
+                                <input id="ncrNo" name="ncrNo" placeholder="65789" type="text" required>
+                                <span id="ncrNoError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="prodNo">PO or Prod. No.*</label>
+                                <input id="prodNo" name="prodNo" placeholder="product number" type="text" required>
+                                <span id="prodNoError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="saleOrderNo">Sales Order No.*</label>
+                                <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text" required>
+                                <span id="saleOrderNoError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="quantityR">Quantity Received:*</label>
+                                <input id="quantityR" name="quantityR" placeholder="10" type="text" required>
+                                <span id="quantityRError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="quantityD">Quantity Defective*</label>
+                                <input id="quantityD" name="quantityD" placeholder="15" type="text" required>
+                                <span id="quantityDError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Report Details</legend>
+                            <div>
+                                <label>Identify Process applicable</label>
+                                <br>
+                                <label for="rdoIPA">Supplier or Rec-Insp*</label>
+                                <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp">
+
+                                <label for="rdoIPA">WIP(Production Order)*</label>
+                                <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP">
+                                <span id="rdoIPAError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="sapNo">SAP No.*</label>
+                                <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
+                                <span id="sapNoError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="itemDescription">Description of Item*</label>
+                                <textarea id="itemDescription" name="itemDescription"
+                                    placeholder="Please describe the item here" required></textarea>
+                                <span id="itemDescriptionError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="defectDescription">Description of Defect*</label>
+                                <textarea id="defectDescription" name="defectDescription"
+                                    placeholder="In as much detail possible, describe the item's defect"
+                                    required></textarea>
+                                <span id="defectDescriptionError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="nrcImage">Choose a Nonconformity image to upload*</label>
+                                <input type="file" id="nrcImage" name="nrcImage" accept="image/*">
+                                <span id="nrcImageError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <div>
+                                <label>Item marked Nonconforming*</label>
+                                <label for="rdoConformingYes">Yes</label>
+                                <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
+                                <label for="rdoConformingNo">No</label>
+                                <input type="radio" id="rdoConformingNo" name="conforming" value="No">
+                                <span id="rdoConformingError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="reportDate">Date of Report*</label>
+                                <input id="reportDate" name="reportDate" type="date">
+                                <span id="reportDateError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="repName">Quality Representative's Name:*</label>
+                                <input type="text" id="repName" name="repName" placeholder="John Wick" required>
+                                <span id="repNameError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <p>Hit "Submit" when all fields are done to satisfaction and the report will be saved and an
+                                Email notification will be sent to Engineering and Operations Manager for review
+                                Please ensure all fields are filled out and accurate.
+                                If you would like to save a partial report select "*Insert button here*"
+                                Saved and partial reports can be found on the **blank** page.
+                            </p>
+                        </fieldset>
+                        <!--Start of Engineering action fields-->
+                        <fieldset>
+                            <Legend>Engineering - Action</Legend>
+                            <div>
+                                <label for="selectDisposition">Review by CF Engineery*</label>
+                                <select id="selectDisposition">
+                                    <option value="UseAsIs">Use as Is</option>
+                                    <option value="repair">Repair</option>
+                                    <option value="rework">Rework</option>
+                                    <option value="scrap">Scrap</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="dispositionDescription">*</label>
+                                <textarea id="dispositionDescription" name="dispositionDescription"
+                                    placeholder="(ex)Sequence of work steps required when 'repair' or 'rework' indicated"
+                                    required></textarea>
+                                <span id="dispositionError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="selectNotification">Does Customer require notification? y/n?</label>
+                                <p>If "Yes" raise message to customer detailing issues</p>
+                                <select id="selectNotification">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Does the drawing require updating? </label>
+                                <label for="rdoYes">Yes</label>
+                                <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes">
+                                <label for="rdoConformingNo">No</label>
+                                <input type="radio" id="rdoRedrawNo" name="redraw" value="No">
+                                <span id="rdoConformingError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Engineering - Details</legend>
+                            <div>
+                                <label for="txtOrgRevNo">Original Rev. Number</label>
+                                <input type="text" id="txtOrgRevNo" name="txtOrgRevNo" placeholder="(ex)5556667722">
+                            </div>
+                            <div> <!-- Engineer created?-->
+                                <label for="txtUpRevNo">Original Rev. Number</label>
+                                <input type="text" id="txtUpRevNo" name="txtUpRevNo" placeholder="(ex)5556667722">
+                            </div>
+                            <div>
+                                <label for="revisionDate">Revision Date*</label>
+                                <input id="revisionDateDate" name="revisionDate" type="date">
+                                <span id="revisionDateError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                            <div>
+                                <label for="txtEngName">Name of Engineer</label>
+                                <input type="text" id="txtEngName" name="txtEngName" placeholder="(ex)Imma DaBoss"
+                                    required>
+                                <span id="txtEngNameError" style="color: red;"></span> <!-- Error span -->
+                            </div>
+                        </fieldset>
                     </div>
-                    <div>
-                        <label for="dispositionDescription">Disposition Description*</label>
-                        <textarea id="dispositionDescription" name="dispositionDescription"
-                            placeholder="(ex)Sequence of work steps required when 'repair' or 'rework' indicated"
-                            required></textarea>
-                        <span id="dispositionError" style="color: red;"></span> <!-- Error span -->
-                    </div>
-                    <div>
-                        <label for="selectNotification">Does Customer require notification? y/n?</label>
-                        <p>If "Yes" raise message to customer detailing issues</p>
-                        <select id="selectNotification">
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Does the drawing require updating? </label>
-                        <div class="radio-group">
-                            <label for="rdoRedrawYes">Yes</label>
-                            <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes">
-                            
-                            <label for="rdoRedrawNo">No</label>
-                            <input type="radio" id="rdoRedrawNo" name="redraw" value="No">
-                        </div>
-                    </div>
-                    <div>
-                        <label for="nrcImage">View Nonconforming product image</label>
-                        <input title="Click to choose a file" type="file" id="nrcImage" name="nrcImage" accept="image/*">
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Engineering - Details</legend>                    
-                    <div> <!-- Engineer created?-->
-                        <label for="txtUpRevNo">Original Rev. Number*</label>
-                        <input type="text" id="txtUpRevNo" name="txtUpRevNo" placeholder="(ex)5556667722">
-                    </div>
-                    <div>
-                        <label for="revisionDate">Revision Date*</label>
-                        <input id="revisionDateDate" name="revisionDate" type="date">
-                        <span id="revisionDateError" style="color: red;"></span> <!-- Error span -->
-                    </div>
-                    <div>
-                        <label for="txtEngName">Name of Engineer*</label>
-                        <input type="text" id="txtEngName" name="txtEngName" placeholder="(ex)Imma DaBoss" required>
-                        <span id="txtEngNameError" style="color: red;"></span> <!-- Error span -->
-                    </div>
+
                     <div class="button-container">
-                        <label for="status">Status*:</label>
+                        <label for="status">Status:</label>
                         <select id="status">
                             <option value="active">Active</option>
                             <option value="Closed">Closed</option>
                         </select>
-                       <div>
-                        <button title ="Save partial report" type="button" id="btnSave" value="Save Report">Save</button>
-                        <button title="Submit completed report"type="submit" id="btnSubmit">Submit</button>
-                        <button title="Clear all Engineer form fields"type="button" id="btnClear" value="Clear Report">Clear</button>
+                        <button type="button" id="btnSave" value="Save Report">Save</button>
+                        <!-- <button type="submit" id="btnSubmit">Save & Send</button> -->
+                        <button type="button" id="btnClear" value="Clear Report">Clear</button>
+
                     </div>
-                    </div>
-                </fieldset>
-
-            </div>
-    </div>
-
-    </form>
-
-    </main>
+                </form>
+                <div id="form-sections">
+        </main>
     </div>
 
     <script src="scripts/app.js"></script>
     <script src="scripts/session.js"></script>
+    <script src="scripts/notif.js"></script>
+
 
 
 

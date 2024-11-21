@@ -3,6 +3,7 @@
 var storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
 var incompleteNCRs = JSON.parse(localStorage.getItem("incompleteNCRs")) || [];
 
+// this fairly large function checks whether any NCRs are stored, and if so, it retrieves and lists them using DOM
 // Function to display the list of NCRs
 function displayNCRList(ncrList, isComplete = true) {
     var ncrListContainer = document.getElementById(isComplete ? "ncrList" : "incompleteNcrList");
@@ -51,9 +52,15 @@ function displayNCRList(ncrList, isComplete = true) {
         statusCell.innerText = ncr.status || (isComplete ? "Open" : "Incomplete");
         row.appendChild(statusCell);
 
-        // Actions (View, Edit, Delete)
+        // Actions (View, Edit, Delete, Export)
         var actionsCell = document.createElement("td");
-
+       // View Button
+       var viewButton = document.createElement('button');
+       viewButton.innerText = 'View';
+       viewButton.onclick = function () {
+           viewNCR(index);
+       };
+       actionsCell.appendChild(viewButton);
         // Edit Button
         var editButton = document.createElement("button");
         editButton.innerText = "Edit";
@@ -72,6 +79,14 @@ function displayNCRList(ncrList, isComplete = true) {
         };
         actionsCell.appendChild(deleteButton);
 
+        // Export Button
+        const exportButton = document.createElement("button");
+        exportButton.innerText = "Export";
+        exportButton.onclick = function () {
+            exportNCRAsPDF(index);
+        };
+        actionsCell.appendChild(exportButton);
+
         row.appendChild(actionsCell);
         tbody.appendChild(row);
     });
@@ -79,6 +94,65 @@ function displayNCRList(ncrList, isComplete = true) {
     table.appendChild(tbody);
     ncrListContainer.appendChild(table);
 }
+
+function exportNCRAsPDF(index) {
+    const ncr = storedNCRs[index];
+    const { jsPDF } = window.jspdf; 
+
+    const doc = new jsPDF();
+
+    const crossfireLogo = './images/CrossfireLogo.png';
+    doc.addImage(crossfireLogo, 'PNG', 10, 10, 50, 15);
+
+    doc.setFontSize(16);
+    doc.setTextColor(33, 37, 41);
+    doc.setFont("helvetica", "bold");
+    doc.text("NCR Report", 105, 30, { align: "center" });
+
+    const sectionHeaderColor = [52, 152, 219];
+
+    doc.setFillColor(...sectionHeaderColor);
+    doc.rect(10, 40, 190, 10, "F");
+    doc.setFontSize(12);
+    doc.setTextColor(255, 255, 255);
+    doc.text("Supplier and Product Info", 15, 47);
+
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Supplier Name: ${ncr.supplierInfo.supplierName || "N/A"}`, 15, 55);
+    doc.text(`NCR Number: ${ncr.supplierInfo.ncrNumber || "N/A"}`, 15, 60);
+    doc.text(`Product Number: ${ncr.supplierInfo.poOrProductNumber || "N/A"}`, 15, 65);
+    doc.text(`Sales Order Number: ${ncr.supplierInfo.salesOrderNumber || "N/A"}`, 15, 70);
+    doc.text(`Quantity Received: ${ncr.supplierInfo.quantityReceived || "N/A"}`, 15, 75);
+    doc.text(`Quantity Defective: ${ncr.supplierInfo.quantityDefective || "N/A"}`, 15, 80);
+
+    doc.setFillColor(...sectionHeaderColor);
+    doc.rect(10, 90, 190, 10, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.text("Report Details", 15, 97);
+
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`SAP Number: ${ncr.reportDetails.sapNo || "N/A"}`, 15, 105);
+    doc.text(`Item Description: ${ncr.reportDetails.itemDescription || "N/A"}`, 15, 110);
+    doc.text(`Defect Description: ${ncr.reportDetails.descriptionOfDefect || "N/A"}`, 15, 115);
+
+    doc.setFillColor(...sectionHeaderColor);
+    doc.rect(10, 125, 190, 10, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.text("Nonconformance Details", 15, 132);
+
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Is Non-Conforming: ${ncr.nonConformanceDetails.isNonConforming || "N/A"}`, 15, 140);
+    doc.text(`Date of Report: ${ncr.nonConformanceDetails.dateOfReport || "N/A"}`, 15, 145);
+    doc.text(`Quality Representative: ${ncr.nonConformanceDetails.qualityRepresentativeName || "N/A"}`, 15, 150);
+
+    doc.save(`${ncr.supplierInfo.ncrNumber || "NCR_Report"}.pdf`);
+}
+
+
+
 
 // Edit NCR function to load the existing NCR data into the form
 function editNCR(index) {
@@ -161,7 +235,48 @@ function editNCR(index) {
     });
 }
 
+// Function to seed NCRs if there are none
+function seedNCRs() {
+    let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+
+    if (storedNCRs.length > 0) {
+        console.log("NCRs are already seeded. Skipping seeding process.");
+        return;
+    }
+
+    for (let i = 1; i <= 10; i++) {
+        const newNCR = {
+            supplierInfo: {
+                ncrNumber: generateNCRNumber(),
+                supplierName: `Supplier ${i}`,
+                poOrProductNumber: `${1000 + i}`,
+                salesOrderNumber: `${10000000 + i}`,
+                quantityReceived: Math.floor(Math.random() * 100) + 1,
+                quantityDefective: Math.floor(Math.random() * 10),
+            },
+            reportDetails: {
+                processApplicable: 'recInsp',
+                sapNo: `${3000 + i}`,
+                itemDescription: `Item description ${i}`,
+                descriptionOfDefect: `Defect description ${i}`,
+                nonConformityImage: `image${i}.jpg`
+            },
+            nonConformanceDetails: {
+                isNonConforming: 'Yes',
+                dateOfReport: new Date().toISOString().split('T')[0],
+                qualityRepresentativeName: `Rep ${i}`,
+            }
+        };
+
+        storedNCRs.push(newNCR);
+    }
+
+    localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
+    console.log("NCRs seeded successfully.");
+}
 // Function to view NCR details
+// I used to have a lot more code here but I broke it out into a separate JS file (ViewNCR.js) for better
+// functionality across pages.
 function viewNCR(index) {
     localStorage.setItem("currentViewIndex", index);
     window.location.href = "viewNCR.html";
@@ -222,3 +337,4 @@ document.addEventListener("DOMContentLoaded", function () {
     displayNCRList(storedNCRs, true);
     displayNCRList(incompleteNCRs, false);
 });
+seedNCRs();
