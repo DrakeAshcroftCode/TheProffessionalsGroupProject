@@ -94,7 +94,9 @@ function displayNCRList(ncrList, isComplete = true) {
     table.appendChild(tbody);
     ncrListContainer.appendChild(table);
 }
-
+// This is based on the jsPDF api. If you guys need help on working with it https://artskydj.github.io/jsPDF/docs/jsPDF.html
+// it is not as complicated as it looks. We just need a logic structure (if else for instance) that checks if the form has engineering data
+// and if so, exports the engineering data in the pdf. Everything else is simple little doc.text commands
 function exportNCRAsPDF(index) {
     const ncr = storedNCRs[index];
     const { jsPDF } = window.jspdf; 
@@ -172,6 +174,7 @@ function editNCR(index) {
         }
     }
 
+    //taking the passed ncr form and setting the form inputs to their values.
     setValue("supName", ncr.supplierInfo.supplierName);
     setValue("ncrNo", ncr.supplierInfo.ncrNumber);
     setValue("prodNo", ncr.supplierInfo.poOrProductNumber);
@@ -202,6 +205,8 @@ function editNCR(index) {
     setValue("reportDate", ncr.nonConformanceDetails.dateOfReport);
     setValue("repName", ncr.nonConformanceDetails.qualityRepresentativeName);
 
+    // This here is where I have coded the check for what the users role is, and if they do have access to 
+    // engineering, we then populate the fields with the relevant info. Please verify this works.
     if (userRole === "Engineering" || userRole === "Operations Manager") {
         if (ncr.engineeringAction) {
             setValue("selectDisposition", ncr.engineeringAction.disposition);
@@ -234,6 +239,7 @@ function editNCR(index) {
         displayNCRList(storedNCRs);
     });
 }
+//function to dynamically generate an NCR number.
 let ncrCounter = 0;
 function generateNCRNumber() {
     const year = new Date().getFullYear();
@@ -254,7 +260,7 @@ function generateNCRNumber() {
 
     return `${year}-${String(ncrCounter).padStart(3, '0')}`;
 }
-// Function to seed NCRs if there are none
+// Function to seed NCRs if there are none, if none found, it'll give us ten of them as mark requested.
 function seedNCRs() {
     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
 
@@ -318,6 +324,7 @@ function deleteNCR(index, isComplete) {
 }
 
 // Search function for NCRs
+// Mark wanted us to add more search functionalities. Searching by date range, searching by open closed status.
 function searchNCRs() {
     var year = document.getElementById("yearSearch").value;
     var code = document.getElementById("codeSearch").value.trim();
