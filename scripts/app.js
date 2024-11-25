@@ -58,7 +58,8 @@ function saveSendFunction() {
             isNonConforming: rdoTwoValue,
             dateOfReport: reportDate,
             qualityRepresentativeName: repName,
-        }
+        },
+       
     };
 
     return ncrForm;
@@ -382,6 +383,7 @@ function handleDeselectRadioButton(radioGroupName, lastCheckedRadioRef) {
 window.onload = function () {
     resetTimer();
     loadFormData();
+    
     /*document.getElementById('timerDisplay').classList.add('hidden');*/
 
     var itemDescriptionTextarea = document.getElementById('itemDescription');
