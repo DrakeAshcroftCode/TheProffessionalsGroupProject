@@ -1,9 +1,34 @@
+#logoutButtonContainer {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+
+}
+
+#logoutButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border-color: #000;
+    
+}
+
+#logoutButton:hover {
+    background-color: #e60000;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     padding: 0;
     overflow-x: hidden;
     background-color: #f4f4f4;
     margin-top: 50px;
+    line-height: 1.6;
 }
 
 nav {
@@ -15,8 +40,6 @@ nav {
     position: relative;
     overflow: hidden;
     border-radius: 60px;
-
-
 }
 
 nav ul {
@@ -83,6 +106,8 @@ nav ul li a:hover .button-lines div {
 }
 
 header {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -104,27 +129,51 @@ main {
 }
 
 form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: fit-content;
-    max-width: 1600px;
+    max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #c9c9c9;
-    border: 4px solid #5897c9;
-    border-radius: 5px;
-    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border: 2px solid #5897c9;
+    border-radius: 10px;
+    font-size: 18px;
 }
-#ncrList {
-    width: fit-content;
-    max-width: 1600px;
-    margin: 20px auto;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #c9c9c9;
-    border: 4px solid #5897c9;
+
+form input[type="text"],
+form select {
+    font-size: 18px;
+    padding: 10px;
+    width: 92%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 20px;
 }
+
+form button {
+    font-size: 18px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+form div.button-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+#ncrList,
 #incompleteNcrList {
     width: fit-content;
     max-width: 1600px;
@@ -134,105 +183,79 @@ form {
     background-color: #c9c9c9;
     border: 4px solid #5897c9;
     border-radius: 5px;
-    font-size: 20px;
-}
-#form-sections {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    font-size: 18px;
 }
 
-#form-sections>div {
-    flex: 1;
-    margin: 10px;
-    min-width: 300px;
-}
-
-#logoutButtonContainer {
+#notifIcon {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: -45px;
+    right: 35px;
+    width: 70px;
+    height: 70px;
     z-index: 1000;
 }
 
-#logoutButton {
-    padding: 10px 20px;
+.ncr-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-size: 18px;
+    text-align: left;
+}
+
+.ncr-table th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+.ncr-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.ncr-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.ncr-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.ncr-table button {
     font-size: 16px;
-    background-color: #ff4d4d;
-    color: #fff;
+    padding: 8px 12px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#logoutButton:hover {
-    background-color: #e60000;
+.ncr-table button:hover {
+    transform: scale(1.05);
 }
 
-#form-sections fieldset {
-    border: 4px solid #5897c9;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 0;
+.ncr-table button:nth-child(1) {
+    background-color: #28a745;
+    color: white;
 }
 
-#form-sections label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+.ncr-table button:nth-child(2) {
+    background-color: #ffc107;
+    color: black;
 }
 
-#form-sections input[type="text"],
-#form-sections textarea,
-#form-sections input[type="date"],
-#form-sections select {
-    width: 100%;
-    background-color: #ffffff;
-    border: 2px solid #5897c9;
-    border-radius: 8px;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
+.ncr-table button:nth-child(3) {
+    background-color: #dc3545;
+    color: white;
 }
 
-#form-sections input[type="radio"],
-#form-sections input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-#form-sections input[type="file"] {
-    display: block;
-    margin-bottom: 10px;
-}
-
-#form-sections .custom-file-upload {
-    background-color: #ffb703;
-}
-
-form button {
-    display: inline-block;
-    padding: 10px 20px;
-    text-align: center;
-    border: 2px solid #abaaaa;
-    background-color: #ffb703;
-    color: #000;
-    border-radius: 5px;
-    outline: none;
-    transition: all 0.3s ease;
-    margin: 0 10px;
-}
-
-form button:hover {
-    background-color: #000;
-    border-color: #222;
-    cursor: pointer;
-}
-
-form div.button-container {
-    text-align: center;
-    margin-top: 20px;
+.ncr-table button:nth-child(4) {
+    background-color: #17a2b8;
+    color: white;
 }
 
 textarea {
@@ -240,22 +263,7 @@ textarea {
     scrollbar-color: #ffb703 #916b0c;
 }
 
-textarea::-webkit-scrollbar {
-    width: 10px;
-}
 
-textarea::-webkit-scrollbar-track {
-    background-color: #916b0c;
-}
-
-textarea::-webkit-scrollbar-thumb {
-    background-color: #ffb703;
-    border-radius: 10px;
-}
-
-textarea::-webkit-scrollbar-thumb:hover {
-    background-color: #fb8500;
-}
 
 @media (max-width: 1200px) {
     #form-sections {
@@ -264,58 +272,20 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @media (max-width: 768px) {
-    #form-sections>div {
+    #form-sections > div {
         flex: 1 1 100%;
     }
-}
 
-fieldset {
-    border: 4px solid #5897c9;
-    border-radius: 5px;
-    padding: 10px;
-}
+    form {
+        width: 90%;
+    }
 
-.supplier-product-info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-}
+    .ncr-table {
+        font-size: 16px;
+    }
 
-.supplier-product-info div {
-    display: flex;
-    flex-direction: column;
-}
-
-.supplier-product-info label {
-    margin-bottom: 5px;
-}
-
-.ncr-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.ncr-table th,
-.ncr-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-.ncr-table th {
-    background-color: #f2f2f2;
-    text-align: left;
-}
-
-.ncr-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.ncr-table tr:hover {
-    background-color: #ddd;
-}
-
-.ncr-table button {
-    margin-right: 5px;
-    padding: 5px 10px;
+    form button {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
 }

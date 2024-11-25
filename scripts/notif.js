@@ -7,8 +7,8 @@ if (!localStorage.getItem('notifications')) {
 function addNotification(ncrForm) {
     const notifList = JSON.parse(localStorage.getItem('notifications')) || [];
     const newNotif = {
-        ncrNumber: ncr.supplierInfo.ncrNumber,
-        message: `New NCR created: ${ncr.supplierInfo.ncrNumber}`,
+        ncrNumber: ncrForm.supplierInfo.ncrNumber,
+        message: `New NCR created: ${ncrForm.supplierInfo.ncrNumber}`,
         timestamp: new Date().toISOString(),
         read: false,
     };
@@ -74,3 +74,4 @@ function notifyOnNewNCR(ncrForm) {
         addNotification(ncrForm);
     }
 }
+

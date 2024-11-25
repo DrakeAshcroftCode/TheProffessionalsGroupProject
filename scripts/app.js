@@ -1,6 +1,8 @@
-// This massive block of code handles the logic for the form, retrieving data, validation, and other functions.
-
-// This function saves or updates NCR form data based on whether the NCR already exists.
+// This code handles the logic behind registering/logging in.
+//domcontent loaded just means "make sure the HTML elements are visible to the JS before we mess with them", I have nested most of the page inside of it to be sure.
+//throughout this document in the eventlisteners you will see me use preventDefault(), this is provided by JS
+//and it simply stops the default event behavior from happening so that I can mess with it.
+//Code for login button, finding any users that exist, checking if the user is logged in or not, etc.
 function saveSendFunction() {
     var supplierName = document.getElementById('supName').value;
     var ncrNumber = document.getElementById('ncrNo').value;
@@ -264,8 +266,12 @@ function storeFormData(ncrForm) {
 
     if (existingIndex !== -1) {
         storedNCRs[existingIndex] = ncrForm; // Update existing NCR
+        notifyOnNewNCR(ncrForm);
+
     } else {
         storedNCRs.push(ncrForm); // Add new NCR
+        notifyOnNewNCR(ncrForm);
+
     }
 
     localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
@@ -317,7 +323,7 @@ function savePartialNCR() {
     alert("Incomplete NCR saved successfully.");
     displayNCRList(incompleteNCRs, false);
 }
-// Save button event
+// Save button click event
 document.getElementById("btnSave").addEventListener("click", function (event) {
     event.preventDefault();
     var ncrForm = saveSendFunction();
@@ -331,7 +337,7 @@ document.getElementById("btnSave").addEventListener("click", function (event) {
     }
 });
 
-// Clear button event
+// Clear button click event
 document.getElementById("btnClear").addEventListener("click", function (event) {
     event.preventDefault();
     document.querySelector('form').reset();
@@ -343,7 +349,7 @@ document.getElementById("btnClear").addEventListener("click", function (event) {
     lastCheckedRadioConforming = null;
 });
 
-// Auto-expand text areas
+// Auto-expand text areas (thus the name)
 function autoExpandTextarea(textarea) {
     function resize() {
         textarea.style.height = 'auto';
@@ -376,6 +382,7 @@ function handleDeselectRadioButton(radioGroupName, lastCheckedRadioRef) {
 window.onload = function () {
     resetTimer();
     loadFormData();
+    /*document.getElementById('timerDisplay').classList.add('hidden');*/
 
     var itemDescriptionTextarea = document.getElementById('itemDescription');
     var defectDescriptionTextarea = document.getElementById('defectDescription');
@@ -386,3 +393,4 @@ window.onload = function () {
     handleDeselectRadioButton('rdoIPA', { value: lastCheckedRadioIPA });
     handleDeselectRadioButton('conforming', { value: lastCheckedRadioConforming });
 };
+ 
