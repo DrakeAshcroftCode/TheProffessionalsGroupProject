@@ -101,32 +101,32 @@
                             <legend>Supplier and Product Info.</legend>
                             <div>
                                 <label for="supName">Supplier Name*</label>
-                                <input id="supName" name="supName" placeholder="Pepsi Co.." type="text" required>
+                                <input id="supName" name="supName" placeholder="Pepsi Co.." type="text" readonly>
                                 <span id="supNameError" style="color: red;"></span>
                             </div>
                             <div>
                                 <label for="ncrNo">NCR No.*</label>
-                                <input id="ncrNo" name="ncrNo" placeholder="65789" type="text" required>
+                                <input id="ncrNo" name="ncrNo" placeholder="65789" type="text" readonly>
                                 <span id="ncrNoError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="prodNo">PO or Prod. No.*</label>
-                                <input id="prodNo" name="prodNo" placeholder="product number" type="text" required>
+                                <input id="prodNo" name="prodNo" placeholder="product number" type="text" readonly>
                                 <span id="prodNoError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="saleOrderNo">Sales Order No.*</label>
-                                <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text" required>
+                                <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text" readonly>
                                 <span id="saleOrderNoError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="quantityR">Quantity Received:*</label>
-                                <input id="quantityR" name="quantityR" placeholder="10" type="text" required>
+                                <input id="quantityR" name="quantityR" placeholder="10" type="text" readonly>
                                 <span id="quantityRError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="quantityD">Quantity Defective*</label>
-                                <input id="quantityD" name="quantityD" placeholder="15" type="text" required>
+                                <input id="quantityD" name="quantityD" placeholder="15" type="text" readonly>
                                 <span id="quantityDError" style="color: red;"></span> <!-- Error span -->
                             </div>
                         </fieldset>
@@ -137,33 +137,33 @@
                                 <label>Identify Process applicable</label>
                                 <br>
                                 <label for="rdoIPA">Supplier or Rec-Insp*</label>
-                                <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp">
+                                <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp" disabled>
 
                                 <label for="rdoIPA">WIP(Production Order)*</label>
-                                <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP">
+                                <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP" disabled>
                                 <span id="rdoIPAError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="sapNo">SAP No.*</label>
-                                <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
+                                <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" readonly>
                                 <span id="sapNoError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="itemDescription">Description of Item*</label>
                                 <textarea id="itemDescription" name="itemDescription"
-                                    placeholder="Please describe the item here" required></textarea>
+                                    placeholder="Please describe the item here" readonly></textarea>
                                 <span id="itemDescriptionError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="defectDescription">Description of Defect*</label>
                                 <textarea id="defectDescription" name="defectDescription"
                                     placeholder="In as much detail possible, describe the item's defect"
-                                    required></textarea>
+                                    readonly></textarea>
                                 <span id="defectDescriptionError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="nrcImage">Choose a Nonconformity image to upload*</label>
-                                <input type="file" id="nrcImage" name="nrcImage" accept="image/*">
+                                <input type="file" id="nrcImage" name="nrcImage" accept="image/*" disabled>
                                 <span id="nrcImageError" style="color: red;"></span> <!-- Error span -->
                             </div>
                         </fieldset>
@@ -172,19 +172,19 @@
                             <div>
                                 <label>Item marked Nonconforming*</label>
                                 <label for="rdoConformingYes">Yes</label>
-                                <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
+                                <input type="radio" id="rdoConformingYes" name="conforming" value="Yes" disabled>
                                 <label for="rdoConformingNo">No</label>
-                                <input type="radio" id="rdoConformingNo" name="conforming" value="No">
+                                <input type="radio" id="rdoConformingNo" name="conforming" value="No" disabled>
                                 <span id="rdoConformingError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="reportDate">Date of Report*</label>
-                                <input id="reportDate" name="reportDate" type="date">
+                                <input id="reportDate" name="reportDate" type="date" disabled>
                                 <span id="reportDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="repName">Quality Representative's Name:*</label>
-                                <input type="text" id="repName" name="repName" placeholder="John Wick" required>
+                                <input type="text" id="repName" name="repName" placeholder="John Wick" readonly>
                                 <span id="repNameError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <p>Hit "Submit" when all fields are done to satisfaction and the report will be saved and an
@@ -198,7 +198,7 @@
                             <Legend>Engineering - Action</Legend>
                             <div>
                                 <label for="selectDisposition">Review by CF Engineery*</label>
-                                <select id="selectDisposition">
+                                <select id="selectDisposition" disabled>
                                     <option value="UseAsIs">Use as Is</option>
                                     <option value="repair">Repair</option>
                                     <option value="rework">Rework</option>
@@ -209,13 +209,13 @@
                                 <label for="dispositionDescription">*</label>
                                 <textarea id="dispositionDescription" name="dispositionDescription"
                                     placeholder="(ex)Sequence of work steps required when 'repair' or 'rework' indicated"
-                                    required></textarea>
+                                    readonly></textarea>
                                 <span id="dispositionError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="selectNotification">Does Customer require notification? y/n?</label>
                                 <p>If "Yes" raise message to customer detailing issues</p>
-                                <select id="selectNotification">
+                                <select id="selectNotification" disabled>
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option>
                                 </select>
@@ -223,9 +223,9 @@
                             <div>
                                 <label>Does the drawing require updating?</label>
                                 <label for="rdoRedrawYes">Yes</label>
-                                <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes">
+                                <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes" disabled>
                                 <label for="rdoRedrawNo">No</label>
-                                <input type="radio" id="rdoRedrawNo" name="redraw" value="No">
+                                <input type="radio" id="rdoRedrawNo" name="redraw" value="No" disabled>
                                 <span id="rdoDrawingError" style="color: red;"></span> <!-- Error span -->
                             </div>
                         </fieldset>
@@ -233,21 +233,21 @@
                             <legend>Engineering - Details</legend>
                             <div>
                                 <label for="txtOrgRevNo">Original Rev. Number</label>
-                                <input type="text" id="txtOrgRevNo" name="txtOrgRevNo" placeholder="(ex)5556667722">
+                                <input type="text" id="txtOrgRevNo" name="txtOrgRevNo" placeholder="(ex)5556667722" readonly>
                             </div>
                             <div>
                                 <label for="txtUpRevNo">Original Rev. Number</label>
-                                <input type="text" id="txtUpRevNo" name="txtUpRevNo" placeholder="(ex)5556667722">
+                                <input type="text" id="txtUpRevNo" name="txtUpRevNo" placeholder="(ex)5556667722" readonly>
                             </div>
                             <div>
                                 <label for="revisionDate">Revision Date*</label>
-                                <input id="revisionDate" name="revisionDate" type="date">
+                                <input id="revisionDate" name="revisionDate" type="date" readonly>
                                 <span id="revisionDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="txtEngName">Name of Engineer</label>
                                 <input type="text" id="txtEngName" name="txtEngName" placeholder="(ex)Imma DaBoss"
-                                    required>
+                                    readonly>
                                 <span id="txtEngNameError" style="color: red;"></span> <!-- Error span -->
                             </div>
                         </fieldset>
@@ -360,6 +360,40 @@
 
 
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const ncrData = JSON.parse(localStorage.getItem("currentNCR"));
+
+    if (ncrData) {
+        console.log("Populating operations page with NCR data:", ncrData);
+
+        // Populate Supplier and Product Info
+        document.getElementById("supName").value = ncrData?.supplierInfo?.supplierName || "";
+        document.getElementById("ncrNo").value = ncrData?.supplierInfo?.ncrNumber || "";
+        document.getElementById("prodNo").value = ncrData?.supplierInfo?.poOrProductNumber || "";
+        document.getElementById("saleOrderNo").value = ncrData?.supplierInfo?.salesOrderNumber || "";
+        document.getElementById("quantityR").value = ncrData?.supplierInfo?.quantityReceived || "";
+        document.getElementById("quantityD").value = ncrData?.supplierInfo?.quantityDefective || "";
+
+        // Populate Report Details
+        document.getElementById("rdoRecInsp").checked = ncrData?.reportDetails?.processApplicable === "recInsp";
+        document.getElementById("rdoWIP").checked = ncrData?.reportDetails?.processApplicable === "WIP";
+        document.getElementById("sapNo").value = ncrData?.reportDetails?.sapNo || "";
+        document.getElementById("itemDescription").value = ncrData?.reportDetails?.itemDescription || "";
+        document.getElementById("defectDescription").value = ncrData?.reportDetails?.descriptionOfDefect || "";
+
+        // Populate Nonconformance Details
+        document.getElementById("rdoConformingYes").checked = ncrData?.nonConformanceDetails?.isNonConforming === "Yes";
+        document.getElementById("rdoConformingNo").checked = ncrData?.nonConformanceDetails?.isNonConforming === "No";
+        document.getElementById("reportDate").value = ncrData?.nonConformanceDetails?.dateOfReport || "";
+        document.getElementById("repName").value = ncrData?.nonConformanceDetails?.qualityRepresentativeName || "";
+    } else {
+        console.warn("No NCR data found for this session.");
+    }
+});
+
+
+    </script>
 </body>
 
 </html>

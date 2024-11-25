@@ -259,25 +259,163 @@ function validation(ncrForm) {
     return isValid;
 }
 
-// Store function that checks for editing existing NCRs by NCR number
+//New store function that checks for editing existing NCRs by NCR number
 function storeFormData(ncrForm) {
     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
     const existingIndex = storedNCRs.findIndex(ncr => ncr.supplierInfo.ncrNumber === ncrForm.supplierInfo.ncrNumber);
+    const session = JSON.parse(localStorage.getItem('session'));
+    const userRole = session ? session.role : null;
 
     if (existingIndex !== -1) {
-        storedNCRs[existingIndex] = ncrForm; // Update existing NCR
-        notifyOnNewNCR(ncrForm);
+        const existingNCR = storedNCRs[existingIndex];
 
+        // Prevent overwriting restricted fields
+        if (userRole === "Quality Inspector") {
+            existingNCR.reportDetails = { ...existingNCR.reportDetails, ...ncrForm.reportDetails };
+        } else if (userRole === "Engineering") {
+            existingNCR.engineeringAction = { ...existingNCR.engineeringAction, ...ncrForm.engineeringAction };
+        } else if (userRole === "Operations Manager") {
+            existingNCR.operationsAction = { ...existingNCR.operationsAction, ...ncrForm.operationsAction };
+        }
+
+        storedNCRs[existingIndex] = existingNCR; // Save updated NCR
     } else {
         storedNCRs.push(ncrForm); // Add new NCR
-        notifyOnNewNCR(ncrForm);
-
     }
 
     localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
 }
 
-// Load form data
+
+// Store function that checks for editing existing NCRs by NCR number
+// function storeFormData(ncrForm) {
+//     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+//     const existingIndex = storedNCRs.findIndex(ncr => ncr.supplierInfo.ncrNumber === ncrForm.supplierInfo.ncrNumber);
+
+//     if (existingIndex !== -1) {
+//         storedNCRs[existingIndex] = ncrForm; // Update existing NCR
+//         notifyOnNewNCR(ncrForm);
+
+//     } else {
+//         storedNCRs.push(ncrForm); // Add new NCR
+//         notifyOnNewNCR(ncrForm);
+
+//     }
+
+//     localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
+// }
+
+//New form Data function
+// function loadFormData() {
+//     const editIndex = localStorage.getItem('currentEditIndex'); // Get the index of the NCR to edit
+//     const session = JSON.parse(localStorage.getItem('session')); // Get session data (e.g., user role)
+//     const userRole = session ? session.role : null; // Extract user role from session
+
+//     if (editIndex !== null) {
+//         const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+//         const ncrForm = storedNCRs[parseInt(editIndex, 10)];
+
+//         if (ncrForm) {
+//             console.log("Loading NCR for editing:", ncrForm);
+//             populateFormForRole(ncrForm, userRole); // Populate fields dynamically based on role
+//         } else {
+//             console.warn("No NCR found for the given index.");
+//         }
+//     }
+// }
+
+function redirectBasedOnRole() {
+    const session = JSON.parse(localStorage.getItem('session')); // Retrieve user session
+    const userRole = session ? session.role : null; // Get the user role
+    const editIndex = localStorage.getItem('currentEditIndex'); // Get the NCR index to edit
+    const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+
+    if (!editIndex || !storedNCRs[parseInt(editIndex, 10)]) {
+        console.warn("No NCR found for the given index or invalid editIndex.");
+        return;
+    }
+
+    if (userRole === "Engineering") {
+        localStorage.setItem("currentNCR", JSON.stringify(storedNCRs[parseInt(editIndex, 10)]));
+        window.location.href = "engineering.html"; // Redirect to engineering page
+    } else if (userRole === "Operations Manager") {
+        localStorage.setItem("currentNCR", JSON.stringify(storedNCRs[parseInt(editIndex, 10)]));
+        window.location.href = "operations.html"; // Redirect to operations page
+    } else {
+        console.warn("User role is not recognized or not authorized for redirection.");
+    }
+}
+
+//New populate form based on roles function
+// function populateFormForRole(ncrForm, userRole) {
+//     console.log("Populating form for role:", userRole);
+
+//     function setField(id, value, editable = false, hidden = false) {
+//         const field = document.getElementById(id);
+//         console.log(`Field with ID ${id}:`, field);
+//         if (field) {
+//             field.value = value || "";
+//             field.readOnly = !editable;
+//             field.style.display = hidden ? "none" : "";
+//         } else {
+//             console.warn(`Field with ID ${id} not found.`);
+//         }
+//     }
+
+//     function toggleSection(sectionId, visible) {
+//         const section = document.getElementById(sectionId);
+//         if (section) {
+//             section.style.display = visible ? "block" : "none";
+//         } else {
+//             console.warn(`Section with ID ${sectionId} not found.`);
+//         }
+//     }
+
+//     // Common fields (visible to all roles but read-only)
+//     setField("supName", ncrForm.supplierInfo.supplierName, false);
+//     setField("ncrNo", ncrForm.supplierInfo.ncrNumber, false);
+//     setField("prodNo", ncrForm.supplierInfo.poOrProductNumber, false);
+//     setField("saleOrderNo", ncrForm.supplierInfo.salesOrderNumber, false);
+//     setField("quantityR", ncrForm.supplierInfo.quantityReceived, false);
+//     setField("quantityD", ncrForm.supplierInfo.quantityDefective, false);
+
+//     // Role-specific logic
+//     if (userRole === "Quality Inspector") {
+//         // Show QI-specific fields
+//         setField("sapNo", ncrForm.reportDetails?.sapNo, true);
+//         setField("itemDescription", ncrForm.reportDetails?.itemDescription, true);
+//         setField("defectDescription", ncrForm.reportDetails?.descriptionOfDefect, true);
+
+//         // Hide Engineering section
+//         toggleSection("Engineer-forms", false);
+//     } else if (userRole === "Engineering") {
+//         // Show and allow editing of engineering fields
+//         toggleSection("Engineer-forms", true);
+
+//         setField("selectDisposition", ncrForm.engineeringAction?.disposition, true);
+//         setField("dispositionDescription", ncrForm.engineeringAction?.dispositionDescription, true);
+//         setField("revisionDateDate", ncrForm.engineeringAction?.revisionDateDate, true);
+//         setField("txtEngName", ncrForm.engineeringAction?.engineerName, true);
+
+//         // Hide irrelevant sections
+//         toggleSection("operationsSection", false); // If applicable
+//     } else if (userRole === "Operations Manager") {
+//         // Show engineering section but make it read-only
+//         toggleSection("Engineer-forms", true);
+//         setField("selectDisposition", ncrForm.engineeringAction?.disposition, false);
+//         setField("dispositionDescription", ncrForm.engineeringAction?.dispositionDescription, false);
+//         setField("revisionDateDate", ncrForm.engineeringAction?.revisionDateDate, false);
+//         setField("txtEngName", ncrForm.engineeringAction?.engineerName, false);
+
+//         // Hide irrelevant sections
+//         toggleSection("operationsSection", true); // If applicable
+//     } else {
+//         console.warn("Unknown role:", userRole);
+//     }
+// }
+
+
+//Load form data
 function loadFormData() {
     const editIndex = localStorage.getItem('currentEditIndex');
     if (editIndex !== null) {
@@ -382,6 +520,7 @@ function handleDeselectRadioButton(radioGroupName, lastCheckedRadioRef) {
 window.onload = function () {
     resetTimer();
     loadFormData();
+    redirectBasedOnRole();
     document.getElementById('timerDisplay').classList.add('hidden');
 
     var itemDescriptionTextarea = document.getElementById('itemDescription');
@@ -393,4 +532,30 @@ window.onload = function () {
     handleDeselectRadioButton('rdoIPA', { value: lastCheckedRadioIPA });
     handleDeselectRadioButton('conforming', { value: lastCheckedRadioConforming });
 };
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     // Ensure timer and form data are initialized
+//     if (typeof resetTimer === 'function') resetTimer();
+//     if (typeof loadFormData === 'function') loadFormData();
+
+//     // Hide timer display if present
+//     const timerDisplay = document.getElementById('timerDisplay');
+//     if (timerDisplay) timerDisplay.classList.add('hidden');
+
+//     // Auto-expand text areas if they exist
+//     const itemDescriptionTextarea = document.getElementById('itemDescription');
+//     const defectDescriptionTextarea = document.getElementById('defectDescription');
+
+//     if (typeof autoExpandTextarea === 'function') {
+//         if (itemDescriptionTextarea) autoExpandTextarea(itemDescriptionTextarea);
+//         if (defectDescriptionTextarea) autoExpandTextarea(defectDescriptionTextarea);
+//     }
+
+//     // Ensure radio button handling is set up correctly
+//     if (typeof handleDeselectRadioButton === 'function') {
+//         handleDeselectRadioButton('rdoIPA', { value: lastCheckedRadioIPA });
+//         handleDeselectRadioButton('conforming', { value: lastCheckedRadioConforming });
+//     }
+// });
+
  

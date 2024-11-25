@@ -65,8 +65,10 @@ function displayNCRList(ncrList, isComplete = true) {
         var editButton = document.createElement("button");
         editButton.innerText = "Edit";
         editButton.onclick = function () {
+            console.log("Edit button clicked. Index:", index, "Is Incomplete:", !isComplete);
             localStorage.setItem("currentEditIndex", index);
             localStorage.setItem("isIncomplete", !isComplete);
+            debugger;
             window.location.href = "qualityInspector.html";
         };
         actionsCell.appendChild(editButton);
@@ -153,8 +155,11 @@ function exportNCRAsPDF(index) {
     doc.save(`${ncr.supplierInfo.ncrNumber || "NCR_Report"}.pdf`);
 }
 
-
-
+function expandAllSections() {
+    document.querySelectorAll('.accordion-content').forEach(content => {
+        content.style.display = 'block'; // Make all accordion sections visible
+    });
+}
 
 // Edit NCR function to load the existing NCR data into the form
 function editNCR(index) {
@@ -162,10 +167,14 @@ function editNCR(index) {
     const session = JSON.parse(localStorage.getItem("session"));
     const userRole = session ? session.role : null;
 
-    function setValue(id, value) {
+    console.log("User Role:", userRole);
+    debugger;
+    function setValue(id, value, readOnly = false, hidden = false) {
         const element = document.getElementById(id);
         if (element) {
-            element.value = value;
+            element.value = value || "";
+            element.readOnly = readOnly;
+            element.style.display = hidden ? "none" : "";
             if (id === "ncrNo") {
                 element.readOnly = true; // Make NCR number read-only
             }
@@ -175,12 +184,12 @@ function editNCR(index) {
     }
 
     //taking the passed ncr form and setting the form inputs to their values.
-    setValue("supName", ncr.supplierInfo.supplierName);
-    setValue("ncrNo", ncr.supplierInfo.ncrNumber);
-    setValue("prodNo", ncr.supplierInfo.poOrProductNumber);
-    setValue("saleOrderNo", ncr.supplierInfo.salesOrderNumber);
-    setValue("quantityR", ncr.supplierInfo.quantityReceived);
-    setValue("quantityD", ncr.supplierInfo.quantityDefective);
+    setValue("supName", ncr.supplierInfo.supplierName, true);
+    setValue("ncrNo", ncr.supplierInfo.ncrNumber, true);
+    setValue("prodNo", ncr.supplierInfo.poOrProductNumber, true);
+    setValue("saleOrderNo", ncr.supplierInfo.salesOrderNumber, true);
+    setValue("quantityR", ncr.supplierInfo.quantityReceived, true);
+    setValue("quantityD", ncr.supplierInfo.quantityDefective, true);
 
     var rdoRecInsp = document.getElementById("rdoRecInsp");
     if (rdoRecInsp && ncr.reportDetails.processApplicable === "recInsp") {
@@ -190,9 +199,9 @@ function editNCR(index) {
     if (rdoWIP && ncr.reportDetails.processApplicable === "WIP") {
         rdoWIP.checked = true;
     }
-    setValue("sapNo", ncr.reportDetails.sapNo);
-    setValue("itemDescription", ncr.reportDetails.itemDescription);
-    setValue("defectDescription", ncr.reportDetails.descriptionOfDefect);
+    setValue("sapNo", ncr.reportDetails.sapNo, userRole !== "Quality Inspector");
+    setValue("itemDescription", ncr.reportDetails.itemDescription, userRole !== "Quality Inspector");
+    setValue("defectDescription", ncr.reportDetails.descriptionOfDefect, userRole !== "Quality Inspector");
 
     var rdoConformingYes = document.getElementById("rdoConformingYes");
     if (rdoConformingYes && ncr.nonConformanceDetails.isNonConforming === "Yes") {
@@ -202,8 +211,8 @@ function editNCR(index) {
     if (rdoConformingNo && ncr.nonConformanceDetails.isNonConforming === "No") {
         rdoConformingNo.checked = true;
     }
-    setValue("reportDate", ncr.nonConformanceDetails.dateOfReport);
-    setValue("repName", ncr.nonConformanceDetails.qualityRepresentativeName);
+    setValue("reportDate", ncr.nonConformanceDetails.dateOfReport, userRole !== "Quality Inspector");
+    setValue("repName", ncr.nonConformanceDetails.qualityRepresentativeName, true);
 
     // This here is where I have coded the check for what the users role is, and if they do have access to 
     // engineering, we then populate the fields with the relevant info. Please verify this works.
@@ -222,10 +231,16 @@ function editNCR(index) {
             setValue("revisionDate", ncr.engineeringAction.revisionDate);
             setValue("txtEngName", ncr.engineeringAction.engineerName);
         }
+    } else {
+        ["selectDisposition", "dispositionDescription", "RevisionDate", "txtEngName"].forEach(id => {
+            setValue(id, null, false, true);
+        })
     }
 
     if (userRole === "Operations Manager" && ncr.operationsAction) {
         setValue("purchDecision", ncr.operationsAction.purchDecision);
+    } else {
+        setValue("purchDecision", null, false, true);
     }
 
     document.getElementById("saveButton")?.addEventListener("click", function () {
