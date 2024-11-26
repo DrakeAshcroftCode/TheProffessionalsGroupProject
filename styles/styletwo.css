@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Poppins', sans-serif;
     padding: 0;
@@ -125,21 +126,7 @@ nav ul li a:hover .button-lines div {
     border-radius: 30px;
 }
 
-#timerDisplay {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    font-size: 16px;
-    background: #fff;
-    padding: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    z-index: 1000;
-}
 
-#timerDisplay.hidden {
-    display: none;
-}
 
 header {
     text-align: center;
@@ -351,4 +338,5 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 .textarea-container span {
     color: red;
+
 }

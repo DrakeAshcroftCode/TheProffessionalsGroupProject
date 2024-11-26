@@ -1,3 +1,4 @@
+
 // This code handles things related to NCR form storage and retrieval
 
 var storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
@@ -82,14 +83,26 @@ function displayNCRList(ncrList, isComplete = true) {
         // Export Button
         const exportButton = document.createElement("button");
         exportButton.innerText = "Export";
-        exportButton.onclick = function () {
-            exportNCRAsPDF(index);
-        };
-        actionsCell.appendChild(exportButton);
 
-        row.appendChild(actionsCell);
-        tbody.appendChild(row);
-    });
+        const session = JSON.parse(localStorage.getItem("session"));
+        const userRole = session ? session.role : null;
+        exportButton.onclick = function () {
+            
+            if (userRole === "Engineering") {
+                exportNCRAsPDF(index)
+                exportButton.disabled = false; 
+            } else {
+            alert('Only engineers can export pdf.')
+               exportButton.disabled = true; 
+               
+            }
+        }
+            
+        
+   actionsCell.appendChild(exportButton);
+   row.appendChild(actionsCell);
+   tbody.appendChild(row);
+});
 
     table.appendChild(tbody);
     ncrListContainer.appendChild(table);
@@ -98,6 +111,9 @@ function displayNCRList(ncrList, isComplete = true) {
 // it is not as complicated as it looks. We just need a logic structure (if else for instance) that checks if the form has engineering data
 // and if so, exports the engineering data in the pdf. Everything else is simple little doc.text commands
 function exportNCRAsPDF(index) {
+    const session = JSON.parse(localStorage.getItem("session"));
+    const userRole = session ? session.role : null;
+
     const ncr = storedNCRs[index];
     const { jsPDF } = window.jspdf; 
 
@@ -150,11 +166,21 @@ function exportNCRAsPDF(index) {
     doc.text(`Date of Report: ${ncr.nonConformanceDetails.dateOfReport || "N/A"}`, 15, 145);
     doc.text(`Quality Representative: ${ncr.nonConformanceDetails.qualityRepresentativeName || "N/A"}`, 15, 150);
 
+   /* doc.setFillColor(...sectionHeaderColor);
+    doc.rect(10, 165, 190, 10, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.text("Engineering Details", 15, 132);
+
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Disposition: ${ncr.engineeringAction.selectDisposition || "N/A"}`, 15, 160);
+    doc.text(`Description of disposition: ${ncr.engineeringAction.dispositionDescription || "N/A"}`, 15, 165);
+    doc.text(`Original Rev. Number: ${ncr.engineeringAction.txtUpRevNo || "N/A"}`, 15, 170);
+    doc.text(`Revision Date: ${ncr.engineeringAction.revisionDateDate || "N/A"}`, 15, 175);
+    doc.text(`Name of Engineer: ${ncr.engineeringAction.txtEngName || "N/A"}`, 15, 180);*/
+
     doc.save(`${ncr.supplierInfo.ncrNumber || "NCR_Report"}.pdf`);
 }
-
-
-
 
 // Edit NCR function to load the existing NCR data into the form
 function editNCR(index) {
@@ -239,9 +265,9 @@ function editNCR(index) {
         displayNCRList(storedNCRs);
     });
 }
-//function to dynamically generate an NCR number.
-let ncrCounter = 0;
-function generateNCRNumber() {
+   //function to dynamically generate an NCR number.
+    let ncrCounter = 0;
+    function generateNCRNumber() {
     const year = new Date().getFullYear();
     const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
 
@@ -363,4 +389,5 @@ document.addEventListener("DOMContentLoaded", function () {
     displayNCRList(storedNCRs, true);
     displayNCRList(incompleteNCRs, false);
 });
+
 seedNCRs();
