@@ -1,7 +1,7 @@
 
 // This code handles everything related to logins.
 // time is in miliseconds so this code is basically a snazzy way of getting fifteen minutes in miliseconds.
-window.SESSION_TIMEOUT = 15 * 60 * 1000;
+window.SESSION_TIMEOUT =   15* 60 * 1000;
 
 window.sessionTimer = null;
 window.sessionExpiration = null;
@@ -15,8 +15,9 @@ function checkSession() {
         sessionExpiration = session.expiration;
         startTimer();
         hideModal();
-        document.getElementById('timerDisplay').classList.add('hidden');
-        showLogoutButton();
+        
+        /*document.getElementById('timerDisplay').classList.add('hidden');
+        showLogoutButton();*/
 
         adjustNavBarForRole(session.role);
     } else {
@@ -28,7 +29,7 @@ function checkSession() {
             window.location.href = '/index.html';
         } else {
             showModal();
-            document.getElementById('timerDisplay').classList.add('hidden');
+           /* document.getElementById('timerDisplay').classList.add('hidden');*/
         }
     }
 }
@@ -46,6 +47,7 @@ function hideLogoutButton() {
         logoutContainer.style.display = 'none';
     }
 }
+
 document.addEventListener('DOMContentLoaded', function () {
     const logoutButton = document.getElementById('logoutButton');
     if (logoutButton) {
@@ -56,10 +58,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     checkSession();
 
-    document.getElementById('timerDisplay').onclick = function () {
+    /*document.getElementById('timerDisplay').onclick = function () {
         resetTimer();
-    };
+    };*/
 });
+
+
+
 // Code to adjust navbar based on user role (Helped by AI as stated in AI record) 
 function adjustNavBarForRole(role) {
     const navItems = document.querySelectorAll('nav ul li');
@@ -98,8 +103,7 @@ function showNavLink(linkName) {
 
 //Code to start timer 
 function startTimer() {
-    updateTimerDisplay();
-
+    
     if (sessionTimer) clearInterval(sessionTimer);
 
     sessionTimer = setInterval(() => {
@@ -107,16 +111,25 @@ function startTimer() {
         const timeLeft = sessionExpiration - now;
 
         if (timeLeft <= 0) {
-
             clearInterval(sessionTimer);
             logout();
-        } else {
-            updateTimerDisplay();
+        } 
+        else if (timeLeft <= 5 *60 * 1000 && !alertShown) {
+            
+            // if user wants to reset the time then they can click on OK and the time will reset.
+            // But if they don't then  session will expire automatically.
+            confirm("You will be logged out in 5 minutes.\nKindly SAVE your records!!!\n\nIf you want to reset the time, click OK?");
+            
+            if (userResponse) {
+                resetTimer();
+            }
+            
         }
-    }, 1000);
+    }, 60000); // calculating the time in minutes.
 }
+
 //Code to update the display if a page is navigated to.
-function updateTimerDisplay() {
+/*function updateTimerDisplay() {
     const now = Date.now();
     const timeLeft = sessionExpiration - now;
     // used a formula that I have used before for a website that I was going to include in my portfolio, instead it is here.
@@ -130,7 +143,10 @@ function updateTimerDisplay() {
 //function for time formatting.
 function padZero(num) {
     return num.toString().padStart(2, '0');
-}
+}*/
+
+let alertShown=false;
+
 // reset the timer to 15:00. I have this called when the user clicks on it or when they nav to another page, which makes sense I think.
 function resetTimer() {
     sessionExpiration = Date.now() + SESSION_TIMEOUT;
@@ -139,8 +155,11 @@ function resetTimer() {
         session.expiration = sessionExpiration;
         localStorage.setItem('session', JSON.stringify(session));
     }
-    updateTimerDisplay();
+
+    alertShown=false;
+   /* updateTimerDisplay();*/
 }
+
 //a modal is a term for something that displays on a high z index. 
 function showModal() {
     if (document.getElementById('modal')) {
@@ -153,12 +172,13 @@ function hideModal() {
         document.getElementById('modal').style.display = 'none';
     }
 }
+
 //If the user chooses to logout they still get the alert for session expiry, I want to fix this yet.
 function logout() {
     alert('Session expired. Please log in again.');
     localStorage.removeItem('session');
     showModal();
-    document.getElementById('timerDisplay').classList.add('hidden');
+    /*document.getElementById('timerDisplay').classList.add('hidden');*/
     adjustNavBarForRole(null);
     window.location.href = '../index.html';
 }
@@ -166,7 +186,12 @@ function logout() {
 document.addEventListener('DOMContentLoaded', function () {
     checkSession();
 
-    document.getElementById('timerDisplay').onclick = function () {
+    /*document.getElementById('timerDisplay').onclick = function () {
         resetTimer();
-    };
+    };*/
 });
+
+
+/* I make the timerdisplay and its reference as a comment in every js file (where it is used) so that it will not affect our website. 
+Because when i remove the timedisplay from html, it shows error in console and alert part is'nt working. I hope it makes sense.
+Things I removed: Timerdisplay and its visibility: html and css ONLY */

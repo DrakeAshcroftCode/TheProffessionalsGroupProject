@@ -1,3 +1,4 @@
+
 // This code handles the logic behind registering/logging in.
 //domcontent loaded just means "make sure the HTML elements are visible to the JS before we mess with them", I have nested most of the page inside of it to be sure.
 //throughout this document in the eventlisteners you will see me use preventDefault(), this is provided by JS
@@ -58,7 +59,8 @@ function saveSendFunction() {
             isNonConforming: rdoTwoValue,
             dateOfReport: reportDate,
             qualityRepresentativeName: repName,
-        }
+        },
+       
     };
 
     return ncrForm;
@@ -382,7 +384,8 @@ function handleDeselectRadioButton(radioGroupName, lastCheckedRadioRef) {
 window.onload = function () {
     resetTimer();
     loadFormData();
-    document.getElementById('timerDisplay').classList.add('hidden');
+    
+    /*document.getElementById('timerDisplay').classList.add('hidden');*/
 
     var itemDescriptionTextarea = document.getElementById('itemDescription');
     var defectDescriptionTextarea = document.getElementById('defectDescription');
@@ -393,4 +396,3 @@ window.onload = function () {
     handleDeselectRadioButton('rdoIPA', { value: lastCheckedRadioIPA });
     handleDeselectRadioButton('conforming', { value: lastCheckedRadioConforming });
 };
- 
