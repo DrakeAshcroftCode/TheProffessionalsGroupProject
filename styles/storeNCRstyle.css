@@ -1,4 +1,3 @@
-
 #logoutButtonContainer {
     position: fixed;
     top: 10px;
@@ -270,23 +269,76 @@ textarea {
     #form-sections {
         flex-wrap: wrap;
     }
+    nav {
+        width: 80vw;
+    }}
+
+@media (max-width: 1080px) {
+   
+    form {
+        width: 100%;
+        padding: 15px;
+    }
+    nav {
+        width: 80vw;
+    }
+   
+    
 }
 
+
 @media (max-width: 768px) {
-    #form-sections > div {
+    
+    form {
+        width: 80%;
+        
+    }
+    nav {
+        width: 80vw;
+    }
+    #form-sections>div {
         flex: 1 1 100%;
     }
+}
 
+
+@media (max-width: 640px) {
+    
     form {
         width: 90%;
     }
-
-    .ncr-table {
-        font-size: 16px;
+    nav {
+        width: 80vw;
     }
-
-    form button {
-        font-size: 16px;
-        padding: 8px 12px;
-    }
+    
+   
 }
+form{
+    width: 80%;
+}
+fieldset{
+   width: 90%;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+.tooltip .explain {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .explain {
+    visibility: visible;
+  }
