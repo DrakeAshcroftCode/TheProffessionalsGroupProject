@@ -9,17 +9,24 @@
 </head>
 
 <body>
+    <header>
     <div id="logoutButtonContainer" style="display: none;">
         <button id="logoutButton">Logout</button>
     </div>
-    <div id="timerDisplay"
-        style="position: fixed; top: 10px; left: 10px; font-size: 16px; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
-        Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
-    </div>
+
     <div>
 
-        <header>
-            <img src="../images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+
+            <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
+            <div id="notifications" style="position: fixed; top: 10px; right: 10px; cursor: pointer;">
+                <img src="images/notif-icon.png" alt="Notifications" id="notifIcon" />
+                <span id="notifBadge" style="background-color: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; display: none;">0</span>
+                <div id="notifDropdown" style="display: none; position: absolute; top: 30px; right: 0; background: white; border: 1px solid #ccc; padding: 10px; max-width: 300px;">
+                    <h4>Notifications</h4>
+                    <ul id="notifList" style="list-style: none; padding: 0; margin: 0;"></ul>
+                </div>
+            </div>
+            
         </header>
         <nav>
             <ul id="navList">
@@ -126,9 +133,9 @@
 
                         <fieldset>
                             <legend>Report Details</legend>
-                            <div>
+                            
                                 <label>Identify Process applicable</label>
-                                <br>
+                                <div class="radio-group">
                                 <label for="rdoIPA">Supplier or Rec-Insp*</label>
                                 <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp">
 
@@ -136,6 +143,7 @@
                                 <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP">
                                 <span id="rdoIPAError" style="color: red;"></span> <!-- Error span -->
                             </div>
+                            <br>
                             <div>
                                 <label for="sapNo">SAP No.*</label>
                                 <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
@@ -162,7 +170,7 @@
                         </fieldset>
 
                         <fieldset>
-                            <div>
+                            <div class="radio-group">
                                 <label>Item marked Nonconforming*</label>
                                 <label for="rdoConformingYes">Yes</label>
                                 <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
@@ -213,7 +221,7 @@
                                     <option value="yes">Yes</option>
                                 </select>
                             </div>
-                            <div>
+                            <div class="radio-group">
                                 <label>Does the drawing require updating?</label>
                                 <label for="rdoRedrawYes">Yes</label>
                                 <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes">
@@ -349,6 +357,8 @@
     </div>
     <script src="scripts/app.js"></script>
     <script src="scripts/session.js"></script>
+    <script src="scripts/notif.js"></script>
+
 
 
 </body>
