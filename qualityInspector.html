@@ -80,11 +80,14 @@
                                     <input id="supName" name="supName" placeholder="Pepsi Co.." type="text"  >
                                     <span id="supNameError" style="color: red;"></span>
                                 </div>
-                                <div>
+                                <div >
                                     <label for="ncrNo">NCR No.</label>
+                                    <div class="tooltip">
                                     <input id="ncrNo" name="ncrNo" placeholder="65789" type="text"  >
+                                    <span class="explain">Non conforming Report Number</span>
                                     <span id="ncrNoError" style="color: red;"></span>
                                 </div>
+                            </div>
                                 <div>
                                     <label for="prodNo">PO or Prod. No.</label>
                                     <input id="prodNo" name="prodNo" placeholder="product number" type="text"  >
@@ -115,7 +118,7 @@
                         <div class="accordion-content">
                             <fieldset>
                                 <legend>Report Details</legend>
-                                <div>
+                                <div class="radio-group">
                                     <label>Identify Process Applicable</label><br>
                                     <label for="rdoRecInsp">Supplier or Rec-Insp</label>
                                     <input type="radio" id="rdoRecInsp" name="rdoIPA" value="recInsp">
@@ -159,7 +162,7 @@
                         <div class="accordion-content">
                             <fieldset>
                                 <legend>Nonconformance Details</legend>
-                                <div>
+                                <div class="radio-group">
                                     <label>Item Marked Nonconforming</label>
                                     <label for="rdoConformingYes">Yes</label>
                                     <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
