@@ -64,11 +64,26 @@ function displayNCRList(ncrList, isComplete = true) {
        actionsCell.appendChild(viewButton);
         // Edit Button
         var editButton = document.createElement("button");
+        
         editButton.innerText = "Edit";
         editButton.onclick = function () {
+        const session = JSON.parse(localStorage.getItem("session"));
+        const userRole = session ? session.role : null;
+             // Redirect based on role
+        if (userRole === "Quality Inspector") {
+            window.location.href = "qualityInspector.html";
+        } else if (userRole === "Engineering") {
+            window.location.href = "engineering.html";
+        } else if (userRole === "Operations Manager") {
+            window.location.href = "operations.html";
+        } else {
+            console.warn("User role not found. Redirecting to login.");
+            window.location.href = "login.html"; // Redirect to login
+            return;
+        }
+
             localStorage.setItem("currentEditIndex", index);
             localStorage.setItem("isIncomplete", !isComplete);
-            window.location.href = "qualityInspector.html";
         };
         actionsCell.appendChild(editButton);
 
@@ -185,8 +200,7 @@ function exportNCRAsPDF(index) {
 // Edit NCR function to load the existing NCR data into the form
 function editNCR(index) {
     const ncr = storedNCRs[index];
-    const session = JSON.parse(localStorage.getItem("session"));
-    const userRole = session ? session.role : null;
+    
 
     function setValue(id, value) {
         const element = document.getElementById(id);
