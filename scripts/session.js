@@ -1,3 +1,4 @@
+
 // This code handles everything related to logins.
 // time is in miliseconds so this code is basically a snazzy way of getting fifteen minutes in miliseconds.
 window.SESSION_TIMEOUT =   15* 60 * 1000;

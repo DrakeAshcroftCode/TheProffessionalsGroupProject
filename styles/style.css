@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Poppins', sans-serif;
     padding: 0;
@@ -428,4 +429,5 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 .textarea-container span {
     color: red;
+
 }

@@ -1,3 +1,4 @@
+
 // This code handles the logic behind registering/logging in.
 //domcontent loaded just means "make sure the HTML elements are visible to the JS before we mess with them", I have nested most of the page inside of it to be sure.
 //throughout this document in the eventlisteners you will see me use preventDefault(), this is provided by JS
@@ -395,4 +396,3 @@ window.onload = function () {
     handleDeselectRadioButton('rdoIPA', { value: lastCheckedRadioIPA });
     handleDeselectRadioButton('conforming', { value: lastCheckedRadioConforming });
 };
- 

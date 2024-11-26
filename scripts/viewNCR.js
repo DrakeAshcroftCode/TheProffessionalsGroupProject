@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     const index = localStorage.getItem('currentViewIndex');
     if (index !== null) {
@@ -30,3 +31,4 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = 'storeNCR.html'; // Redirect to the storage page
     });
 });
+
