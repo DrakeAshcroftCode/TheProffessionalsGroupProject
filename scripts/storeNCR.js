@@ -303,7 +303,7 @@ function searchNCRs() {
     var year = document.getElementById("yearSearch").value;
     var code = document.getElementById("codeSearch").value.trim();
     var supplier = document.getElementById("supplierSearch").value;
-
+    
     var filteredNCRs = storedNCRs.filter(function (ncr) {
         var matchYear = true;
         var matchCode = true;
