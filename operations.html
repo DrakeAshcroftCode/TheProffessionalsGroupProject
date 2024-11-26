@@ -133,9 +133,9 @@
 
                         <fieldset>
                             <legend>Report Details</legend>
-                            <div>
+                            
                                 <label>Identify Process applicable</label>
-                                <br>
+                                <div class="radio-group">
                                 <label for="rdoIPA">Supplier or Rec-Insp*</label>
                                 <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp">
 
@@ -143,6 +143,7 @@
                                 <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP">
                                 <span id="rdoIPAError" style="color: red;"></span> <!-- Error span -->
                             </div>
+                            <br>
                             <div>
                                 <label for="sapNo">SAP No.*</label>
                                 <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
@@ -169,7 +170,7 @@
                         </fieldset>
 
                         <fieldset>
-                            <div>
+                            <div class="radio-group">
                                 <label>Item marked Nonconforming*</label>
                                 <label for="rdoConformingYes">Yes</label>
                                 <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
@@ -220,7 +221,7 @@
                                     <option value="yes">Yes</option>
                                 </select>
                             </div>
-                            <div>
+                            <div class="radio-group">
                                 <label>Does the drawing require updating?</label>
                                 <label for="rdoRedrawYes">Yes</label>
                                 <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes">
