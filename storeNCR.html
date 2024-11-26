@@ -11,9 +11,7 @@
     <div id="logoutButtonContainer" style="display: none;">
         <button id="logoutButton">Logout</button>
     </div>
-    <div id="timerDisplay" style="position: fixed; top: 10px; left: 10px; font-size: 16px; visibility: hidden; background: #fff; padding: 5px; border: 1px solid #ccc; cursor: pointer;">
-        Login Time Left (Click to reset): <span id="timeLeft">15:00</span>
-    </div>
+   
     <div>
 
             <img src="images/CrossfireLogo.png" alt="Bold Crossfire logo" width="650" height="700">
@@ -73,8 +71,11 @@
                     </div>
                     <div>
                         <label for="codeSearch">3-digit Extension</label>
+            
                         <input id="codeSearch" name="codeSearch" placeholder="(ex)253" type="text">
+                        <span class="explain"> enter 3 digit number cannot be more than 3 </span>
                         <span id="codeSearchError" style="color: red;"></span>
+                   
                     </div>
                     <div>
                         <label for="statusSearch">Status</label>

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function ()
             hideModal();
             startTimer();
             showLogoutButton();
-            document.getElementById('timerDisplay').classList.remove('hidden');
+            /*document.getElementById('timerDisplay').classList.remove('hidden');*/
 
             adjustNavBarForRole(user.role);
         } else {
@@ -95,5 +95,4 @@ document.addEventListener('DOMContentLoaded', function ()
 // reset timer for accessibility reasonings
 window.onload = function () {
     resetTimer();
-
 }

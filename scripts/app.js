@@ -1,3 +1,4 @@
+
 // This code handles the logic behind registering/logging in.
 //domcontent loaded just means "make sure the HTML elements are visible to the JS before we mess with them", I have nested most of the page inside of it to be sure.
 //throughout this document in the eventlisteners you will see me use preventDefault(), this is provided by JS
@@ -58,7 +59,8 @@ function saveSendFunction() {
             isNonConforming: rdoTwoValue,
             dateOfReport: reportDate,
             qualityRepresentativeName: repName,
-        }
+        },
+       
     };
 
     return ncrForm;
@@ -279,43 +281,72 @@ function storeFormData(ncrForm) {
 
 // Load form data
 function loadFormData() {
-    const editIndex = localStorage.getItem('currentEditIndex');
-    if (editIndex !== null) {
-        const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
-        const ncrForm = storedNCRs[parseInt(editIndex, 10)];
+    const session = JSON.parse(localStorage.getItem('session')); // Assume session stores user role
+    const userRole = session?.role; // Get user role
+    const ncrData = JSON.parse(localStorage.getItem('currentNCR')); // Get NCR data
 
-        if (ncrForm) {
-            document.getElementById('supName').value = ncrForm.supplierInfo.supplierName;
-            const ncrNoField = document.getElementById('ncrNo');
-            ncrNoField.value = ncrForm.supplierInfo.ncrNumber;
-            ncrNoField.disabled = true;
-
-            document.getElementById('prodNo').value = ncrForm.supplierInfo.poOrProductNumber;
-            document.getElementById('saleOrderNo').value = ncrForm.supplierInfo.salesOrderNumber;
-            document.getElementById('quantityR').value = ncrForm.supplierInfo.quantityReceived;
-            document.getElementById('quantityD').value = ncrForm.supplierInfo.quantityDefective;
-
-            if (ncrForm.reportDetails.processApplicable === 'recInsp') {
-                document.getElementById('rdoRecInsp').checked = true;
-            }
-            if (ncrForm.reportDetails.processApplicable === 'WIP') {
-                document.getElementById('rdoWIP').checked = true;
-            }
-            document.getElementById('sapNo').value = ncrForm.reportDetails.sapNo;
-            document.getElementById('itemDescription').value = ncrForm.reportDetails.itemDescription;
-            document.getElementById('defectDescription').value = ncrForm.reportDetails.descriptionOfDefect;
-
-            if (ncrForm.nonConformanceDetails.isNonConforming === 'Yes') {
-                document.getElementById('rdoConformingYes').checked = true;
-            }
-            if (ncrForm.nonConformanceDetails.isNonConforming === 'No') {
-                document.getElementById('rdoConformingNo').checked = true;
-            }
-            document.getElementById('reportDate').value = ncrForm.nonConformanceDetails.dateOfReport;
-            document.getElementById('repName').value = ncrForm.nonConformanceDetails.qualityRepresentativeName;
-        }
+    if (!ncrData) {
+        console.warn("No NCR data found for this session.");
+        return; // Stop further execution if no NCR data
     }
+
+    // Populate common fields for all roles
+    const commonFields = [
+        { id: "supName", value: ncrData?.supplierInfo?.supplierName },
+        { id: "ncrNo", value: ncrData?.supplierInfo?.ncrNumber },
+        { id: "prodNo", value: ncrData?.supplierInfo?.poOrProductNumber },
+        { id: "saleOrderNo", value: ncrData?.supplierInfo?.salesOrderNumber },
+        { id: "quantityR", value: ncrData?.supplierInfo?.quantityReceived },
+        { id: "quantityD", value: ncrData?.supplierInfo?.quantityDefective },
+        { id: "sapNo", value: ncrData?.reportDetails?.sapNo },
+        { id: "itemDescription", value: ncrData?.reportDetails?.itemDescription },
+        { id: "defectDescription", value: ncrData?.reportDetails?.descriptionOfDefect },
+        { id: "reportDate", value: ncrData?.nonConformanceDetails?.dateOfReport },
+        { id: "repName", value: ncrData?.nonConformanceDetails?.qualityRepresentativeName },
+    ];
+
+    commonFields.forEach(({ id, value }) => {
+        const element = document.getElementById(id);
+        if (element && value) element.value = value; // Populate if value exists
+    });
+
+    // Check user role and populate role-specific fields
+    if (userRole === "Engineering") {
+        const engineeringFields = [
+            { id: "selectDisposition", value: ncrData?.engineeringAction?.disposition },
+            { id: "dispositionDescription", value: ncrData?.engineeringAction?.dispositionDescription },
+            { id: "revisionDate", value: ncrData?.engineeringAction?.revisionDate },
+            { id: "txtEngName", value: ncrData?.engineeringAction?.engineerName },
+        ];
+
+        engineeringFields.forEach(({ id, value }) => {
+            const element = document.getElementById(id);
+            if (element && value) element.value = value;
+        });
+    } else if (userRole === "Operations Manager") {
+        const operationsFields = [
+            { id: "purchDecision", value: ncrData?.operationsAction?.purchDecision },
+            { id: "CAR", value: ncrData?.operationsAction?.car },
+            { id: "carNumber", value: ncrData?.operationsAction?.carNumber },
+            { id: "followUp", value: ncrData?.operationsAction?.followUp },
+            { id: "txtOpName", value: ncrData?.operationsAction?.operationsManager },
+        ];
+
+        operationsFields.forEach(({ id, value }) => {
+            const element = document.getElementById(id);
+            if (element && value) element.value = value;
+        });
+    } else if (userRole === "Quality Inspector") {
+        console.log("Quality Inspector role: No additional fields to populate.");
+        // No additional fields to populate for Quality Inspector
+    } else {
+        console.warn("Unrecognized user role.");
+    }
+
+    console.log(`Loaded NCR data for role: ${userRole}`);
 }
+
+
 function savePartialNCR() {
     var ncrForm = saveSendFunction();
     incompleteNCRs.push(ncrForm);
@@ -382,7 +413,8 @@ function handleDeselectRadioButton(radioGroupName, lastCheckedRadioRef) {
 window.onload = function () {
     resetTimer();
     loadFormData();
-    document.getElementById('timerDisplay').classList.add('hidden');
+    
+    /*document.getElementById('timerDisplay').classList.add('hidden');*/
 
     var itemDescriptionTextarea = document.getElementById('itemDescription');
     var defectDescriptionTextarea = document.getElementById('defectDescription');
@@ -393,4 +425,3 @@ window.onload = function () {
     handleDeselectRadioButton('rdoIPA', { value: lastCheckedRadioIPA });
     handleDeselectRadioButton('conforming', { value: lastCheckedRadioConforming });
 };
- 

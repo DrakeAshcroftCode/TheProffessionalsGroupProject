@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', updateNotifBadge);
 
 function notifyOnNewNCR(ncrForm) {
     const session = JSON.parse(localStorage.getItem('session')) || {};
-    if (session.role === 'Engineering') {
+    console.log(session);
+    if (session.role === 'Engineering' || session.role === 'Quality Inspector') {
         addNotification(ncrForm);
     }
 }
