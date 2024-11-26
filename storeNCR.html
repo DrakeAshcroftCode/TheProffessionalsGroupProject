@@ -53,7 +53,7 @@
             <form>
                 <fieldset>
                     <legend>NCR Search</legend>
-                    <p>Search for a saved NCR by year, 3-digit log #, or supplier name.</p>
+                    <p>Search for a saved NCR by year, date range, 3-digit log #, status, or supplier name.</p>
                     <div>
                         <label for="yearSearch">Year</label>
                         <select id="yearSearch">
@@ -75,6 +75,13 @@
                         <label for="codeSearch">3-digit Extension</label>
                         <input id="codeSearch" name="codeSearch" placeholder="(ex)253" type="text">
                         <span id="codeSearchError" style="color: red;"></span>
+                    </div>
+                    <div>
+                        <label for="statusSearch">Status</label>
+                        <select id="statusSearch">
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                        </select>
                     </div>
                     <div>
                         <label for="supplierSearch">Supplier Name</label>
