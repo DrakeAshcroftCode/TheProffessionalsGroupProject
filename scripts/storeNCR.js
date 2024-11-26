@@ -329,12 +329,26 @@ function searchNCRs() {
     var year = document.getElementById("yearSearch").value;
     var code = document.getElementById("codeSearch").value.trim();
     var supplier = document.getElementById("supplierSearch").value;
+    var startDate = new Date(document.getElementById("startDate").value);
+    var endDate = new Date(document.getElementById("endDate").value);
+    //var ncrStat = document.getElementById("statusSearch").value;
+
     
     var filteredNCRs = storedNCRs.filter(function (ncr) {
         var matchYear = true;
         var matchCode = true;
         var matchSupplier = true;
+        var matchDateRange = true;
+        //var matchNCRStatus = true;
 
+        if(startDate > endDate){
+            alert("start date must be before or equal to the end date");
+            return;
+        }
+        if (startDate && endDate) {
+            var ncrDate = new Date(ncr.nonConformanceDetails.dateOfReport);
+            matchDateRange = ncrDate >= startDate && ncrDate <= endDate;
+        }
         if (year) {
             var ncrYear = new Date(ncr.nonConformanceDetails.dateOfReport).getFullYear().toString();
             matchYear = ncrYear === year;
@@ -345,8 +359,13 @@ function searchNCRs() {
         if (supplier) {
             matchSupplier = ncr.supplierInfo.supplierName === supplier;
         }
-
-        return matchYear && matchCode && matchSupplier;
+       // if (ncrStat) {
+       //     var isComplete = ncr.isComplete || False; 
+       //     var ncrStatus = ncr.status || (isComplete ? "Open" : "Incomplete");
+       //     matchNCRStatus = ncrStatus === ncrStat;
+      //  }
+    
+        return matchYear && matchCode && matchSupplier && matchDateRange;
     });
 
     displayNCRList(filteredNCRs);
