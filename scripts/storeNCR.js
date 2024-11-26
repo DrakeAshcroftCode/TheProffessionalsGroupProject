@@ -260,6 +260,7 @@ function generateNCRNumber() {
 
     return `${year}-${String(ncrCounter).padStart(3, '0')}`;
 }
+
 // Function to seed NCRs if there are none, if none found, it'll give us ten of them as mark requested.
 function seedNCRs() {
     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
@@ -358,6 +359,9 @@ document.getElementById("btnSearch").addEventListener("click", function (event) 
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    const ncrNo = document.getElementById("ncrNo");
+    
+
     storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
     incompleteNCRs = JSON.parse(localStorage.getItem("incompleteNCRs")) || [];
     displayNCRList(storedNCRs, true);
