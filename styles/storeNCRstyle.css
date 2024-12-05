@@ -245,16 +245,11 @@ form div.button-container {
 }
 
 .ncr-table button:nth-child(2) {
-    background-color: #ffc107;
+    background-color: #f47eb5;
     color: black;
 }
 
 .ncr-table button:nth-child(3) {
-    background-color: #dc3545;
-    color: white;
-}
-
-.ncr-table button:nth-child(4) {
     background-color: #17a2b8;
     color: white;
 }
