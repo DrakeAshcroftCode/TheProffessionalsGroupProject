@@ -1,7 +1,7 @@
 
 // This code handles everything related to logins.
 // time is in miliseconds so this code is basically a snazzy way of getting fifteen minutes in miliseconds.
-window.SESSION_TIMEOUT =   15* 60 * 1000;
+window.SESSION_TIMEOUT =   15 * 60 * 1000;
 
 window.sessionTimer = null;
 window.sessionExpiration = null;
@@ -118,7 +118,7 @@ function startTimer() {
             
             // if user wants to reset the time then they can click on OK and the time will reset.
             // But if they don't then  session will expire automatically.
-            confirm("You will be logged out in 5 minutes.\nKindly SAVE your records!!!\n\nIf you want to reset the time, click OK?");
+            confirm("Session will expire in 5 minutes, press ok to reset timer.");
             
             if (userResponse) {
                 resetTimer();
