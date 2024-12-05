@@ -1,4 +1,5 @@
 
+
 // This code handles things related to NCR form storage and retrieval
 
 var storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
@@ -58,46 +59,34 @@ function displayNCRList(ncrList, isComplete = true) {
        // View Button
        var viewButton = document.createElement('button');
        viewButton.innerText = 'View';
+       viewButton.title="View NCR records";
        viewButton.onclick = function () {
            viewNCR(index);
        };
        actionsCell.appendChild(viewButton);
         // Edit Button
         var editButton = document.createElement("button");
-        
         editButton.innerText = "Edit";
+        editButton.title="Edit NCR records";
         editButton.onclick = function () {
-        const session = JSON.parse(localStorage.getItem("session"));
-        const userRole = session ? session.role : null;
-             // Redirect based on role
-        if (userRole === "Quality Inspector") {
-            window.location.href = "qualityInspector.html";
-        } else if (userRole === "Engineering") {
-            window.location.href = "engineering.html";
-        } else if (userRole === "Operations Manager") {
-            window.location.href = "operations.html";
-        } else {
-            console.warn("User role not found. Redirecting to login.");
-            window.location.href = "login.html"; // Redirect to login
-            return;
-        }
-
             localStorage.setItem("currentEditIndex", index);
             localStorage.setItem("isIncomplete", !isComplete);
+            window.location.href = "qualityInspector.html";
         };
         actionsCell.appendChild(editButton);
 
-        // Delete Button
+       /* // Delete Button
         var deleteButton = document.createElement("button");
         deleteButton.innerText = "Delete";
         deleteButton.onclick = function () {
             deleteNCR(index, isComplete);
         };
-        actionsCell.appendChild(deleteButton);
+        actionsCell.appendChild(deleteButton);*/
 
         // Export Button
         const exportButton = document.createElement("button");
         exportButton.innerText = "Export";
+        exportButton.title="Export NCR records";
 
         const session = JSON.parse(localStorage.getItem("session"));
         const userRole = session ? session.role : null;
@@ -200,7 +189,8 @@ function exportNCRAsPDF(index) {
 // Edit NCR function to load the existing NCR data into the form
 function editNCR(index) {
     const ncr = storedNCRs[index];
-    
+    const session = JSON.parse(localStorage.getItem("session"));
+    const userRole = session ? session.role : null;
 
     function setValue(id, value) {
         const element = document.getElementById(id);
@@ -348,7 +338,7 @@ function viewNCR(index) {
 }
 
 
-// Function to delete an NCR, either complete or incomplete
+/*// Function to delete an NCR, either complete or incomplete
 function deleteNCR(index, isComplete) {
     if (confirm("Deleting NCR, are you sure?")) {
         if (isComplete) {
@@ -361,7 +351,7 @@ function deleteNCR(index, isComplete) {
             displayNCRList(incompleteNCRs, false);
         }
     }
-}
+}*/
 
 // Search function for NCRs
 // Mark wanted us to add more search functionalities. Searching by date range, searching by open closed status.
@@ -369,26 +359,12 @@ function searchNCRs() {
     var year = document.getElementById("yearSearch").value;
     var code = document.getElementById("codeSearch").value.trim();
     var supplier = document.getElementById("supplierSearch").value;
-    var startDate = new Date(document.getElementById("startDate").value);
-    var endDate = new Date(document.getElementById("endDate").value);
-    //var ncrStat = document.getElementById("statusSearch").value;
 
-    
     var filteredNCRs = storedNCRs.filter(function (ncr) {
         var matchYear = true;
         var matchCode = true;
         var matchSupplier = true;
-        var matchDateRange = true;
-        //var matchNCRStatus = true;
 
-        if(startDate > endDate){
-            alert("start date must be before or equal to the end date");
-            return;
-        }
-        if (startDate && endDate) {
-            var ncrDate = new Date(ncr.nonConformanceDetails.dateOfReport);
-            matchDateRange = ncrDate >= startDate && ncrDate <= endDate;
-        }
         if (year) {
             var ncrYear = new Date(ncr.nonConformanceDetails.dateOfReport).getFullYear().toString();
             matchYear = ncrYear === year;
@@ -399,13 +375,8 @@ function searchNCRs() {
         if (supplier) {
             matchSupplier = ncr.supplierInfo.supplierName === supplier;
         }
-       // if (ncrStat) {
-       //     var isComplete = ncr.isComplete || False; 
-       //     var ncrStatus = ncr.status || (isComplete ? "Open" : "Incomplete");
-       //     matchNCRStatus = ncrStatus === ncrStat;
-      //  }
-    
-        return matchYear && matchCode && matchSupplier && matchDateRange;
+
+        return matchYear && matchCode && matchSupplier;
     });
 
     displayNCRList(filteredNCRs);
@@ -422,5 +393,6 @@ document.addEventListener("DOMContentLoaded", function () {
     displayNCRList(storedNCRs, true);
     displayNCRList(incompleteNCRs, false);
 });
+
 
 seedNCRs();
