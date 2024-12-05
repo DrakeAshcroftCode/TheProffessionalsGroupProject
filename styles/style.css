@@ -303,7 +303,7 @@ form {
     border-radius: 5px;
     outline: none;
     transition: all 0.3s ease;
-    margin: 0 10px;
+    margin:5px;
 }
 #viewBackButton{
     display: inline-block;
@@ -315,17 +315,19 @@ form {
     border-radius: 5px;
     outline: none;
     transition: all 0.3s ease;
-    margin: 0 10px;
+    margin:5px;
 }
 #viewBackButton:hover{
     background-color: #000;
     border-color: #222;
+    padding:10px;
     cursor: pointer;
     color: #fff;
 }
 #viewEditButton:hover{
     background-color: #000;
     border-color: #222;
+    padding:10px;
     cursor: pointer;
     color: #fff;
 }

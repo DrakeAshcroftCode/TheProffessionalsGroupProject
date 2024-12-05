@@ -82,7 +82,7 @@ function adjustNavBarForRole(role) {
         showNavLink('NCR Storage');
     } else if (role === 'Engineering') {
         showNavLink('Home');
-        showNavLink('Create NCR');
+        
         showNavLink('NCR Storage');
         showNavLink('Engineering');
     } else if (role === 'Operations Manager') {
