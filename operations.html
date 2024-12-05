@@ -133,14 +133,14 @@
 
                         <fieldset>
                             <legend>Report Details</legend>
-                            
-                                <label>Identify Process applicable</label>
-                                <div class="radio-group">
+                            <div>
+                                <label>Identify Process applicable:</label>
+                                <br>
                                 <label for="rdoIPA">Supplier or Rec-Insp*</label>
-                                <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp">
+                                <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp" required>
 
                                 <label for="rdoIPA">WIP(Production Order)*</label>
-                                <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP">
+                                <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP" required>
                                 <span id="rdoIPAError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <br>
@@ -164,7 +164,7 @@
                             </div>
                             <div>
                                 <label for="nrcImage">Choose a Nonconformity image to upload*</label>
-                                <input type="file" id="nrcImage" name="nrcImage" accept="image/*">
+                                <input type="file" id="nrcImage" name="nrcImage" accept="image/*" required>
                                 <span id="nrcImageError" style="color: red;"></span> <!-- Error span -->
                             </div>
                         </fieldset>
@@ -180,7 +180,7 @@
                             </div>
                             <div>
                                 <label for="reportDate">Date of Report*</label>
-                                <input id="reportDate" name="reportDate" type="date">
+                                <input id="reportDate" name="reportDate" type="date" required>
                                 <span id="reportDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
@@ -188,18 +188,18 @@
                                 <input type="text" id="repName" name="repName" placeholder="John Wick" required>
                                 <span id="repNameError" style="color: red;"></span> <!-- Error span -->
                             </div>
-                            <p>Hit "Submit" when all fields are done to satisfaction and the report will be saved and an
-                                Email notification will be sent to Engineering and Operations Manager for review
+                            <p>Hit "Submit" when all fields are done to satisfaction. This will save the report and send an
+                                Email notification to the Engineering and Operations Manager for review.
                                 Please ensure all fields are filled out and accurate.
-                                If you would like to save a partial report select "*Insert button here*"
-                                Saved and partial reports can be found on the **blank** page.
+                                If you would like to save a partial report select "Save".
+                                Saved and partial reports can be found on the "NCR Log / NCR Storage" page.
                             </p>
                         </fieldset>
                         <fieldset>
                             <Legend>Engineering - Action</Legend>
                             <div>
-                                <label for="selectDisposition">Review by CF Engineery*</label>
-                                <select id="selectDisposition">
+                                <label for="selectDisposition">Review by CF Engineer*</label>
+                                <select id="selectDisposition" required>
                                     <option value="UseAsIs">Use as Is</option>
                                     <option value="repair">Repair</option>
                                     <option value="rework">Rework</option>
@@ -207,46 +207,46 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="dispositionDescription">*</label>
+                                <label for="dispositionDescription">Disposition Description*</label>
                                 <textarea id="dispositionDescription" name="dispositionDescription"
                                     placeholder="(ex)Sequence of work steps required when 'repair' or 'rework' indicated"
                                     required></textarea>
                                 <span id="dispositionError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
-                                <label for="selectNotification">Does Customer require notification? y/n?</label>
+                                <label for="selectNotification">Does Customer require notification?* y/n?</label>
                                 <p>If "Yes" raise message to customer detailing issues</p>
-                                <select id="selectNotification">
+                                <select id="selectNotification" required>
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option>
                                 </select>
                             </div>
                             <div class="radio-group">
-                                <label>Does the drawing require updating?</label>
+                                <label>Does the drawing require updating?*</label>
                                 <label for="rdoRedrawYes">Yes</label>
-                                <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes">
+                                <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes" >
                                 <label for="rdoRedrawNo">No</label>
-                                <input type="radio" id="rdoRedrawNo" name="redraw" value="No">
+                                <input type="radio" id="rdoRedrawNo" name="redraw" value="No" >
                                 <span id="rdoDrawingError" style="color: red;"></span> <!-- Error span -->
                             </div>
                         </fieldset>
                         <fieldset>
                             <legend>Engineering - Details</legend>
                             <div>
-                                <label for="txtOrgRevNo">Original Rev. Number</label>
-                                <input type="text" id="txtOrgRevNo" name="txtOrgRevNo" placeholder="(ex)5556667722">
+                                <label for="txtOrgRevNo">Original Rev. Number*</label>
+                                <input type="text" id="txtOrgRevNo" name="txtOrgRevNo" placeholder="(ex)5556667722" required>
                             </div>
                             <div>
-                                <label for="txtUpRevNo">Original Rev. Number</label>
-                                <input type="text" id="txtUpRevNo" name="txtUpRevNo" placeholder="(ex)5556667722">
+                                <label for="txtUpRevNo">Original Rev. Number*</label>
+                                <input type="text" id="txtUpRevNo" name="txtUpRevNo" placeholder="(ex)5556667722" required>
                             </div>
                             <div>
                                 <label for="revisionDate">Revision Date*</label>
-                                <input id="revisionDate" name="revisionDate" type="date">
+                                <input id="revisionDate" name="revisionDate" type="date" required>
                                 <span id="revisionDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
-                                <label for="txtEngName">Name of Engineer</label>
+                                <label for="txtEngName">Name of Engineer*</label>
                                 <input type="text" id="txtEngName" name="txtEngName" placeholder="(ex)Imma DaBoss"
                                     required>
                                 <span id="txtEngNameError" style="color: red;"></span> <!-- Error span -->
@@ -257,29 +257,29 @@
                         <fieldset>
                             <legend>Operations - Action</legend>
                             <div>
-                                <label for="purchDecision">Purchasing's Prelim Decision</label>
-                                <select id="purchDecision">
+                                <label for="purchDecision">Purchasing's Prelim Decision*</label>
+                                <select id="purchDecision" required>
                                     <option value="return">Return To Supplier</option>
                                     <option value="rwkInHouse">Rework in House</option>
                                     <option value="scrpInHouse">Scrap in House</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="CAR">Was a CAR raise?</label>
-                                <select id="CAR">
+                                <label for="CAR">Was a CAR raised?*</label>
+                                <select id="CAR" required>
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option>
-                                </select>
+                                </select required>
                                 <span id="CARError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <p>If "Yes" indicate CAR#</p>
-                                <label for="carNumber">Car No.</label>
-                                <input type="text" id="carNumber" name="carNumber" placeholder="(ex)optional CAR NO">
+                                <label for="carNumber">CAR No.*</label>
+                                <input type="text" id="carNumber" name="carNumber" placeholder="(ex)optional CAR NO" required>
                             </div>
                             <div>
                                 <label for="followUp">Follow-Up Required?*</label>
-                                <select id="followUp">
+                                <select id="followUp" required>
                                     <option value="yes">Yes</option>
                                     <option value="no">No</option>
                                 </select>
@@ -292,7 +292,7 @@
                             </div>
                             <div>
                                 <label for="operationsDate">Revision Date*</label>
-                                <input id="operationsDate" name="revisionDate" type="date">
+                                <input id="operationsDate" name="revisionDate" type="date" required>
                                 <span id="operationsDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
                         </fieldset>
@@ -301,48 +301,48 @@
                         <fieldset>
                             <legend>Final</legend>
                             <div>
-                                <label for="reInspect">Re-Inspect Acceptable?</label>
-                                <select id="reInspect">
+                                <label for="reInspect">Re-Inspect Acceptable?*</label>
+                                <select id="reInspect" required>
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option>
-                                </select>
+                                </select required>
                                 <span id="reInspectError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <p>If "No" then record new NCR number</p>
-                                <label for="newNCRnumber">New NCR No.</label>
+                                <label for="newNCRnumber">New NCR No.*</label>
                                 <input type="text" id="newNCRnumber" name="newNCRnumber"
-                                    placeholder="(ex)new NCR number">
+                                    placeholder="(ex)new NCR number" required>
                             </div>
                             <hr>
                             <div>
-                                <label for="txtInspectorName">Inspectors Name</label>
+                                <label for="txtInspectorName">Inspectors Name*</label>
                                 <input type="text" id="txtInspectorName" name="txtInspectorName"
                                     placeholder="(ex)Jeremy Irons" required>
                                 <span id="txtInspectorNameError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="finalInspectorDate">Inspector Date*</label>
-                                <input id="finalInspectorDate" name="inspectorDate" type="date">
+                                <input id="finalInspectorDate" name="inspectorDate" type="date" required>
                                 <span id="finalInspectorDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <hr>
                             <div>
-                                <label for="txtQualityName">Quality Department</label>
+                                <label for="txtQualityName">Quality Department*</label>
                                 <input type="text" id="txtQualityName" name="txtQualityName"
                                     placeholder="(ex)Jeremy Irons" required>
                                 <span id="txtQualityNameError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
                                 <label for="qualityDate">Quality Dept Date*</label>
-                                <input id="qualityDate" name="inspectorDate" type="date">
+                                <input id="qualityDate" name="inspectorDate" type="date" required>
                                 <span id="qualityDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
                         </fieldset>
                     </div>
                     <div class="button-container">
-                        <label for="status">Status:</label>
-                        <select id="status">
+                        <label for="status">Status:*</label>
+                        <select id="status" required>
                             <option value="active">Active</option>
                             <option value="Closed">Closed</option>
                         </select>
