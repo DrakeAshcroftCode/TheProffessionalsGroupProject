@@ -88,12 +88,12 @@ function displayNCRList(ncrList, isComplete = true) {
         actionsCell.appendChild(editButton);
 
         // Delete Button
-        var deleteButton = document.createElement("button");
-        deleteButton.innerText = "Delete";
-        deleteButton.onclick = function () {
-            deleteNCR(index, isComplete);
-        };
-        actionsCell.appendChild(deleteButton);
+        // var deleteButton = document.createElement("button");
+        // deleteButton.innerText = "Delete";
+        // deleteButton.onclick = function () {
+        //     deleteNCR(index, isComplete);
+        // };
+        // actionsCell.appendChild(deleteButton);
 
         // Export Button
         const exportButton = document.createElement("button");
@@ -369,26 +369,17 @@ function searchNCRs() {
     var year = document.getElementById("yearSearch").value;
     var code = document.getElementById("codeSearch").value.trim();
     var supplier = document.getElementById("supplierSearch").value;
-    var startDate = new Date(document.getElementById("startDate").value);
-    var endDate = new Date(document.getElementById("endDate").value);
-    //var ncrStat = document.getElementById("statusSearch").value;
+    var startDate = document.getElementById("startDate").value;
+    var endDate = document.getElementById("endDate").value;
+    var inspectorName = document.getElementById("inspectorNameSearch").value.trim();
 
-    
     var filteredNCRs = storedNCRs.filter(function (ncr) {
         var matchYear = true;
         var matchCode = true;
         var matchSupplier = true;
         var matchDateRange = true;
-        //var matchNCRStatus = true;
+        var matchInspectorName = true;
 
-        if(startDate > endDate){
-            alert("start date must be before or equal to the end date");
-            return;
-        }
-        if (startDate && endDate) {
-            var ncrDate = new Date(ncr.nonConformanceDetails.dateOfReport);
-            matchDateRange = ncrDate >= startDate && ncrDate <= endDate;
-        }
         if (year) {
             var ncrYear = new Date(ncr.nonConformanceDetails.dateOfReport).getFullYear().toString();
             matchYear = ncrYear === year;
@@ -399,17 +390,51 @@ function searchNCRs() {
         if (supplier) {
             matchSupplier = ncr.supplierInfo.supplierName === supplier;
         }
-       // if (ncrStat) {
-       //     var isComplete = ncr.isComplete || False; 
-       //     var ncrStatus = ncr.status || (isComplete ? "Open" : "Incomplete");
-       //     matchNCRStatus = ncrStatus === ncrStat;
-      //  }
-    
-        return matchYear && matchCode && matchSupplier && matchDateRange;
+        if (startDate) {
+            var ncrDate = new Date(ncr.nonConformanceDetails.dateOfReport);
+            matchDateRange = ncrDate >= new Date(startDate);
+        }
+        if (endDate) {
+            var ncrDate = new Date(ncr.nonConformanceDetails.dateOfReport);
+            matchDateRange = matchDateRange && ncrDate <= new Date(endDate);
+        }
+        if (inspectorName) {
+            matchInspectorName = ncr.nonConformanceDetails.qualityRepresentativeName.includes(inspectorName);
+        }
+
+        return matchYear && matchCode && matchSupplier && matchDateRange && matchInspectorName;
     });
 
     displayNCRList(filteredNCRs);
 }
+
+
+// Function to populate the supplier search dropdown dynamically
+function populateSupplierDropdown() {
+    const supplierDropdown = document.getElementById("supplierSearch");
+    const suppliers = new Set();
+
+    // Iterate over stored NCRs and collect unique supplier names
+    storedNCRs.forEach(ncr => {
+        if (ncr.supplierInfo && ncr.supplierInfo.supplierName) {
+            suppliers.add(ncr.supplierInfo.supplierName); 
+        }
+    });
+
+    // Clear existing options except the first one (All Suppliers)
+    supplierDropdown.innerHTML = '<option value="">All Suppliers</option>';
+
+    // Add unique suppliers to the dropdown
+    suppliers.forEach(supplier => {
+        const option = document.createElement("option");
+        option.value = supplier;
+        option.textContent = supplier;
+        supplierDropdown.appendChild(option);
+    });
+}
+
+// Call the function to populate the supplier dropdown on page load
+document.addEventListener('DOMContentLoaded', populateSupplierDropdown);
 
 document.getElementById("btnSearch").addEventListener("click", function (event) {
     event.preventDefault();
