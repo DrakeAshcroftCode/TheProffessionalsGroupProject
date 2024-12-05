@@ -1,4 +1,5 @@
 
+
 // This code handles things related to NCR form storage and retrieval
 
 var storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
@@ -58,6 +59,7 @@ function displayNCRList(ncrList, isComplete = true) {
        // View Button
        var viewButton = document.createElement('button');
        viewButton.innerText = 'View';
+       viewButton.title="View NCR records";
        viewButton.onclick = function () {
            viewNCR(index);
        };
@@ -65,6 +67,7 @@ function displayNCRList(ncrList, isComplete = true) {
         // Edit Button
         var editButton = document.createElement("button");
         editButton.innerText = "Edit";
+        editButton.title="Edit NCR records";
         editButton.onclick = function () {
             localStorage.setItem("currentEditIndex", index);
             localStorage.setItem("isIncomplete", !isComplete);
@@ -72,17 +75,18 @@ function displayNCRList(ncrList, isComplete = true) {
         };
         actionsCell.appendChild(editButton);
 
-        // Delete Button
+       /* // Delete Button
         var deleteButton = document.createElement("button");
         deleteButton.innerText = "Delete";
         deleteButton.onclick = function () {
             deleteNCR(index, isComplete);
         };
-        actionsCell.appendChild(deleteButton);
+        actionsCell.appendChild(deleteButton);*/
 
         // Export Button
         const exportButton = document.createElement("button");
         exportButton.innerText = "Export";
+        exportButton.title="Export NCR records";
 
         const session = JSON.parse(localStorage.getItem("session"));
         const userRole = session ? session.role : null;
@@ -334,7 +338,7 @@ function viewNCR(index) {
 }
 
 
-// Function to delete an NCR, either complete or incomplete
+/*// Function to delete an NCR, either complete or incomplete
 function deleteNCR(index, isComplete) {
     if (confirm("Deleting NCR, are you sure?")) {
         if (isComplete) {
@@ -347,7 +351,7 @@ function deleteNCR(index, isComplete) {
             displayNCRList(incompleteNCRs, false);
         }
     }
-}
+}*/
 
 // Search function for NCRs
 // Mark wanted us to add more search functionalities. Searching by date range, searching by open closed status.
@@ -389,5 +393,6 @@ document.addEventListener("DOMContentLoaded", function () {
     displayNCRList(storedNCRs, true);
     displayNCRList(incompleteNCRs, false);
 });
+
 
 seedNCRs();
