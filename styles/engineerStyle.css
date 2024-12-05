@@ -10,7 +10,7 @@ body {
     display: block !important;
     position: fixed;
     top: 10px;
-    left: 10px;
+    right: 10px;
     z-index: 1000;
 }
 
@@ -32,8 +32,8 @@ body {
 }
 #notifIcon {
     position: fixed;
-    top: -45px; 
-    right: 35px; 
+    top: -30px; 
+    left: 20px; 
     width: 70px;
     height: 70px;
     z-index: 1000; 
@@ -709,4 +709,28 @@ details[open] summary {
     }
     
    
+}
+
+/* Profile Icon */
+#profileSection {
+    position: fixed;
+    top: -40px;
+    right: 120px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#profileIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background-color: #f0f0f0;
+}
+
+#profileDropdown {
+    position: fixed;
+    top: 75px;
+    right: 65px;
 }

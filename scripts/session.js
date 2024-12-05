@@ -20,9 +20,11 @@ function checkSession() {
         showLogoutButton();*/
 
         adjustNavBarForRole(session.role);
+        showUserProfile(session); //Get the user data to display in the profile section
     } else {
         localStorage.removeItem('session');
         hideLogoutButton();
+        hideUserProfile(); //Hide the user profile when your done with it
 
         adjustNavBarForRole(null);
         if (window.location.pathname !== '/index.html') {
@@ -33,6 +35,28 @@ function checkSession() {
         }
     }
 }
+
+//Function to display the user profile section, click the user profile image and then a user profile section will drop down
+function showUserProfile(user) {
+    const profileName = document.getElementById('profileName');
+    const profileEmail = document.getElementById('profileEmail');
+
+    if (user) {
+        profileName.textContent = `Role: ${user.role}` || 'Role not available';
+        profileEmail.textContent = `Email: ${user.email}` || 'Email not available';
+    }
+}
+
+//Function that does the opposite so when you click the user profile image again it takes away the profile information
+function hideUserProfile() {
+    const profileSection = document.getElementById('profileSection');
+    const profileDropdown = document.getElementById('profileDropdown');
+    if (profileSection) {
+        profileSection.style.display = 'none';
+        profileDropdown.style.display = 'none';
+    }
+}
+
 //function to display the logout.
 function showLogoutButton() {
     const logoutContainer = document.getElementById('logoutButtonContainer');
@@ -178,9 +202,10 @@ function logout() {
     alert('Session expired. Please log in again.');
     localStorage.removeItem('session');
     showModal();
+
     /*document.getElementById('timerDisplay').classList.add('hidden');*/
     adjustNavBarForRole(null);
-    window.location.href = '../index.html';
+    window.parent.location.href = 'index.html';
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -195,3 +220,4 @@ document.addEventListener('DOMContentLoaded', function () {
 /* I make the timerdisplay and its reference as a comment in every js file (where it is used) so that it will not affect our website. 
 Because when i remove the timedisplay from html, it shows error in console and alert part is'nt working. I hope it makes sense.
 Things I removed: Timerdisplay and its visibility: html and css ONLY */
+

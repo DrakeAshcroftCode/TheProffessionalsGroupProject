@@ -96,3 +96,21 @@ document.addEventListener('DOMContentLoaded', function ()
 window.onload = function () {
     resetTimer();
 }
+
+//Grabs the profile image button so when you click it, it displays the user profile section
+document.addEventListener('DOMContentLoaded', function () {
+    // Profile Image Click Event to Toggle Dropdown
+    const profileIcon = document.getElementById('profileIcon');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    if (profileIcon && profileDropdown) {
+        profileIcon.addEventListener('click', function () {
+            // Toggle the dropdown's visibility
+            if (profileDropdown.style.display === 'none' || profileDropdown.style.display === '') {
+                profileDropdown.style.display = 'block'; // Show the dropdown
+            } else {
+                profileDropdown.style.display = 'none'; // Hide the dropdown
+            }
+        });
+    }
+});
