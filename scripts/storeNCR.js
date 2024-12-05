@@ -143,44 +143,69 @@ function exportNCRAsPDF(index) {
     doc.text("NCR Report", 105, 30, { align: "center" });
 
     const sectionHeaderColor = [52, 152, 219];
-
+////////////////////////////////////////////////////////////////////////
     doc.setFillColor(...sectionHeaderColor);
     doc.rect(10, 40, 190, 10, "F");
-    doc.setFontSize(12);
+    doc.setFontSize(10);
     doc.setTextColor(255, 255, 255);
-    doc.text("Supplier and Product Info", 15, 47);
+    doc.text("Quality Representative Information", 15, 47);
 
     doc.setFontSize(10);
     doc.setTextColor(0, 0, 0);
-    doc.text(`Supplier Name: ${ncr.supplierInfo.supplierName || "N/A"}`, 15, 55);
-    doc.text(`NCR Number: ${ncr.supplierInfo.ncrNumber || "N/A"}`, 15, 60);
-    doc.text(`Product Number: ${ncr.supplierInfo.poOrProductNumber || "N/A"}`, 15, 65);
-    doc.text(`Sales Order Number: ${ncr.supplierInfo.salesOrderNumber || "N/A"}`, 15, 70);
-    doc.text(`Quantity Received: ${ncr.supplierInfo.quantityReceived || "N/A"}`, 15, 75);
-    doc.text(`Quantity Defective: ${ncr.supplierInfo.quantityDefective || "N/A"}`, 15, 80);
-
+    doc.text(`Identify Process Applicable: ${ncr.reportDetails.processApplicable || "N/A"}`, 15, 55);
+    doc.text(`Supplier Name: ${ncr.supplierInfo.supplierName || "N/A"}`, 15, 60);
+    doc.text(`NCR Number: ${ncr.supplierInfo.ncrNumber || "N/A"}`, 15, 65);
+    doc.text(`Product Number: ${ncr.supplierInfo.poOrProductNumber || "N/A"}`, 15, 70);
+    doc.text(`Sales Order Number: ${ncr.supplierInfo.salesOrderNumber || "N/A"}`, 15, 75);
+    doc.text(`Quantity Received: ${ncr.supplierInfo.quantityReceived || "N/A"}`, 15, 80);
+    doc.text(`Quantity Defective: ${ncr.supplierInfo.quantityDefective || "N/A"}`, 15, 85);
+    doc.text(`Item Description: ${ncr.reportDetails.itemDescription || "N/A"}`, 15, 90);
+    doc.text(`SAP Number: ${ncr.reportDetails.sapNo || "N/A"}`, 15, 95);
+    doc.text(`Defect Description: ${ncr.reportDetails.descriptionOfDefect || "N/A"}`, 15, 100);
+    doc.text(`Is Non-Conforming?: ${ncr.nonConformanceDetails.isNonConforming || "N/A"}`, 15, 105);
+    doc.text(`Quality Representative: ${ncr.nonConformanceDetails.qualityRepresentativeName || "N/A"}`, 15, 110);
+    doc.text(`Date of Report: ${ncr.nonConformanceDetails.dateOfReport || "N/A"}`, 15, 115);
+   
+   
+/////////////////////////////////////////////////////////////////////////
     doc.setFillColor(...sectionHeaderColor);
-    doc.rect(10, 90, 190, 10, "F");
+    doc.rect(10, 120, 190, 10, "F");
     doc.setTextColor(255, 255, 255);
-    doc.text("Report Details", 15, 97);
+    doc.text("Engineering Information", 15, 127);
 
     doc.setFontSize(10);
     doc.setTextColor(0, 0, 0);
-    doc.text(`SAP Number: ${ncr.reportDetails.sapNo || "N/A"}`, 15, 105);
-    doc.text(`Item Description: ${ncr.reportDetails.itemDescription || "N/A"}`, 15, 110);
-    doc.text(`Defect Description: ${ncr.reportDetails.descriptionOfDefect || "N/A"}`, 15, 115);
+    doc.text(`Review by CF Engineer: ${ncr.reportDetails.selectDisposition || "N/A"}`, 15, 135);
+    doc.text(`Does Customer Require Notification?: ${ncr.reportDetails.selectNotification || "N/A"}`, 15, 140);
+    doc.text(`Disposition Description: ${ncr.reportDetails.dispositionDescription || "N/A"}`, 15, 145);
+    doc.text(`Does Drawing Require Updating?: ${ncr.reportDetails.needRedraw || "N/A"}`, 15, 150); 
+    doc.text(`Original Rev. Num: ${ncr.reportDetails.origRevNum || "N/A"}`, 15, 155);
+    doc.text(`Updated Rev. Num: ${ncr.reportDetails.updatedRevNum || "N/A"}`, 15, 160);
+    doc.text(`Revision Date: ${ncr.reportDetails.revisionDate || "N/A"}`, 15, 165);
+    doc.text(`Engineer Name: ${ncr.reportDetails.engineerName || "N/A"}`, 15, 170);
 
+////////////////////////////////////////////////////////////////////////
     doc.setFillColor(...sectionHeaderColor);
-    doc.rect(10, 125, 190, 10, "F");
+    doc.rect(10, 175, 190, 10, "F");
     doc.setTextColor(255, 255, 255);
-    doc.text("Nonconformance Details", 15, 132);
+    doc.text("Purchasing/Operations Information", 15, 182);
 
     doc.setFontSize(10);
     doc.setTextColor(0, 0, 0);
-    doc.text(`Is Non-Conforming: ${ncr.nonConformanceDetails.isNonConforming || "N/A"}`, 15, 140);
-    doc.text(`Date of Report: ${ncr.nonConformanceDetails.dateOfReport || "N/A"}`, 15, 145);
-    doc.text(`Quality Representative: ${ncr.nonConformanceDetails.qualityRepresentativeName || "N/A"}`, 15, 150);
-
+    doc.text(`Puchasing's Prelim Decision: ${ncr.nonConformanceDetails.purchDecision || "N/A"}`, 15, 190);
+    doc.text(`Was a CAR Raised?: ${ncr.nonConformanceDetails.car || "N/A"}`, 15, 195);
+    doc.text(`If "Yes" Indicate CAR #: ${ncr.nonConformanceDetails.carNum || "N/A"}`, 15, 200);
+    doc.text(`Follow-Up Required?: ${ncr.nonConformanceDetails.followUp || "N/A"}`, 15, 205);
+    doc.text(`Operations Manager Name: ${ncr.nonConformanceDetails.txtOpName || "N/A"}`, 15, 210);
+    doc.text(`Revision Date: ${ncr.nonConformanceDetails.revisionDate || "N/A"}`, 15, 215);
+    doc.text(`Re-inspected Acceptable?: ${ncr.nonConformanceDetails.reInspect || "N/A"}`, 15, 220);
+    doc.text(`New NCR Number: ${ncr.nonConformanceDetails.newNCRNum || "N/A"}`, 15, 225);
+    doc.text(`Inspector's Name: ${ncr.nonConformanceDetails.inspectorName || "N/A"}`, 15, 230);
+    doc.text(`Inspector's Date: ${ncr.nonConformanceDetails.inspectorDate || "N/A"}`, 15, 235);
+    doc.text(`Quality Department: ${ncr.nonConformanceDetails.qualityName || "N/A"}`, 15, 240);
+    doc.text(`Quality Department Date: ${ncr.nonConformanceDetails.qualityDate || "N/A"}`, 15, 245);
+    
+    doc.text(`Status: ${ncr.nonConformanceDetails.status || "N/A"}`, 15, 250);
    /* doc.setFillColor(...sectionHeaderColor);
     doc.rect(10, 165, 190, 10, "F");
     doc.setTextColor(255, 255, 255);

@@ -24,6 +24,30 @@ function saveSendFunction() {
     var rdoConformingNo = document.getElementById('rdoConformingNo');
     var reportDate = document.getElementById('reportDate').value;
     var repName = document.getElementById('repName').value;
+   
+    var dispositionDescription = document.getElementById('dispositionDescription').value;
+    var selectDisposition = document.getElementById('selectDisposition').value;
+    var selectNotification = document.getElementById('selectNotification').value;
+    var rdoRedrawYes = document.getElementById('rdoRedrawYes').value;
+    var rdoRedrawNo = document.getElementById('rdoRedrawNo').value;
+    var origRevNum = document.getElementById('txtUpRevNo').value;
+    var updatedRevNum = document.getElementById('txtUpRevNo').value;
+    var revisionDate = document.getElementById('revisionDateDate').value;
+    var engineerName = document.getElementById('txtEngName').value;
+    var status = document.getElementById('status').value;
+
+    var purchDecision = document.getElementById('purchDecision').value;
+    var car = document.getElementById('CAR').value;
+    var carNum = document.getElementById('carNumber').value;
+    var followUp = document.getElementById('followUp').value;
+    var txtOpName = document.getElementById('txtOpName').value;
+    var revisionDate = document.getElementById('operationsDate').value;
+    var reInspect = document.getElementById('reInspect').value;
+    var newNCRNum = document.getElementById('newNCRnumber').value;
+    var inspectorName = document.getElementById('txtInspectorName').value;
+    var inspectorDate = document.getElementById('finalInspectorDate').value;
+    var qualityName = document.getElementById('txtQualityName').value;
+    var qualityDate = document.getElementById('qualityDate').value;
 
     var rdoOneValue = '';
     if (rdoRecInsp.checked) {
@@ -38,6 +62,14 @@ function saveSendFunction() {
     } else if (rdoConformingNo.checked) {
         rdoTwoValue = 'No';
     }
+
+    var rdoThreeValue = '';
+    if (rdoRedrawYes.checked) {
+        rdoThreeValue = 'Yes';
+    } else if (rdoRedrawNo.checked) {
+        rdoThreeValue = 'No';
+    }
+
 
     var ncrForm = {
         supplierInfo: {
@@ -54,11 +86,32 @@ function saveSendFunction() {
             itemDescription: itemDescription,
             descriptionOfDefect: defectDescription,
             nonConformityImage: ncrImage,
+            selectDisposition: selectDisposition,
+            dispositionDescription: dispositionDescription,
+            selectNotification: selectNotification,
+            needRedraw: rdoThreeValue,
+            origRevNum: origRevNum,
+            updatedRevNum: updatedRevNum,
+            revisionDate: revisionDate,
+            engineerName: engineerName,
         },
         nonConformanceDetails: {
             isNonConforming: rdoTwoValue,
             dateOfReport: reportDate,
             qualityRepresentativeName: repName,
+            status: status,
+            purchDecision: purchDecision,
+            car: car,
+            carNum: carNum,
+            followUp: followUp,
+            txtOpName: txtOpName,
+            revisionDate: revisionDate,
+            reInspect: reInspect,
+            newNCRNum: newNCRNum,
+            inspectorName: inspectorName,
+            inspectorDate: inspectorDate,
+            qualityName: qualityName,
+            qualityDate: qualityDate,
         },
        
     };

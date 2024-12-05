@@ -237,7 +237,7 @@
                                 <input type="text" id="txtOrgRevNo" name="txtOrgRevNo" placeholder="(ex)5556667722">
                             </div>
                             <div>
-                                <label for="txtUpRevNo">Original Rev. Number</label>
+                                <label for="txtUpRevNo">Updated Rev. Number</label>
                                 <input type="text" id="txtUpRevNo" name="txtUpRevNo" placeholder="(ex)5556667722">
                             </div>
                             <div>
@@ -262,6 +262,7 @@
                                     <option value="return">Return To Supplier</option>
                                     <option value="rwkInHouse">Rework in House</option>
                                     <option value="scrpInHouse">Scrap in House</option>
+                                    <option value="Defer">Defer for HBC Engineering Review</option>
                                 </select>
                             </div>
                             <div>
@@ -301,7 +302,7 @@
                         <fieldset>
                             <legend>Final</legend>
                             <div>
-                                <label for="reInspect">Re-Inspect Acceptable?*</label>
+                                <label for="reInspect">Re-Inspected Acceptable?*</label>
                                 <select id="reInspect">
                                     <option value="no">No</option>
                                     <option value="yes">Yes</option>
@@ -316,13 +317,13 @@
                             </div>
                             <hr>
                             <div>
-                                <label for="txtInspectorName">Inspectors Name*</label>
+                                <label for="txtInspectorName">Inspector's Name*</label>
                                 <input type="text" id="txtInspectorName" name="txtInspectorName"
                                     placeholder="(ex)Jeremy Irons" required>
                                 <span id="txtInspectorNameError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <div>
-                                <label for="finalInspectorDate">Inspector Date*</label>
+                                <label for="finalInspectorDate">Inspector's Date*</label>
                                 <input id="finalInspectorDate" name="inspectorDate" type="date">
                                 <span id="finalInspectorDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
