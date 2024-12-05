@@ -1,4 +1,3 @@
-
 body {
     font-family: 'Poppins', sans-serif;
     padding: 0;
@@ -387,4 +386,52 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 #logoutButton:hover {
     background-color: #e60000;
+}
+@media (max-width: 1200px) {
+    #form-sections {
+        flex-wrap: wrap;
+    }
+    nav {
+        width: 80vw;
+    }}
+
+@media (max-width: 1080px) {
+   
+    form {
+        width: 100%;
+        padding: 15px;
+    }
+    nav {
+        width: 80vw;
+    }
+   
+    
+}
+
+
+@media (max-width: 768px) {
+    
+    form {
+        width: 80%;
+        
+    }
+    nav {
+        width: 80vw;
+    }
+    #form-sections>div {
+        flex: 1 1 100%;
+    }
+}
+
+
+@media (max-width: 640px) {
+    
+    form {
+        width: 90%;
+    }
+    nav {
+        width: 80vw;
+    }
+    
+   
 }

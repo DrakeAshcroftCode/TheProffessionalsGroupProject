@@ -1,4 +1,5 @@
 
+
 // This code handles things related to NCR form storage and retrieval
 
 var storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
@@ -392,5 +393,6 @@ document.addEventListener("DOMContentLoaded", function () {
     displayNCRList(storedNCRs, true);
     displayNCRList(incompleteNCRs, false);
 });
+
 
 seedNCRs();

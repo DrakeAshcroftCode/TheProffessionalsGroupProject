@@ -94,4 +94,7 @@ document.addEventListener('DOMContentLoaded', function ()
 });
 // reset timer for accessibility reasonings
 window.onload = function () {
+
     resetTimer();}
+
+}
