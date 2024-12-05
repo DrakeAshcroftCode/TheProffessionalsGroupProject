@@ -191,8 +191,9 @@
                     <Legend>Engineering</Legend>
                     <div>
                         <label for="selectDisposition">Review by CF Engineer*</label>
-                        <select id="selectDisposition">
-                            <option value="UseAsIs">Use as Is</option>
+
+                        <select id="selectDisposition" required>
+              <option value="UseAsIs">Use as Is</option>
                             <option value="repair">Repair</option>
                             <option value="rework">Rework</option>
                             <option value="scrap">Scrap</option>
@@ -206,15 +207,19 @@
                         <span id="dispositionError" style="color: red;"></span> <!-- Error span -->
                     </div>
                     <div>
-                        <label for="selectNotification">Does Customer require notification? y/n?</label>
+
+                        <label for="selectNotification">Does Customer require notification?* y/n?</label>
                         <p>If "Yes" raise message to customer detailing issues</p>
-                        <select id="selectNotification">
+                        <select id="selectNotification" required>
+
                             <option value="no">No</option>
                             <option value="yes">Yes</option>
                         </select>
                     </div>
                     <div>
-                        <label>Does the drawing require updating? </label>
+
+                        <label>Does the drawing require updating?* </label>
+
                         <div class="radio-group">
                             <label for="rdoRedrawYes">Yes</label>
                             <input type="radio" id="rdoRedrawYes" name="redraw" value="Yes">
@@ -224,8 +229,9 @@
                         </div>
                     </div>
                     <div>
-                        <label for="nrcImage">View Nonconforming product image</label>
-                        <input title="Click to choose a file" type="file" id="nrcImage" name="nrcImage" accept="image/*">
+
+                        <label for="nrcImage">View Nonconforming product image*</label>
+         <input title="Click to choose a file" type="file" id="nrcImage" name="nrcImage" accept="image/*">
                     </div>
                 </fieldset>
                 <fieldset>

@@ -53,8 +53,8 @@
                     <legend>NCR Search</legend>
                     <p>Search for a saved NCR by year, date range, 3-digit log #, status, or supplier name.</p>
                     <div>
-                        <label for="yearSearch">Year</label>
-                        <select id="yearSearch">
+                        <label for="yearSearch">Year*</label>
+                        <select id="yearSearch" required>
                             <option value="">All Years</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
@@ -64,13 +64,16 @@
                         </select>
                     </div>
                     <div>
-                        <label for="startDate">Start Date</label>
-                        <input id="startDate" name="startDate" type="date">
-                        <label for="endDate">End Date</label>
-                        <input id="endDate" name="endDate" type="date">
+
+                        <label for="startDate">Start Date*</label>
+                        <input id="startDate" name="startDate" type="date" required>
+                        <label for="endDate">End Date*</label>
+                        <input id="endDate" name="endDate" type="date" required>
+      
                     </div>
                     <div>
-                        <label for="codeSearch">3-digit Extension</label>
+                        <label for="codeSearch">3-digit Extension*</label>
+
             
                         <input id="codeSearch" name="codeSearch" placeholder="(ex)253" type="text">
                         <span class="explain"> enter 3 digit number cannot be more than 3 </span>
@@ -78,15 +81,19 @@
                    
                     </div>
                     <div>
-                        <label for="statusSearch">Status</label>
-                        <select id="statusSearch">
+
+                        <label for="statusSearch">Status*</label>
+                        <select id="statusSearch" required>
+
                             <option value="Open">Open</option>
                             <option value="Closed">Closed</option>
                         </select>
                     </div>
                     <div>
-                        <label for="supplierSearch">Supplier Name</label>
-                        <select id="supplierSearch">
+
+                        <label for="supplierSearch">Supplier Name*</label>
+                        <select id="supplierSearch" required>
+
                             <option value="">All Suppliers</option>
                             <option value="Pepsi Co.">Pepsi Co.</option>
                             <option value="PetsMart">PetsMart</option>
