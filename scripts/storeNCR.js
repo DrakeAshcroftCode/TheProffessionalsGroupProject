@@ -337,7 +337,7 @@ function viewNCR(index) {
 }
 
 
-// Function to delete an NCR, either complete or incomplete
+/*// Function to delete an NCR, either complete or incomplete
 function deleteNCR(index, isComplete) {
     if (confirm("Deleting NCR, are you sure?")) {
         if (isComplete) {
@@ -350,7 +350,7 @@ function deleteNCR(index, isComplete) {
             displayNCRList(incompleteNCRs, false);
         }
     }
-}
+}*/
 
 // Search function for NCRs
 // Mark wanted us to add more search functionalities. Searching by date range, searching by open closed status.
