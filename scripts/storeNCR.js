@@ -307,24 +307,26 @@ function editNCR(index) {
    //function to dynamically generate an NCR number.
     let ncrCounter = 0;
     function generateNCRNumber() {
-    const year = new Date().getFullYear();
-    const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+        const year = new Date().getFullYear();
+        const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
 
-    // Filter NCRs from the current year to find the highest existing NCR number
-    const currentYearNCRs = storedNCRs
-        .filter(ncr => ncr.supplierInfo.ncrNumber.startsWith(`${year}-`))
-        .map(ncr => parseInt(ncr.supplierInfo.ncrNumber.split('-')[1], 10)); // Extract the counter part after the hyphen
+        // Filter NCRs from the current year to find the highest existing NCR number
+        const currentYearNCRs = storedNCRs
+            .filter(ncr => ncr.supplierInfo.ncrNumber.startsWith(`${year}-`))
+            .map(ncr => parseInt(ncr.supplierInfo.ncrNumber.split('-')[1], 10)); // Extract the counter part after the hyphen
 
-    const lastNumber = currentYearNCRs.length > 0 ? Math.max(...currentYearNCRs) : 0;
+        const lastNumber = currentYearNCRs.length > 0 ? Math.max(...currentYearNCRs) : 0;
 
-    if (ncrCounter === 0) {
-        ncrCounter = lastNumber;
-    }
+        if (ncrCounter === 0) {
+            ncrCounter = lastNumber;
+        }
 
-    ncrCounter += 1;
+        ncrCounter += 1;
 
-    return `${year}-${String(ncrCounter).padStart(3, '0')}`;
+        return `${year}-${String(ncrCounter).padStart(3, '0')}`;
 }
+
+
 // Function to seed NCRs if there are none, if none found, it'll give us ten of them as mark requested.
 function seedNCRs() {
     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
@@ -436,10 +438,10 @@ function searchNCRs() {
     displayNCRList(filteredNCRs);
 }
 
-document.getElementById("btnSearch").addEventListener("click", function (event) {
-    event.preventDefault();
-    searchNCRs();
-});
+// document.getElementById("btnSearch").addEventListener("click", function (event) {
+//     event.preventDefault();
+//     searchNCRs();
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
     storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];

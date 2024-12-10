@@ -337,6 +337,11 @@ function loadFormData() {
     const session = JSON.parse(localStorage.getItem('session')); // Assume session stores user role
     const userRole = session?.role; // Get user role
     const ncrData = JSON.parse(localStorage.getItem('currentNCR')); // Get NCR data
+    const ncrNumberNext = generateNCRNumber();
+
+    if (ncrNumberNext) {
+        document.getElementById('ncrNo').value = ncrNumberNext;
+    }
 
     if (!ncrData) {
         console.warn("No NCR data found for this session.");
