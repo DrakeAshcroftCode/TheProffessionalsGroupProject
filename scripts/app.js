@@ -5,6 +5,8 @@
 //and it simply stops the default event behavior from happening so that I can mess with it.
 //Code for login button, finding any users that exist, checking if the user is logged in or not, etc.
 function saveSendFunction() {
+    const session = JSON.parse(localStorage.getItem('session')) || {};
+
     var supplierName = document.getElementById('supName').value;
     var ncrNumber = document.getElementById('ncrNo').value;
     var poOrProductNumber = document.getElementById('prodNo').value;
@@ -12,9 +14,9 @@ function saveSendFunction() {
     var quantityReceived = document.getElementById('quantityR').value;
     var quantityDefective = document.getElementById('quantityD').value;
 
-    var rdoRecInsp = document.getElementById('rdoRecInsp');
-    var rdoWIP = document.getElementById('rdoWIP');
-    var sapNo = document.getElementById('sapNo').value;
+    var rdoRecInsp = document.getElementById('rdoRecInsp') || '';
+    var rdoWIP = document.getElementById('rdoWIP') || '';
+    var sapNo = document.getElementById('sapNo').value || '';
 
     var itemDescription = document.getElementById('itemDescription').value;
     var defectDescription = document.getElementById('defectDescription').value;
@@ -24,7 +26,9 @@ function saveSendFunction() {
     var rdoConformingNo = document.getElementById('rdoConformingNo');
     var reportDate = document.getElementById('reportDate').value;
     var repName = document.getElementById('repName').value;
-   
+
+    
+    if (session.role ==='Engineering'){
     var dispositionDescription = document.getElementById('dispositionDescription').value;
     var selectDisposition = document.getElementById('selectDisposition').value;
     var selectNotification = document.getElementById('selectNotification').value;
@@ -35,20 +39,22 @@ function saveSendFunction() {
     var revisionDate = document.getElementById('revisionDateDate').value;
     var engineerName = document.getElementById('txtEngName').value;
     var status = document.getElementById('status').value;
+    }
 
-    var purchDecision = document.getElementById('purchDecision').value;
-    var car = document.getElementById('CAR').value;
-    var carNum = document.getElementById('carNumber').value;
-    var followUp = document.getElementById('followUp').value;
-    var txtOpName = document.getElementById('txtOpName').value;
-    var revisionDate = document.getElementById('operationsDate').value;
-    var reInspect = document.getElementById('reInspect').value;
-    var newNCRNum = document.getElementById('newNCRnumber').value;
-    var inspectorName = document.getElementById('txtInspectorName').value;
-    var inspectorDate = document.getElementById('finalInspectorDate').value;
-    var qualityName = document.getElementById('txtQualityName').value;
-    var qualityDate = document.getElementById('qualityDate').value;
-
+    if (session.role !='Engineering'){
+        var purchDecision = document.getElementById('purchDecision').value || '';
+        var car = document.getElementById('CAR').value || '';
+        var carNum = document.getElementById('carNumber').value || '';
+        var followUp = document.getElementById('followUp').value || '';
+        var txtOpName = document.getElementById('txtOpName').value || '';
+        var revisionDate = document.getElementById('operationsDate').value || '';
+        var reInspect = document.getElementById('reInspect').value || '';
+        var newNCRNum = document.getElementById('newNCRnumber').value || '';
+        var inspectorName = document.getElementById('txtInspectorName').value || '';
+        var inspectorDate = document.getElementById('finalInspectorDate').value || '';
+        var qualityName = document.getElementById('txtQualityName').value || '';
+        var qualityDate = document.getElementById('qualityDate').value || '';
+}
     var rdoOneValue = '';
     if (rdoRecInsp.checked) {
         rdoOneValue = 'recInsp';
@@ -70,6 +76,10 @@ function saveSendFunction() {
         rdoThreeValue = 'No';
     }
 
+    //Submitter flag stored to call notifications.
+    var submitterRole = session.role;
+  
+    
 
     var ncrForm = {
         supplierInfo: {
@@ -94,6 +104,7 @@ function saveSendFunction() {
             updatedRevNum: updatedRevNum,
             revisionDate: revisionDate,
             engineerName: engineerName,
+            submitterRole: submitterRole,
         },
         nonConformanceDetails: {
             isNonConforming: rdoTwoValue,
@@ -113,7 +124,15 @@ function saveSendFunction() {
             qualityName: qualityName,
             qualityDate: qualityDate,
         },
-       
+       engineeringDetails:{           
+            rdoRedrawYes :rdoRedrawYes,
+            rdoRedrawNo: rdoRedrawNo,
+            origRevNum: origRevNum,
+            updatedRevNum: updatedRevNum,
+            revisionDate: revisionDate,
+            engineerName: engineerName,
+            status: status,
+       }
     };
 
     return ncrForm;
@@ -125,20 +144,20 @@ function validation(ncrForm) {
     let firstErrorElement = null;
 
     // Error elements
-    const supNameError = document.getElementById('supNameError');
-    const ncrNoError = document.getElementById('ncrNoError');
-    const prodNoError = document.getElementById('prodNoError');
-    const saleOrderNoError = document.getElementById('saleOrderNoError');
-    const quantityRError = document.getElementById('quantityRError');
-    const quantityDError = document.getElementById('quantityDError');
-    const sapNoError = document.getElementById('sapNoError');
-    const itemDescriptionError = document.getElementById('itemDescriptionError');
-    const defectDescriptionError = document.getElementById('defectDescriptionError');
-    const repNameError = document.getElementById('repNameError');
-    const reportDateError = document.getElementById('reportDateError');
-    const rdoIPAError = document.getElementById('rdoIPAError');
-    const rdoConformingError = document.getElementById('rdoConformingError');
-    const nrcImageError = document.getElementById('nrcImageError');
+    const supNameError = document.getElementById('supNameError') || '1';
+    const ncrNoError = document.getElementById('ncrNoError') || '2';
+    const prodNoError = document.getElementById('prodNoError') || '3';
+    const saleOrderNoError = document.getElementById('saleOrderNoError') || '4';
+    const quantityRError = document.getElementById('quantityRError') || '5';
+    const quantityDError = document.getElementById('quantityDError') || '6';
+    const sapNoError = document.getElementById('sapNoError') || '7';
+    const itemDescriptionError = document.getElementById('itemDescriptionError') || '8';
+    const defectDescriptionError = document.getElementById('defectDescriptionError') || '9';
+    const repNameError = document.getElementById('repNameError') || '0';
+    const reportDateError = document.getElementById('reportDateError') || '11';
+    const rdoIPAError = document.getElementById('rdoIPAError') || '22';
+    const rdoConformingError = document.getElementById('rdoConformingError') || '33';
+    const nrcImageError = document.getElementById('nrcImageError') || '44';
 
     // Clear error messages
     supNameError.textContent = "";
@@ -407,11 +426,13 @@ function savePartialNCR() {
     alert("Incomplete NCR saved successfully.");
     displayNCRList(incompleteNCRs, false);
 }
+
 // Save button click event
 document.getElementById("btnSave").addEventListener("click", function (event) {
     event.preventDefault();
-    var ncrForm = saveSendFunction();
+    var ncrForm = saveSendFunction();    
 
+    console.log(ncrForm);
     if (validation(ncrForm)) {
         storeFormData(ncrForm);
         alert("Form saved successfully.");

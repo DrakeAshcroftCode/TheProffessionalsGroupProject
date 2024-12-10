@@ -441,6 +441,8 @@ document.getElementById("btnSearch").addEventListener("click", function (event) 
     searchNCRs();
 });
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
     storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
     incompleteNCRs = JSON.parse(localStorage.getItem("incompleteNCRs")) || [];

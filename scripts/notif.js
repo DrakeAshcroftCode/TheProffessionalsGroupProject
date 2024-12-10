@@ -10,11 +10,19 @@ function addNotification(ncrForm) {
         ncrNumber: ncrForm.supplierInfo.ncrNumber,
         message: `New NCR created: ${ncrForm.supplierInfo.ncrNumber}`,
         timestamp: new Date().toISOString(),
-        read: false,
+        read: false,        
     };
-    notifList.push(newNotif);
-    localStorage.setItem('notifications', JSON.stringify(notifList));
-    updateNotifBadge();
+    
+    //Check condition of flag to update notification.
+    if(ncrForm.reportDetails.submitterRole ==='Engineering' && session.role === 'Operations Manager'){
+        notifList.push(newNotif);
+        localStorage.setItem('notifications', JSON.stringify(notifList));
+        updateNotifBadge();
+    }else if(session.role === 'Engineering' && session.role ==='Quality Inspector'){
+        notifList.push(newNotif);
+        localStorage.setItem('notifications', JSON.stringify(notifList));
+        updateNotifBadge();
+    }   
 }
 
 // Function to update the notification badge
