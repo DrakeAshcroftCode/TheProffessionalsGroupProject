@@ -61,12 +61,12 @@ function saveSendFunction() {
         var rdoRecInsp = document.getElementById('rdoRecInsp');
         var rdoWIP = document.getElementById('rdoWIP');
         if (rdoRecInsp && rdoRecInsp.checked) {
-            rdoOneValue = 'recInsp';
+            rdoOneValue = 'rdoRecInsp';
         } else if (rdoWIP && rdoWIP.checked) {
-            rdoOneValue = 'WIP';
+            rdoOneValue = 'rdoWIP';
         }
     }
-   
+   console.log(rdoOneValue);
 
     var rdoTwoValue = '';
     if (rdoConformingYes.checked) {
