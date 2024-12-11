@@ -57,7 +57,10 @@ function displayNotifications() {
             notifItem.innerHTML = `
                 <span>${notif.message}</span>
                 <button style="margin-left: 10px;" onclick="goToNCR('${notif.ncrNumber}', ${index})">View</button>
+                <button style="margin-left: 10px;"  onclick="clearNotification(${index})">Clear</button>
             `;
+            
+            
             notifList.appendChild(notifItem);
         });
     }
@@ -74,6 +77,7 @@ function goToNCR(ncrNumber, notifIndex) {
     // Redirect to the engineering page with the NCR number
     const session = JSON.parse(localStorage.getItem('session')) || {};
     
+    //Conditional redirect for the View button. If session === x, go to x.html
     if(session.role === 'Operations Manager'){
         console.log(session);
         window.location.href = `operations.html?ncr=${ncrNumber}`;
@@ -82,6 +86,13 @@ function goToNCR(ncrNumber, notifIndex) {
     }    
 }
 
+// Function to handle "Clear" button click
+function clearNotification(notifIndex) {
+    const notifList = JSON.parse(localStorage.getItem('notifications')) || [];  
+    notifList.splice(notifIndex, 1);    
+    localStorage.setItem('notifications', JSON.stringify(notifList));    
+    displayNotifications();
+}
 
 // Attach event listener to the notification icon
 document.getElementById('notifIcon').addEventListener('click', displayNotifications);
