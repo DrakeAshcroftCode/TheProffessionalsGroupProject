@@ -222,12 +222,3 @@ document.addEventListener('DOMContentLoaded', function () {
 /* I make the timerdisplay and its reference as a comment in every js file (where it is used) so that it will not affect our website. 
 Because when i remove the timedisplay from html, it shows error in console and alert part is'nt working. I hope it makes sense.
 Things I removed: Timerdisplay and its visibility: html and css ONLY */
-
-function onLoginSuccess() {
-    const iframe = document.getElementById('mainIframe');
-    if (iframe) {
-        iframe.src = 'index.html'
-    } else {
-        console.error('Iframe not found!');
-    }
-}

@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function ()
             /*document.getElementById('timerDisplay').classList.remove('hidden');*/
 
             adjustNavBarForRole(user.role);
+
+            //Refresh the page after login to fix nav bar
+            window.location.reload();
         } else {
             alert('Invalid email or password.');
         }
