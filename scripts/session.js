@@ -21,6 +21,7 @@ function checkSession() {
 
         adjustNavBarForRole(session.role);
         showUserProfile(session); //Get the user data to display in the profile section
+
     } else {
         localStorage.removeItem('session');
         hideLogoutButton();
@@ -205,7 +206,8 @@ function logout() {
 
     /*document.getElementById('timerDisplay').classList.add('hidden');*/
     adjustNavBarForRole(null);
-    window.parent.location.href = 'index.html';
+
+    window.top.location.href = 'index.html';
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -221,3 +223,11 @@ document.addEventListener('DOMContentLoaded', function () {
 Because when i remove the timedisplay from html, it shows error in console and alert part is'nt working. I hope it makes sense.
 Things I removed: Timerdisplay and its visibility: html and css ONLY */
 
+function onLoginSuccess() {
+    const iframe = document.getElementById('mainIframe');
+    if (iframe) {
+        iframe.src = 'index.html'
+    } else {
+        console.error('Iframe not found!');
+    }
+}
