@@ -92,6 +92,7 @@ function clearNotification(notifIndex) {
     notifList.splice(notifIndex, 1);    
     localStorage.setItem('notifications', JSON.stringify(notifList));    
     displayNotifications();
+    updateNotifBadge();
 }
 
 // Attach event listener to the notification icon
