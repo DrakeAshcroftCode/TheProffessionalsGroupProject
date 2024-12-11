@@ -243,7 +243,7 @@ form div.button-container {
 
 .ncr-table button:nth-child(1) {
     background-color: #68c67e;
-    color: white;
+    color: #000000;
 }
 
 .ncr-table button:nth-child(2) {
@@ -252,8 +252,8 @@ form div.button-container {
 }
 
 .ncr-table button:nth-child(3) {
-    background-color: #17a2b8;
-    color: white;
+    background-color: #15AAC1;
+    color: #000000;
 }
 
 textarea {
