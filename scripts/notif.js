@@ -87,13 +87,41 @@ function goToNCR(ncrNumber, notifIndex) {
 document.getElementById('notifIcon').addEventListener('click', displayNotifications);
 
 // Update notifications badge on page load
-document.addEventListener('DOMContentLoaded', updateNotifBadge);
+
+document.addEventListener('DOMContentLoaded', function () {
+    updateNotifBadge();
+    emailjs.init("v11zkRvHEyRxW0Icf"); 
+    
+});
 
 function notifyOnNewNCR(ncrForm) {
-    const session = JSON.parse(localStorage.getItem('session')) || {};
-    console.log(session);
-    if (session.role === 'Engineering' || session.role === 'Quality Inspector') {
-        addNotification(ncrForm);
-    }
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const engineers = users.filter(user => user.role === 'Engineering');
+    engineers.forEach(engineer => {
+        sendEmailNotification(
+            engineer.email,
+            `New NCR Assigned: ${ncrForm.supplierInfo.ncrNumber}`,
+            ncrForm
+        );
+    });
+    updateNotifBadge();
+
+}
+
+    
+function sendEmailNotification(email, subject, ncrData) {
+    emailjs.send("service_ifwgw9e", "template_or6un3i", {
+        to_email: email,
+        subject: subject,
+        ncr_number: ncrData.supplierInfo.ncrNumber,
+        supplier_name: ncrData.supplierInfo.supplierName,
+        description: ncrData.reportDetails.descriptionOfDefect,
+    })
+    .then(() => {
+        console.log('Email sent successfully.');
+    })
+    .catch(error => {
+        console.error('Error sending email:', error);
+    });
 }
 
