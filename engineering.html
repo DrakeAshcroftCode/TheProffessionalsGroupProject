@@ -162,9 +162,10 @@
                                 <legend>Details Cont.</legend>
                                 <div>
                                     <label for="rdoIPA">Supplier or Rec-Insp*</label>
-                                    <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp">
-                                    <label for="rdoIPA">WIP(Production Order)*</label>
-                                    <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP">
+                                    <input type="radio" id="rdoIPA" name="rdoRecWIP" value="recInsp">
+                                
+                                    <label for="rdoWIP">WIP(Production Order)*</label>
+                                    <input type="radio" id="rdoWIP" name="rdoRecWIP" value="WIP">
                                 </div>
                                 <div>
                                     <label for="sapNo">SAP No.*</label>
@@ -193,7 +194,7 @@
                         <label for="selectDisposition">Review by CF Engineer*</label>
 
                         <select id="selectDisposition" required>
-              <option value="UseAsIs">Use as Is</option>
+                            <option value="UseAsIs">Use as Is</option>
                             <option value="repair">Repair</option>
                             <option value="rework">Rework</option>
                             <option value="scrap">Scrap</option>
@@ -227,12 +228,7 @@
                             <label for="rdoRedrawNo">No</label>
                             <input type="radio" id="rdoRedrawNo" name="redraw" value="No">
                         </div>
-                    </div>
-                    <div>
-
-                        <label for="nrcImage">View Nonconforming product image*</label>
-         <input title="Click to choose a file" type="file" id="nrcImage" name="nrcImage" accept="image/*">
-                    </div>
+                    </div>                    
                 </fieldset>
                 <fieldset>
                     <legend>Engineering - Details</legend>                    
@@ -275,53 +271,71 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/session.js"></script>
     <script src="scripts/notif.js"></script>
-    <script src="scripts/viewNCR.js"></script>
+   
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const index = localStorage.getItem('currentViewIndex');
-            if (index !== null) {
+            //const index = localStorage.getItem('currentViewIndex');
+            const passedNCR = new URLSearchParams(window.location.search).get('ncr');
+            var index = -1;
+            if (passedNCR !== null) {
                 const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
-                const ncr = storedNCRs[index];
+                //console.log(storedNCRs);
+               storedNCRs.forEach(element => {
+                    if (element.supplierInfo.ncrNumber === passedNCR) index = storedNCRs.indexOf(element);
+               });
+
+               if (index !=-1){
+                var ncr = storedNCRs[index];
+                }
+                
+                //console.log('Index: ' + index);
+                //console.log(ncr);
 
                 if (ncr) {
                     document.getElementById('supName').value = ncr.supplierInfo.supplierName;
-            document.getElementById('ncrNo').value = ncr.supplierInfo.ncrNumber;
-            document.getElementById('prodNo').value = ncr.supplierInfo.poOrProductNumber;
-            document.getElementById('saleOrderNo').value = ncr.supplierInfo.salesOrderNumber;
-            document.getElementById('quantityR').value = ncr.supplierInfo.quantityReceived;
-            document.getElementById('quantityD').value = ncr.supplierInfo.quantityDefective;
+                    document.getElementById('ncrNo').value = ncr.supplierInfo.ncrNumber;
+                    document.getElementById('prodNo').value = ncr.supplierInfo.poOrProductNumber;
+                    document.getElementById('saleOrderNo').value = ncr.supplierInfo.salesOrderNumber;
+                    document.getElementById('quantityR').value = ncr.supplierInfo.quantityReceived;
+                    document.getElementById('quantityD').value = ncr.supplierInfo.quantityDefective;
+                    document.getElementById('sapNo').value = ncr.reportDetails.sapNo;
+                    // Populating Report Details (Non-Conforming and Redraw)
+                    if (ncr.reportDetails.isNonConforming === 'Yes') {
+                        document.getElementById('rdoConformingYes').checked = true;
+                    } else {
+                        document.getElementById('rdoConformingNo').checked = true;
+                    }
+                    
+                    if (ncr.reportDetails.redraw === 'Yes') {
+                        document.getElementById('rdoRedrawYes').checked = true;
+                    } else {
+                        document.getElementById('rdoRedrawNo').checked = true;
+                    }
 
-            // Populating Report Details (Non-Conforming and Redraw)
-            if (ncr.reportDetails.isNonConforming === 'Yes') {
-                document.getElementById('rdoConformingYes').checked = true;
-            } else {
-                document.getElementById('rdoConformingNo').checked = true;
-            }
+                    if(ncr.reportDetails.processApplicable === 'recInsp'){
+                        document.getElementById('recInsp').checked = true;
+                    }else {
+                        document.getElementById('rdoWIP').checked = true;
+                    }
+                    
+                    // Populating Date and Name
+                    const reportDate = ncr.reportDetails.reportDate;
+                    if (reportDate) {
+                        // Ensure the date format is YYYY-MM-DD for the input[type="date"]
+                        const formattedDate = new Date(reportDate).toISOString().split('T')[0]; // Get YYYY-MM-DD part
+                        console.log(formattedDate); // Check the formatted date
 
-            if (ncr.reportDetails.redraw === 'Yes') {
-                document.getElementById('rdoRedrawYes').checked = true;
-            } else {
-                document.getElementById('rdoRedrawNo').checked = true;
-            }
+                        // Setting the value directly to input[type="date"]
+                        document.getElementById('reportDate').value = formattedDate;
 
-            // Populating Date and Name
-            const reportDate = ncr.reportDetails.reportDate;
-            if (reportDate) {
-                // Ensure the date format is YYYY-MM-DD for the input[type="date"]
-                const formattedDate = new Date(reportDate).toISOString().split('T')[0]; // Get YYYY-MM-DD part
-                console.log(formattedDate); // Check the formatted date
+                        // This should update the calendar and text display for date pickers
+                    }
+                    document.getElementById('repName').value = ncr.reportDetails.qualityRepresentativeName;        
+                    
 
-                // Setting the value directly to input[type="date"]
-                document.getElementById('reportDate').value = formattedDate;
-
-                // This should update the calendar and text display for date pickers
-            }
-            document.getElementById('repName').value = ncr.reportDetails.qualityRepresentativeName;        
-            
-
-            // Populating Description Fields
-            document.getElementById('itemDescription').value = ncr.reportDetails.itemDescription;
-            document.getElementById('defectDescription').value = ncr.reportDetails.descriptionOfDefect;            
+                    // Populating Description Fields
+                    document.getElementById('itemDescription').value = ncr.reportDetails.itemDescription;
+                    document.getElementById('defectDescription').value = ncr.reportDetails.descriptionOfDefect;            
 
                 }
             }
