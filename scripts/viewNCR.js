@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('viewIsNonConforming').textContent = ncr.nonConformanceDetails.isNonConforming;
             document.getElementById('viewDateOfReport').textContent = ncr.nonConformanceDetails.dateOfReport;
             document.getElementById('viewQualityRepName').textContent = ncr.nonConformanceDetails.qualityRepresentativeName;
+            
         }
     }
 
