@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crossfire - Operations</title>
+    <title>Crossfire - Purchasing</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
@@ -187,13 +187,7 @@
                                 <label for="repName">Quality Representative's Name:*</label>
                                 <input type="text" id="repName" name="repName" placeholder="John Wick" required>
                                 <span id="repNameError" style="color: red;"></span> <!-- Error span -->
-                            </div>
-                            <p>Hit "Submit" when all fields are done to satisfaction. This will save the report and send an
-                                Email notification to the Engineering and Operations Manager for review.
-                                Please ensure all fields are filled out and accurate.
-                                If you would like to save a partial report select "Save".
-                                Saved and partial reports can be found on the "NCR Log / NCR Storage" page.
-                            </p>
+                            </div>                            
                         </fieldset>
                         <fieldset>
                             <Legend>Engineering - Action</Legend>
@@ -355,8 +349,7 @@
                             <option value="active">Active</option>
                             <option value="Closed">Closed</option>
                         </select>
-                        <button type="button" id="btnSave" value="Save Report">Save</button>
-                        <!-- <button type="submit" id="btnSubmit">Save & Send</button> -->
+                        <button type="button" id="btnSave" value="Save Report" title="Save and close out the">Save & Close</button>                        
                         <button type="button" id="btnClear" value="Clear Report">Clear</button>
 
                     </div>
@@ -367,7 +360,83 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/session.js"></script>
     <script src="scripts/notif.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {            
+            const passedNCR = new URLSearchParams(window.location.search).get('ncr');
+            var index = -1;
+            if (passedNCR !== null) {
+                const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
+                //console.log(storedNCRs);
+               storedNCRs.forEach(element => {
+                    if (element.supplierInfo.ncrNumber === passedNCR) index = storedNCRs.indexOf(element);
+               });
 
+               if (index !=-1){
+                var ncr = storedNCRs[index];
+                }            
+               
+
+                if (ncr) {
+                    document.getElementById('supName').value = ncr.supplierInfo.supplierName;
+                    document.getElementById('ncrNo').value = ncr.supplierInfo.ncrNumber;
+                    document.getElementById('prodNo').value = ncr.supplierInfo.poOrProductNumber;
+                    document.getElementById('saleOrderNo').value = ncr.supplierInfo.salesOrderNumber;
+                    document.getElementById('quantityR').value = ncr.supplierInfo.quantityReceived;
+                    document.getElementById('quantityD').value = ncr.supplierInfo.quantityDefective;
+                    document.getElementById('sapNo').value = ncr.reportDetails.sapNo;
+
+                    if(ncr.reportDetails.processApplicable === 'recIsp'){
+                        document.getElementById('rdoRecInsp').checked =true;
+                    }else { document.getElementbyId('rdoWIP').checked = true
+                        
+                    }
+
+                    // Populating Report Details (Non-Conforming and Redraw)
+                    if (ncr.reportDetails.isNonConforming === 'Yes') {
+                        document.getElementById('rdoConformingYes').checked = true;
+                    } else {
+                        document.getElementById('rdoConformingNo').checked = true;
+                    }
+
+                    if (ncr.reportDetails.redraw === 'Yes') {
+                        document.getElementById('rdoRedrawYes').checked = true;
+                    } else {
+                        document.getElementById('rdoRedrawNo').checked = true;
+                    }
+
+                    if(ncr.reportDetails.processApplicable === 'recInsp'){
+                        document.getElementById('recInsp').checked = true;
+                    }else {
+                        document.getElementById('rdoWIP').checked = true;
+                    }
+                    // Populating Date and Name
+                    const reportDate = ncr.reportDetails.reportDate;
+                    if (reportDate) {
+                        // Ensure the date format is YYYY-MM-DD for the input[type="date"]
+                        const formattedDate = new Date(reportDate).toISOString().split('T')[0]; // Get YYYY-MM-DD part
+                        console.log(formattedDate); // Check the formatted date
+
+                        // Setting the value directly to input[type="date"]
+                        document.getElementById('reportDate').value = formattedDate;
+
+                        // This should update the calendar and text display for date pickers
+                    }
+                    document.getElementById('repName').value = ncr.reportDetails.qualityRepresentativeName;        
+                    
+
+                    // Populating Description Fields
+                    document.getElementById('itemDescription').value = ncr.reportDetails.itemDescription;
+                    document.getElementById('defectDescription').value = ncr.reportDetails.descriptionOfDefect;
+                    
+                    //Engineering fieds.
+                    document.getElementById('dispositionDescription').value = ncr.reportDetails.dispositionDescription;
+                    document.getElementById('selectDisposition').value = ncr.reportDetails.selectDisposition;
+                    document.getElementById('selectNotification').value = ncr.reportDetails.selectNotification;
+                    document.getElementById('origRevNum').value = ncr.value = ncr.engineeringDetails.origRevNum;
+                }
+            }
+        });
+    </script>
 
 
 </body>

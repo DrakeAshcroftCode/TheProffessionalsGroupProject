@@ -119,10 +119,13 @@
                                 <legend>Report Details</legend>
                                 <div>
                                     <label>Identify Process Applicable:*</label><br>
-                                    <label for="rdoRecInsp">Supplier or Rec-Insp</label>
-                                    <input type="radio" id="rdoRecInsp" name="rdoIPA" value="recInsp">
-                                    <label for="rdoWIP">WIP (Production Order)</label>
-                                    <input type="radio" id="rdoWIP" name="rdoIPA" value="WIP">
+                                    <div>
+                                        <label for="rdoIPA">Supplier or Rec-Insp*</label>
+                                        <input type="radio" id="rdoIPA" name="rdoRecWIP" value="recInsp">
+                                    
+                                        <label for="rdoWIP">WIP(Production Order)*</label>
+                                        <input type="radio" id="rdoWIP" name="rdoRecWIP" value="WIP">
+                                    </div>
                                     <span id="rdoIPAError" style="color: red;"></span>
                                     <hr>
                                 </div>

@@ -443,6 +443,8 @@ function searchNCRs() {
 //     searchNCRs();
 // });
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
     storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
     incompleteNCRs = JSON.parse(localStorage.getItem("incompleteNCRs")) || [];

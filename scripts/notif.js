@@ -10,11 +10,24 @@ function addNotification(ncrForm) {
         ncrNumber: ncrForm.supplierInfo.ncrNumber,
         message: `New NCR created: ${ncrForm.supplierInfo.ncrNumber}`,
         timestamp: new Date().toISOString(),
-        read: false,
+        read: false,        
     };
-    notifList.push(newNotif);
-    localStorage.setItem('notifications', JSON.stringify(notifList));
-    updateNotifBadge();
+    
+    //Check condition of flag to update notification.
+    if(ncrForm.reportDetails.submitterRole === 'Quality Inspector'){
+        notifList.push(newNotif);
+        localStorage.setItem('notifications', JSON.stringify(notifList));
+        updateNotifBadge();
+    }
+    else if(ncrForm.reportDetails.submitterRole ==='Engineering' ){
+        notifList.push(newNotif);
+        localStorage.setItem('notifications', JSON.stringify(notifList));
+        updateNotifBadge();
+    }else if(ncrForm.reportDetails.submitterRole === 'Engineering' && session.role ==='Quality Inspector'){ 
+        notifList.push(newNotif);
+        localStorage.setItem('notifications', JSON.stringify(notifList));
+        updateNotifBadge();
+    }   
 }
 
 // Function to update the notification badge
@@ -59,8 +72,16 @@ function goToNCR(ncrNumber, notifIndex) {
     localStorage.setItem('notifications', JSON.stringify(notifList));
 
     // Redirect to the engineering page with the NCR number
-    window.location.href = `engineering.html?ncr=${ncrNumber}`;
+    const session = JSON.parse(localStorage.getItem('session')) || {};
+    
+    if(session.role === 'Operations Manager'){
+        console.log(session);
+        window.location.href = `operations.html?ncr=${ncrNumber}`;
+    }else if (session.role === 'Engineering'){
+        window.location.href = `engineering.html?ncr=${ncrNumber}`;
+    }    
 }
+
 
 // Attach event listener to the notification icon
 document.getElementById('notifIcon').addEventListener('click', displayNotifications);
