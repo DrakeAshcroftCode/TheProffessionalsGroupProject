@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function ()
 window.onload = function () {
     resetTimer();
 }
-resetTimer();}
+resetTimer();
 
 //Grabs the profile image button so when you click it, it displays the user profile section
 document.addEventListener('DOMContentLoaded', function () {
