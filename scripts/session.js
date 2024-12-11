@@ -143,7 +143,7 @@ function startTimer() {
             
             // if user wants to reset the time then they can click on OK and the time will reset.
             // But if they don't then  session will expire automatically.
-            confirm("Session will expire in 5 minutes, press ok to reset timer.");
+           const userResponse= confirm("Session will expire in 5 minutes, press ok to reset timer.");
             
             if (userResponse) {
                 resetTimer();
