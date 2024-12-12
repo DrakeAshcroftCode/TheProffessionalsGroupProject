@@ -5,6 +5,7 @@
 //and it simply stops the default event behavior from happening so that I can mess with it.
 //Code for login button, finding any users that exist, checking if the user is logged in or not, etc.
 function saveSendFunction() {
+    const session = JSON.parse(localStorage.getItem('session'));
     var supplierName = document.getElementById('supName').value;
     var ncrNumber = document.getElementById('ncrNo').value;
     var poOrProductNumber = document.getElementById('prodNo').value;
@@ -77,7 +78,16 @@ function saveSendFunction() {
     } else if (rdoConformingNo.checked) {
         rdoTwoValue = 'No';
     }
-
+    var rdoThreeValue = '';
+    if(window.location.pathname === '/engineering.html'){
+        var rdoRedrawYes = document.getElementById('rdoRedrawYes').value;
+        var rdoRedrawNo = document.getElementById('rdoRedrawNo').value;
+        if (rdoRedrawYes.checked) {
+            rdoThreeValue = 'Yes';
+        } else if (rdoRedrawNo.checked) {
+            rdoThreeValue = 'No';
+        }
+    }
     var ncrForm = {
         supplierInfo: {
             supplierName: supplierName,
@@ -102,7 +112,7 @@ function saveSendFunction() {
             updatedRevNum: updatedRevNum,
             revisionDate: revisionDate,
             engineerName: engineerName,
-            submitterRole: submitterRole,
+            // submitterRole: submitterRole,
             requirFollowUp: requirFollowUp,           
 
         },
@@ -574,6 +584,7 @@ function handleDeselectRadioButton(radioGroupName, lastCheckedRadioRef) {
 window.onload = function () {
     resetTimer();
     loadFormData();
+
     
     /*document.getElementById('timerDisplay').classList.add('hidden');*/
 

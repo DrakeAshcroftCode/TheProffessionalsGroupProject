@@ -335,7 +335,6 @@ function editNCR(index) {
 // Function to seed NCRs if there are none, if none found, it'll give us ten of them as mark requested.
 function seedNCRs() {
     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
-
     if (storedNCRs.length > 0) {
         console.log("NCRs are already seeded. Skipping seeding process.");
         return;
