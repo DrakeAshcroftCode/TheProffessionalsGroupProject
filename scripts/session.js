@@ -93,12 +93,12 @@ function adjustMainMenuForRole(role) {
     const menuItems = document.querySelectorAll('section.icon');
 
     menuItems.forEach(item => {
-        const itemRole = item.getAttribute('data-role'); // Get the role assigned to the item
+        const itemRole = item.getAttribute('data-role');
 
         if (itemRole === 'all' || itemRole === role) {
-            item.style.display = 'block'; // Show the item
+            item.style.display = 'block'; 
         } else {
-            item.style.display = 'none'; // Hide the item
+            item.style.display = 'none';
         }
     });
 }

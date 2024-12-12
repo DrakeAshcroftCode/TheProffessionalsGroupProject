@@ -247,21 +247,12 @@
     <script src="scripts/notif.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            //const index = localStorage.getItem('currentViewIndex');
-            const passedNCR = new URLSearchParams(window.location.search).get('ncr');
-            var index = -1;
-            if (passedNCR !== null) {
-                const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
-                //console.log(storedNCRs);
-               storedNCRs.forEach(element => {
-                    if (element.supplierInfo.ncrNumber === passedNCR) index = storedNCRs.indexOf(element);
-               });
+            document.addEventListener("DOMContentLoaded", function () {
+    const currentEditIndex = localStorage.getItem("currentEditIndex");
+    const storedNCRs = JSON.parse(localStorage.getItem("storedNCRs")) || [];
 
-               if (index !=-1){
-                var ncr = storedNCRs[index];
-                }
-                
+    if (currentEditIndex !== null) {
+        const ncr = storedNCRs[currentEditIndex];
                 //console.log('Index: ' + index);
                 //console.log(ncr);
 
