@@ -18,7 +18,7 @@ function checkSession() {
         
         /*document.getElementById('timerDisplay').classList.add('hidden');
         showLogoutButton();*/
-
+        adjustMainMenuForRole(session.role);
         adjustNavBarForRole(session.role);
         showUserProfile(session); //Get the user data to display in the profile section
 
@@ -26,6 +26,7 @@ function checkSession() {
         localStorage.removeItem('session');
         hideLogoutButton();
         hideUserProfile(); //Hide the user profile when your done with it
+        adjustMainMenuForRole(null);
 
         adjustNavBarForRole(null);
         if (window.location.pathname !== '/index.html') {
@@ -88,6 +89,25 @@ document.addEventListener('DOMContentLoaded', function () {
     };*/
 });
 
+function adjustMainMenuForRole(role) {
+    const menuItems = document.querySelectorAll('section.icon');
+
+    menuItems.forEach(item => {
+        const itemRole = item.getAttribute('data-role'); // Get the role assigned to the item
+
+        if (itemRole === 'all' || itemRole === role) {
+            item.style.display = 'block'; // Show the item
+        } else {
+            item.style.display = 'none'; // Hide the item
+        }
+    });
+}
+
+
+
+// Example: Call this function after determining the user role
+const userRole = JSON.parse(localStorage.getItem('session'))?.role || null;
+adjustMainMenuForRole(userRole);
 
 
 // Code to adjust navbar based on user role (Helped by AI as stated in AI record) 
@@ -205,6 +225,7 @@ function logout() {
     showModal();
 
     /*document.getElementById('timerDisplay').classList.add('hidden');*/
+    adjustMainMenuForRole(null);
     adjustNavBarForRole(null);
 
     window.top.location.href = 'index.html';
