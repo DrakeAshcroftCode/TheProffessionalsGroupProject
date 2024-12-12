@@ -251,45 +251,45 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 .icon {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust the minimum width */
-    gap: 20px; /* Spacing between items */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 20px;
     width: 100%;
     max-width: 1200px;
-    margin: 30px auto; /* Center the grid */
+    margin: 30px auto;
     padding: 20px;
     box-sizing: border-box;
 }
 
 .icon a {
     display: flex;
-    flex-direction: column; /* Ensure the text stays below the icon */
+    flex-direction: column;
     align-items: center;
-    text-align: center; /* Center-align the text */
+    text-align: center;
     padding: 20px;
-    border: 1px solid #e0e0e0; /* Optional: Add border for better visuals */
-    border-radius: 10px; /* Rounded corners for better styling */
-    background-color: #fff; /* Optional: Background color for contrast */
+    border: 1px solid #e0e0e0; 
+    border-radius: 10px; 
+    background-color: #fff; 
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .icon a:hover {
-    transform: scale(1.05); /* Slight scale on hover */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow on hover */
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .icon i {
-    font-size: 5rem; /* Icon size */
+    font-size: 5rem;
     color: #023E97;
-    margin-bottom: 10px; /* Spacing between the icon and text */
+    margin-bottom: 10px; 
 }
 
 .icon-label {
-    font-size: 1rem; /* Font size for the label */
+    font-size: 1rem; 
     color: #023E97;
     text-transform: uppercase;
     font-weight: bold;
     margin-top: 10px;
-    word-break: keep-all; /* Prevent text wrapping awkwardly */
+    word-break: keep-all; 
 }
 
 
