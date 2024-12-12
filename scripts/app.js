@@ -410,7 +410,7 @@ document.getElementById("btnSave").addEventListener("click", async function (eve
         // Save form data and wait for async operations to complete
         try {
             await storeFormData(ncrForm); // Ensure form data is stored and emails are sent
-            notifyTestEmail(ncrForm); // Optionally send a test email
+            notifyTestEmail(ncrForm);
             
             alert("Form saved successfully."); // Notify user of successful save
             
