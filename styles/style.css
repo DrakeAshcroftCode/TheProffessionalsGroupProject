@@ -222,8 +222,8 @@ form {
     display: inline-block;
     padding: 10px 20px;
     text-align: center;
-    border: 2px solid #444;
-    background-color: #ffb703;
+    border: 2px solid #ffffff;
+    background-color: #82eefd;
     color: #000;
     border-radius: 5px;
     outline: none;
@@ -234,8 +234,8 @@ form {
     display: inline-block;
     padding: 10px 20px;
     text-align: center;
-    border: 2px solid #444;
-    background-color: #ffb703;
+    border: 2px solid #ffffff;
+    background-color: #82eefd;
     color: #000;
     border-radius: 5px;
     outline: none;
@@ -243,18 +243,18 @@ form {
     margin:5px;
 }
 #viewBackButton:hover{
-    background-color: #000;
-    border-color: #222;
+    background-color: #01AFC6;
+    border-color: #ffffff;
     padding:10px;
     cursor: pointer;
-    color: #fff;
+    color: #000000;
 }
 #viewEditButton:hover{
-    background-color: #000;
-    border-color: #222;
+    background-color: #01AFC6;
+    border-color: #ffffff;
     padding:10px;
     cursor: pointer;
-    color: #fff;
+    color: #000000;
 }
 form button {
     padding: 15px 30px; 
