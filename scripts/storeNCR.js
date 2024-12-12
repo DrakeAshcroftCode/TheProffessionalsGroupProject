@@ -395,57 +395,43 @@ function deleteNCR(index, isComplete) {
 
 // Search function for NCRs
 // Mark wanted us to add more search functionalities. Searching by date range, searching by open closed status.
+// Enhanced search function for NCRs
 function searchNCRs() {
-    var year = document.getElementById("yearSearch").value;
-    var code = document.getElementById("codeSearch").value.trim();
-    var supplier = document.getElementById("supplierSearch").value;
-    var startDate = new Date(document.getElementById("startDate").value);
-    var endDate = new Date(document.getElementById("endDate").value);
-    //var ncrStat = document.getElementById("statusSearch").value;
+    const year = document.getElementById("yearSearch").value;
+    const code = document.getElementById("codeSearch").value.trim();
+    const supplier = document.getElementById("supplierSearch").value;
+    const status = document.getElementById("statusSearch").value;
+    const startDateValue = document.getElementById("startDate").value;
+    const endDateValue = document.getElementById("endDate").value;
 
-    
-    var filteredNCRs = storedNCRs.filter(function (ncr) {
-        var matchYear = true;
-        var matchCode = true;
-        var matchSupplier = true;
-        var matchDateRange = true;
-        //var matchNCRStatus = true;
+    const startDate = startDateValue ? new Date(startDateValue) : null;
+    const endDate = endDateValue ? new Date(endDateValue) : null;
 
-        if(startDate > endDate){
-            alert("start date must be before or equal to the end date");
-            return;
-        }
-        if (startDate && endDate) {
-            var ncrDate = new Date(ncr.nonConformanceDetails.dateOfReport);
-            matchDateRange = ncrDate >= startDate && ncrDate <= endDate;
-        }
-        if (year) {
-            var ncrYear = new Date(ncr.nonConformanceDetails.dateOfReport).getFullYear().toString();
-            matchYear = ncrYear === year;
-        }
-        if (code) {
-            matchCode = ncr.supplierInfo.ncrNumber.endsWith(code);
-        }
-        if (supplier) {
-            matchSupplier = ncr.supplierInfo.supplierName === supplier;
-        }
-       // if (ncrStat) {
-       //     var isComplete = ncr.isComplete || False; 
-       //     var ncrStatus = ncr.status || (isComplete ? "Open" : "Incomplete");
-       //     matchNCRStatus = ncrStatus === ncrStat;
-      //  }
-    
-        return matchYear && matchCode && matchSupplier && matchDateRange;
+    if (startDate && endDate && startDate > endDate) {
+        alert("Start date must be before or equal to the end date.");
+        return;
+    }
+
+    const filteredNCRs = storedNCRs.filter(ncr => {
+        const ncrDate = new Date(ncr.nonConformanceDetails.dateOfReport);
+
+        const matchesYear = year ? ncrDate.getFullYear().toString() === year : true;
+        const matchesCode = code ? ncr.supplierInfo.ncrNumber.endsWith(code) : true;
+        const matchesSupplier = supplier ? ncr.supplierInfo.supplierName === supplier : true;
+        const matchesStatus = status ? (ncr.status || "Open") === status : true;
+        const matchesDateRange = startDate && endDate ? (ncrDate >= startDate && ncrDate <= endDate) : true;
+
+        return matchesYear && matchesCode && matchesSupplier && matchesStatus && matchesDateRange;
     });
 
     displayNCRList(filteredNCRs);
 }
 
-// document.getElementById("btnSearch").addEventListener("click", function (event) {
-//     event.preventDefault();
-//     searchNCRs();
-// });
-
+// Attach search function to the Search button
+document.getElementById("btnSearch").addEventListener("click", function (event) {
+    event.preventDefault();
+    searchNCRs();
+});
 
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -5,29 +5,31 @@
 //and it simply stops the default event behavior from happening so that I can mess with it.
 //Code for login button, finding any users that exist, checking if the user is logged in or not, etc.
 function saveSendFunction() {
-    const session = JSON.parse(localStorage.getItem('session')) || {};
-
     var supplierName = document.getElementById('supName').value;
     var ncrNumber = document.getElementById('ncrNo').value;
     var poOrProductNumber = document.getElementById('prodNo').value;
     var salesOrderNumber = document.getElementById('saleOrderNo').value;
     var quantityReceived = document.getElementById('quantityR').value;
     var quantityDefective = document.getElementById('quantityD').value;
+
     var repName = document.getElementById('repName').value;
     
+
+
+    var rdoRecInsp = document.getElementById('rdoRecInsp');
+    var rdoWIP = document.getElementById('rdoWIP');
+
     var sapNo = document.getElementById('sapNo').value;
 
     var itemDescription = document.getElementById('itemDescription').value;
     var defectDescription = document.getElementById('defectDescription').value;
-
-    if(session.role== 'Quality Inspector' && window.location.pathname == '/qualityInspector.html'){
-        var ncrImage = document.getElementById('nrcImage').files;
-    }    
+    var ncrImage = document.getElementById('nrcImage').files;
 
     var rdoConformingYes = document.getElementById('rdoConformingYes');
     var rdoConformingNo = document.getElementById('rdoConformingNo');
     var reportDate = document.getElementById('reportDate').value;
     
+
 
     
     if (session.role === 'Engineering' && window.location.pathname === '/engineering.html'){
@@ -66,6 +68,7 @@ function saveSendFunction() {
         } else if (rdoWIP && rdoWIP.checked) {
             rdoOneValue = 'rdoWIP';
         }
+
     }
 
     var rdoTwoValue = '';
@@ -75,22 +78,6 @@ function saveSendFunction() {
         rdoTwoValue = 'No';
     }
 
-    var rdoThreeValue = '';
-    if(window.location.pathname === '/engineering.html'){
-        var rdoRedrawYes = document.getElementById('rdoRedrawYes').value;
-        var rdoRedrawNo = document.getElementById('rdoRedrawNo').value;
-        if (rdoRedrawYes.checked) {
-            rdoThreeValue = 'Yes';
-        } else if (rdoRedrawNo.checked) {
-            rdoThreeValue = 'No';
-        }   
-    }
-    
-
-    //Submitter flag stored to call notifications.
-    var submitterRole = session.role;   
-    console.log(submitterRole);
-    
     var ncrForm = {
         supplierInfo: {
             supplierName: supplierName,
@@ -101,12 +88,12 @@ function saveSendFunction() {
             quantityDefective: quantityDefective,
         },
         reportDetails: {
-            processApplicable: rdoOneValue,            
+            processApplicable: rdoOneValue,
             sapNo: sapNo,
-            rdoWIP:rdoWIP,
             itemDescription: itemDescription,
             descriptionOfDefect: defectDescription,
             nonConformityImage: ncrImage,
+
             selectDisposition: selectDisposition,
             dispositionDescription: dispositionDescription,
             selectNotification: selectNotification,
@@ -117,11 +104,13 @@ function saveSendFunction() {
             engineerName: engineerName,
             submitterRole: submitterRole,
             requirFollowUp: requirFollowUp,           
+
         },
         nonConformanceDetails: {
             isNonConforming: rdoTwoValue,
             dateOfReport: reportDate,
             qualityRepresentativeName: repName,
+
             status: status,
             purchDecision: purchDecision,
             car: car,
@@ -144,6 +133,7 @@ function saveSendFunction() {
             engineerName: engineerName,            
             
        }
+
     };
 
     return ncrForm;
@@ -168,19 +158,10 @@ function validation(ncrForm) {
     const reportDateError = document.getElementById('reportDateError');
     const rdoIPAError = document.getElementById('rdoIPAError');
     const rdoConformingError = document.getElementById('rdoConformingError');
-
-    if(window.location.pathname === '/qualityInspector.html'){
-        
-        const nrcImageError = document.getElementById('nrcImageError');
-        if (!ncrForm.reportDetails.nonConformityImage || ncrForm.reportDetails.nonConformityImage.length === 0) {
-            nrcImageError.textContent = "You must upload an image";
-            isValid = false;
-            if (!firstErrorElement) firstErrorElement = document.getElementById('nrcImage');
-        }
-    }
-    
+    const nrcImageError = document.getElementById('nrcImageError');
 
     // Clear error messages
+
     if(window.location.pathname === '/qualityInspector.html' || '/engineering.html'){
         supNameError.textContent = "";
         ncrNoError.textContent = "";
@@ -199,149 +180,154 @@ function validation(ncrForm) {
     }
     
 
+
     // Validation checks
     if (ncrForm.supplierInfo.supplierName === "") {
-        supNameError.textContent = "Name is required";
+        supNameError.textContent = "You must enter a name";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('supName');
     }
 
     if (ncrForm.supplierInfo.supplierName.length > 35) {
-        supNameError.textContent = "Please ensure your name is within the 35 character limit";
+        supNameError.textContent = "Your name cannot be more than 35 characters";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('supName');
     }
 
     if (ncrForm.supplierInfo.ncrNumber === "") {
-        ncrNoError.textContent = "NCR number is required";
+        ncrNoError.textContent = "You must enter an NCR number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('ncrNo');
     }
 
     if (ncrForm.supplierInfo.ncrNumber.length !== 8) {
-        ncrNoError.textContent = "Please make sure your NCR number consists of 8 characters";
+        ncrNoError.textContent = "Your NCR number must be 8 characters";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('ncrNo');
     }
 
     if (ncrForm.supplierInfo.poOrProductNumber === "") {
-        prodNoError.textContent = "Product number is required";
+        prodNoError.textContent = "You must enter a product number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('prodNo');
     }
 
     if (isNaN(ncrForm.supplierInfo.poOrProductNumber)) {
-        prodNoError.textContent = "Your product number has to be a number";
+        prodNoError.textContent = "Your product number must be a number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('prodNo');
     }
 
     if (ncrForm.supplierInfo.salesOrderNumber === "") {
-        saleOrderNoError.textContent = "Sales order number is required";
+        saleOrderNoError.textContent = "You must enter a sales order number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('saleOrderNo');
     }
 
     if (isNaN(ncrForm.supplierInfo.salesOrderNumber)) {
-        saleOrderNoError.textContent = "Your sales order number has to be a number";
+        saleOrderNoError.textContent = "Your sales order number must be a number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('saleOrderNo');
     }
 
     if (ncrForm.supplierInfo.salesOrderNumber.length > 8) {
-        saleOrderNoError.textContent = "Please ensure  sales order number is withnin 8 digits";
+        saleOrderNoError.textContent = "Your sales order number cannot be more than 8 digits";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('saleOrderNo');
     }
 
     if (ncrForm.supplierInfo.quantityReceived === "") {
-        quantityRError.textContent = "Quantity is required";
+        quantityRError.textContent = "You must enter a quantity";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('quantityR');
     }
 
     if (isNaN(ncrForm.supplierInfo.quantityReceived)) {
-        quantityRError.textContent = "Quantity has to be a number";
+        quantityRError.textContent = "Your quantity must be a number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('quantityR');
     }
 
     if (ncrForm.supplierInfo.quantityDefective === "") {
-        quantityDError.textContent = "Defective quantity is required";
+        quantityDError.textContent = "You must enter a defective quantity";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('quantityD');
     }
 
     if (isNaN(ncrForm.supplierInfo.quantityDefective)) {
-        quantityDError.textContent = "Defective quantity has to be a number";
+        quantityDError.textContent = "Your defective quantity must be a number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('quantityD');
     }
 
     if (ncrForm.reportDetails.sapNo === "") {
-        sapNoError.textContent = "SAP number is required";
+        sapNoError.textContent = "You must enter a SAP number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('sapNo');
     }
 
     if (isNaN(ncrForm.reportDetails.sapNo)) {
-        sapNoError.textContent = "SAP number has to be a number";
+        sapNoError.textContent = "Your SAP number must be a number";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('sapNo');
     }
 
     if (ncrForm.reportDetails.itemDescription === "") {
-        itemDescriptionError.textContent = "Item description is required";
+        itemDescriptionError.textContent = "You must enter an item description";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('itemDescription');
     }
 
     if (ncrForm.reportDetails.itemDescription.length > 250) {
-        itemDescriptionError.textContent = "Item description has to be less than 250 characters";
+        itemDescriptionError.textContent = "Your item description must be less than 250 characters";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('itemDescription');
     }
 
     if (ncrForm.reportDetails.descriptionOfDefect === "") {
-        defectDescriptionError.textContent = "Description of the defect is required";
+        defectDescriptionError.textContent = "You must enter a description of the defect";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('defectDescription');
     }
 
     if (ncrForm.reportDetails.descriptionOfDefect.length > 250) {
-        defectDescriptionError.textContent = "Defect description has to be less than 250 characters";
+        defectDescriptionError.textContent = "Your defect description must be less than 250 characters";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('defectDescription');
     }
 
-   
+    if (!ncrForm.reportDetails.nonConformityImage || ncrForm.reportDetails.nonConformityImage.length === 0) {
+        nrcImageError.textContent = "You must upload an image";
+        isValid = false;
+        if (!firstErrorElement) firstErrorElement = document.getElementById('nrcImage');
+    }
 
     if (ncrForm.nonConformanceDetails.qualityRepresentativeName === "") {
-        repNameError.textContent = "Name is required";
+        repNameError.textContent = "You must enter a name";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('repName');
     }
 
     if (ncrForm.nonConformanceDetails.qualityRepresentativeName.length > 70) {
-        repNameError.textContent = "Please ensure your name is within the 70 character limit";
+        repNameError.textContent = "The name you enter cannot be more than 70 characters";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('repName');
     }
 
     if (ncrForm.nonConformanceDetails.dateOfReport === "") {
-        reportDateError.textContent = "Date is required";
+        reportDateError.textContent = "You must select a date";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementById('reportDate');
     }
 
     if (ncrForm.reportDetails.processApplicable === "") {
-        rdoIPAError.textContent = "Selecting one of the option is required";
+        rdoIPAError.textContent = "You must select one of the options";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementsByName('rdoIPA')[0];
     }
 
     if (ncrForm.nonConformanceDetails.isNonConforming === "") {
-        rdoConformingError.textContent = "Selecting one of the option is required";
+        rdoConformingError.textContent = "You must select one of the options";
         isValid = false;
         if (!firstErrorElement) firstErrorElement = document.getElementsByName('conforming')[0];
     }
@@ -353,7 +339,6 @@ function validation(ncrForm) {
     return isValid;
 }
 
-// Store function that checks for editing existing NCRs by NCR number
 function storeFormData(ncrForm) {
     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
     const existingIndex = storedNCRs.findIndex(ncr => ncr.supplierInfo.ncrNumber === ncrForm.supplierInfo.ncrNumber);
@@ -369,22 +354,41 @@ function storeFormData(ncrForm) {
     }
 
     localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
-}
 
+        // Send email notification
+        const toEmail = "drakejashcroft@hotmail.com"; 
+        const subject = existingIndex === -1
+            ? `New NCR Created: ${ncrForm.supplierInfo.ncrNumber}`
+            : `NCR Updated: ${ncrForm.supplierInfo.ncrNumber}`;
+        sendEmailNotification(toEmail, subject, ncrForm);
+    
+        // Notify the next role in the workflow
+        // const nextRole = determineNextRole(ncrForm);
+        // if (nextRole) {
+        //     notifyRoleUsers(nextRole, ncrForm);
+        // }
+}
 // Load form data
 function loadFormData() {
     const session = JSON.parse(localStorage.getItem('session')); // Assume session stores user role
     const userRole = session?.role; // Get user role
-    const ncrData = JSON.parse(localStorage.getItem('currentNCR')); // Get NCR data
+    const currentEditIndex = localStorage.getItem('currentEditIndex'); // Retrieve the current NCR index
+    const isEditing = currentEditIndex !== null; // Determine if we are editing
+    const storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || []; // Retrieve stored NCRs
+    const ncrData = isEditing ? storedNCRs[parseInt(currentEditIndex, 10)] : null; // Get the NCR data for editing
     const ncrNumberNext = generateNCRNumber();
 
-    if (ncrNumberNext) {
-        document.getElementById('ncrNo').value = ncrNumberNext;
-    }
-
-    if (!ncrData) {
-        console.warn("No NCR data found for this session.");
-        return; // Stop further execution if no NCR data
+    if (!isEditing) {
+        // If not editing, generate a new NCR number
+        if (ncrNumberNext) {
+            document.getElementById('ncrNo').value = ncrNumberNext;
+        }
+    } else if (ncrData) {
+        // If editing, populate the NCR number and existing data
+        document.getElementById('ncrNo').value = ncrData.supplierInfo.ncrNumber;
+    } else {
+        console.warn("Editing mode detected but no NCR data found.");
+        return;
     }
 
     // Populate common fields for all roles
@@ -404,34 +408,40 @@ function loadFormData() {
 
     commonFields.forEach(({ id, value }) => {
         const element = document.getElementById(id);
-        if (element && value) element.value = value; // Populate if value exists
+        if (element) {
+            element.value = value || ''; // Populate with value or empty string
+        }
     });
 
     // Check user role and populate role-specific fields
-    if (userRole === "Engineering") {
+    if (userRole === "Engineering" && ncrData?.engineeringAction) {
         const engineeringFields = [
-            { id: "selectDisposition", value: ncrData?.engineeringAction?.disposition },
-            { id: "dispositionDescription", value: ncrData?.engineeringAction?.dispositionDescription },
-            { id: "revisionDate", value: ncrData?.engineeringAction?.revisionDate },
-            { id: "txtEngName", value: ncrData?.engineeringAction?.engineerName },
+            { id: "selectDisposition", value: ncrData.engineeringAction.disposition },
+            { id: "dispositionDescription", value: ncrData.engineeringAction.dispositionDescription },
+            { id: "revisionDate", value: ncrData.engineeringAction.revisionDate },
+            { id: "txtEngName", value: ncrData.engineeringAction.engineerName },
         ];
 
         engineeringFields.forEach(({ id, value }) => {
             const element = document.getElementById(id);
-            if (element && value) element.value = value;
+            if (element) {
+                element.value = value || '';
+            }
         });
-    } else if (userRole === "Operations Manager") {
+    } else if (userRole === "Operations Manager" && ncrData?.operationsAction) {
         const operationsFields = [
-            { id: "purchDecision", value: ncrData?.operationsAction?.purchDecision },
-            { id: "CAR", value: ncrData?.operationsAction?.car },
-            { id: "carNumber", value: ncrData?.operationsAction?.carNumber },
-            { id: "followUp", value: ncrData?.operationsAction?.followUp },
-            { id: "txtOpName", value: ncrData?.operationsAction?.operationsManager },
+            { id: "purchDecision", value: ncrData.operationsAction.purchDecision },
+            { id: "CAR", value: ncrData.operationsAction.car },
+            { id: "carNumber", value: ncrData.operationsAction.carNumber },
+            { id: "followUp", value: ncrData.operationsAction.followUp },
+            { id: "txtOpName", value: ncrData.operationsAction.operationsManager },
         ];
 
         operationsFields.forEach(({ id, value }) => {
             const element = document.getElementById(id);
-            if (element && value) element.value = value;
+            if (element) {
+                element.value = value || '';
+            }
         });
     } else if (userRole === "Quality Inspector") {
         console.log("Quality Inspector role: No additional fields to populate.");
@@ -440,8 +450,9 @@ function loadFormData() {
         console.warn("Unrecognized user role.");
     }
 
-    console.log(`Loaded NCR data for role: ${userRole}`);
+    console.log(`Loaded NCR data for role: ${userRole}, Editing: ${isEditing}`);
 }
+
 
 
 function savePartialNCR() {
@@ -451,33 +462,84 @@ function savePartialNCR() {
     alert("Incomplete NCR saved successfully.");
     displayNCRList(incompleteNCRs, false);
 }
+function notifyTestEmail(ncrForm) {
+    const testEmail = "Drakejashcroft@hotmail.com";
+    sendEmailNotification(
+        testEmail,
+        `Test NCR Notification: ${ncrForm.supplierInfo.ncrNumber}`,
+        ncrForm
+    );
+
+    queueNotification(
+        testEmail,
+        "Test NCR Assigned",
+        `You have been assigned NCR #${ncrForm.supplierInfo.ncrNumber}. Please review it.`
+    );
+
+    console.log(`Notification and email sent to test email: ${testEmail}`);
+}
 
 // Save button click event
-document.getElementById("btnSave").addEventListener("click", function (event) {
+document.getElementById("btnSave").addEventListener("click", async function (event) {
     event.preventDefault();
     var ncrForm = saveSendFunction();    
 
     console.log(ncrForm);
     if (validation(ncrForm)) {
-        storeFormData(ncrForm);
-        alert("Form saved successfully.");
-        window.location.href = "storeNCR.html";
+        // Save form data and wait for async operations to complete
+        try {
+            await storeFormData(ncrForm); // Ensure form data is stored and emails are sent
+            notifyTestEmail(ncrForm);
+            
+            alert("Form saved successfully."); // Notify user of successful save
+            
+            // Redirect after all async operations complete
+            window.location.href = "storeNCR.html";
+        } catch (error) {
+            console.error("Error during save or notification process:", error);
+            alert("An error occurred while saving the form. Please try again.");
+        }
     } else {
-        console.log("Form has errors");
+        console.log("Form has errors"); // Log if validation fails
     }
 });
 
 // Clear button click event
 document.getElementById("btnClear").addEventListener("click", function (event) {
     event.preventDefault();
-    document.querySelector('form').reset();
+
+    const userChoice = confirm(
+        "Do you want to keep the current NCR number?\n\n" +
+        "Press OK to keep the current NCR number.\n" +
+        "Press Cancel to generate a new NCR number."
+    );
+
+    const ncrField = document.getElementById('ncrNo');
+    let ncrNumberToKeep = '';
+
+    if (ncrField) {
+        ncrNumberToKeep = ncrField.value;
+
+        document.querySelector('form').reset();
+
+        if (userChoice) {
+            ncrField.value = ncrNumberToKeep;
+        } else {
+            ncrField.value = generateNCRNumber();
+        }
+    }
+
     const errorElements = document.querySelectorAll('span[id$="Error"]');
     errorElements.forEach(function (element) {
         element.textContent = "";
     });
+
     lastCheckedRadioIPA = null;
     lastCheckedRadioConforming = null;
+
+    console.log(`Form cleared. NCR number ${userChoice ? "retained" : "regenerated"}.`);
 });
+
 
 // Auto-expand text areas (thus the name)
 function autoExpandTextarea(textarea) {

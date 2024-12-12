@@ -249,35 +249,49 @@ textarea::-webkit-scrollbar-thumb:hover {
 .textarea-container span {
     color: red;
 }
-
-.icon{
+.icon {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 20px;
     width: 100%;
-    max-width: 900px;
-    margin: 30 auto;
-    box-shadow:  0 5px  5px ;
-    margin: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .icon a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #e0e0e0; 
+    border-radius: 10px; 
+    background-color: #fff; 
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.icon a:hover {
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.icon i {
+    font-size: 5rem;
+    color: #023E97;
+    margin-bottom: 10px; 
 }
 
 .icon-label {
-    font-size: 1rem;
-    color:#0d6efd;
+    font-size: 1rem; 
+    color: #023E97;
     text-transform: uppercase;
     font-weight: bold;
-    text-align: center;
-    padding: 10px;
-    
+    margin-top: 10px;
+    word-break: keep-all; 
 }
+
 
 .img {
     height: 180px;

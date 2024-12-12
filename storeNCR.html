@@ -46,7 +46,7 @@
                     <p>Search for a saved NCR by year, date range, 3-digit log #, status, or supplier name.</p>
                     <div>
                         <label for="yearSearch">Year*</label>
-                        <select id="yearSearch" required>
+                        <select id="yearSearch" >
                             <option value="">All Years</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
@@ -58,9 +58,9 @@
                     <div>
 
                         <label for="startDate">Start Date*</label>
-                        <input id="startDate" name="startDate" type="date" required>
+                        <input id="startDate" name="startDate" type="date" >
                         <label for="endDate">End Date*</label>
-                        <input id="endDate" name="endDate" type="date" required>
+                        <input id="endDate" name="endDate" type="date" >
       
                     </div>
                     <div>
@@ -75,7 +75,7 @@
                     <div>
 
                         <label for="statusSearch">Status*</label>
-                        <select id="statusSearch" required>
+                        <select id="statusSearch" >
 
                             <option value="Open">Open</option>
                             <option value="Closed">Closed</option>
@@ -84,7 +84,7 @@
                     <div>
 
                         <label for="supplierSearch">Supplier Name*</label>
-                        <select id="supplierSearch" required>
+                        <select id="supplierSearch" >
 
                             <option value="">All Suppliers</option>
                             <option value="Pepsi Co.">Pepsi Co.</option>
@@ -107,11 +107,22 @@
             <div id="incompleteNcrList"></div>
         </main>
     </div>
-    <script src="scripts/storeNCR.js"></script>
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+  emailjs.init({
+    publicKey: "v11zkRvHEyRxW0Icf",
+  });
+})();
+</script>
+    <script src="scripts/storeNCR.js" type="module"></script>
     <script src="scripts/session.js"></script>
     <script src="scripts/notif.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="scripts/homeLogin.js"></script>
+    <script src="scripts/email.js"></script>
 
 
 </body>
