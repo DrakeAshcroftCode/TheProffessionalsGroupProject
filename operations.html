@@ -255,7 +255,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="txtFollowUp">If "Yes" suplly type of follow up and expected date</label>
+                                <label for="txtFollowUp">If "Yes" supply type of follow up and expected date</label>
                                 <input type="text" id="txtFollowUp" name="newNCRNO" placeholder="Type of follow up and expected date">
                             </div>                    
                             
@@ -289,25 +289,13 @@
                                 <input type="text" id="newNCRnumber" name="newNCRnumber"
                                     placeholder="(ex)new NCR number" required>
                             </div>
-                            <hr>
+                            <hr>                            
                             <div>
-                                <label for="txtInspectorName">Inspector's Name*</label>
-                                <input type="text" id="txtInspectorName" name="txtInspectorName"
-                                    placeholder="(ex)Jeremy Irons" required>
-                                <span id="txtInspectorNameError" style="color: red;"></span> <!-- Error span -->
-                            </div>
-                            <div>
-                                <label for="finalInspectorDate">Inspector's Date*</label>
+                                <label for="finalInspectorDate">Purchasing's Name*</label>
                                 <input id="finalInspectorDate" name="inspectorDate" type="date">
                                 <span id="finalInspectorDateError" style="color: red;"></span> <!-- Error span -->
                             </div>
-                            <hr>
-                            <div>
-                                <label for="txtQualityName">Quality Department*</label>
-                                <input type="text" id="txtQualityName" name="txtQualityName"
-                                    placeholder="(ex)Jeremy Irons" required>
-                                <span id="txtQualityNameError" style="color: red;"></span> <!-- Error span -->
-                            </div>
+                            <hr>                            
                             <div>
                                 <label for="qualityDate">Quality Dept Date*</label>
                                 <input id="qualityDate" name="inspectorDate" type="date" required>
@@ -316,11 +304,10 @@
                         </fieldset>
                     </div>
                     <div class="button-container">
-                        <label for="status">Status:*</label>
-
+                        <label for="status">Mark Status Closed?:*</label>
                         <select id="status" required>
 
-                            <option value="active">Active</option>
+                            <option value="Open">Active</option>
                             <option value="Closed">Closed</option>
                         </select>
                         <button type="button" id="btnSave" value="Save Report" title="Save and close out the">Save & Close</button>                        

@@ -52,11 +52,10 @@ function saveSendFunction() {
         var revisionDate = document.getElementById('operationsDate').value;
         var reInspect = document.getElementById('reInspect').value;
         var newNCRNum = document.getElementById('newNCRnumber').value;
-        var inspectorName = document.getElementById('txtInspectorName').value;
-        var inspectorDate = document.getElementById('finalInspectorDate').value;
-        var qualityName = document.getElementById('txtQualityName').value;
+        
+        var inspectorDate = document.getElementById('finalInspectorDate').value;       
         var qualityDate = document.getElementById('qualityDate').value;
-        var requirFollowUp = document.getElementById('txtFollowUp').value;
+        var requirFollowUp = document.getElementById('txtFollowUp').value;       
 }
     var rdoOneValue = '';
     if(window.location.pathname === '/qualityInspector.html' || '/engineering.html' || '/operations.html'){
@@ -132,9 +131,9 @@ function saveSendFunction() {
             revisionDate: revisionDate,
             reInspect: reInspect,
             newNCRNum: newNCRNum,
-            inspectorName: inspectorName,
+            //inspectorName: inspectorName,
             inspectorDate: inspectorDate,
-            qualityName: qualityName,
+            //qualityName: qualityName,
             qualityDate: qualityDate,
         },
        engineeringDetails:{           
@@ -142,8 +141,8 @@ function saveSendFunction() {
             isNonConforming: rdoTwoValue,           
             updatedRevNum: updatedRevNum,
             revisionDate: revisionDate,
-            engineerName: engineerName,
-            status: status,
+            engineerName: engineerName,            
+            
        }
     };
 
