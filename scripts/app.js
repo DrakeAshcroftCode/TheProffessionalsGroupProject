@@ -275,6 +275,19 @@ function storeFormData(ncrForm) {
     }
 
     localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
+
+        // Send email notification
+        const toEmail = "drakejashcroft@hotmail.com"; 
+        const subject = existingIndex === -1
+            ? `New NCR Created: ${ncrForm.supplierInfo.ncrNumber}`
+            : `NCR Updated: ${ncrForm.supplierInfo.ncrNumber}`;
+        sendEmailNotification(toEmail, subject, ncrForm);
+    
+        // Notify the next role in the workflow
+        // const nextRole = determineNextRole(ncrForm);
+        // if (nextRole) {
+        //     notifyRoleUsers(nextRole, ncrForm);
+        // }
 }
 // Load form data
 function loadFormData() {
@@ -370,19 +383,45 @@ function savePartialNCR() {
     alert("Incomplete NCR saved successfully.");
     displayNCRList(incompleteNCRs, false);
 }
+function notifyTestEmail(ncrForm) {
+    const testEmail = "Drakejashcroft@hotmail.com";
+    sendEmailNotification(
+        testEmail,
+        `Test NCR Notification: ${ncrForm.supplierInfo.ncrNumber}`,
+        ncrForm
+    );
+
+    queueNotification(
+        testEmail,
+        "Test NCR Assigned",
+        `You have been assigned NCR #${ncrForm.supplierInfo.ncrNumber}. Please review it.`
+    );
+
+    console.log(`Notification and email sent to test email: ${testEmail}`);
+}
 
 // Save button click event
-document.getElementById("btnSave").addEventListener("click", function (event) {
+document.getElementById("btnSave").addEventListener("click", async function (event) {
     event.preventDefault();
     var ncrForm = saveSendFunction();    
 
     console.log(ncrForm);
     if (validation(ncrForm)) {
-        storeFormData(ncrForm);
-        alert("Form saved successfully.");
-        window.location.href = "storeNCR.html";
+        // Save form data and wait for async operations to complete
+        try {
+            await storeFormData(ncrForm); // Ensure form data is stored and emails are sent
+            notifyTestEmail(ncrForm); // Optionally send a test email
+            
+            alert("Form saved successfully."); // Notify user of successful save
+            
+            // Redirect after all async operations complete
+            window.location.href = "storeNCR.html";
+        } catch (error) {
+            console.error("Error during save or notification process:", error);
+            alert("An error occurred while saving the form. Please try again.");
+        }
     } else {
-        console.log("Form has errors");
+        console.log("Form has errors"); // Log if validation fails
     }
 });
 

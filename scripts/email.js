@@ -2,26 +2,30 @@
 
 // EmailJS Initialization
 (function () {
-    emailjs.init('v11zkRvHEyRxW0Icf'); // Your public API key
+    try {
+        emailjs.init('v11zkRvHEyRxW0Icf'); // public API key
+        console.log("EmailJS initialized successfully.");
+    } catch (error) {
+        console.error("Failed to initialize EmailJS:", error);
+    }
 })();
 
 // Function to send email notifications
 function sendEmailNotification(toEmail, subject, ncrForm) {
+    if (!toEmail || !ncrForm) {
+        console.error("Missing required parameters for sending email.");
+        return;
+    }
+
     const templateParams = {
         to_email: toEmail,
         subject: subject,
-        supplier_name: ncrForm.supplierInfo.supplierName,
-        ncr_number: ncrForm.supplierInfo.ncrNumber,
-        product_number: ncrForm.supplierInfo.poOrProductNumber,
-        sales_order_number: ncrForm.supplierInfo.salesOrderNumber,
-        quantity_received: ncrForm.supplierInfo.quantityReceived,
-        quantity_defective: ncrForm.supplierInfo.quantityDefective,
-        sap_no: ncrForm.reportDetails.sapNo,
-        item_description: ncrForm.reportDetails.itemDescription,
-        defect_description: ncrForm.reportDetails.descriptionOfDefect,
-        report_date: ncrForm.nonConformanceDetails.dateOfReport,
-        representative_name: ncrForm.nonConformanceDetails.qualityRepresentativeName,
+        ncr_number: ncrForm.supplierInfo?.ncrNumber || "N/A",
+        supplier_name: ncrForm.supplierInfo?.supplierName || "N/A",
+        description: ncrForm.reportDetails?.descriptionOfDefect || "N/A", 
     };
+
+    console.log("Sending email with templateParams:", templateParams);
 
     emailjs.send('service_ifwgw9e', 'template_or6un3i', templateParams)
         .then((response) => {
@@ -34,39 +38,61 @@ function sendEmailNotification(toEmail, subject, ncrForm) {
 
 // Function to queue notifications locally
 function queueNotification(email, title, message) {
+    if (!email || !title || !message) {
+        console.error("Missing required parameters for queuing notification.");
+        return;
+    }
+
     const notificationsKey = `notifications_${email}`;
     const notifications = JSON.parse(localStorage.getItem(notificationsKey)) || [];
     notifications.push({ title, message, timestamp: new Date().toISOString() });
     localStorage.setItem(notificationsKey, JSON.stringify(notifications));
+
     console.log("Notification queued for:", email, "Title:", title, "Message:", message);
 }
 
 // Function to notify relevant users
 function notifyRoleUsers(role, ncrForm) {
+    if (!role || !ncrForm) {
+        console.error("Missing required parameters for notifying users.");
+        return;
+    }
+
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const roleUsers = users.filter(user => user.role === role);
 
+    if (roleUsers.length === 0) {
+        console.warn(`No users found for role: ${role}`);
+    }
+
     roleUsers.forEach(user => {
+        console.log(`Notifying user: ${user.email}`);
         sendEmailNotification(
             user.email,
-            `New NCR Assigned: ${ncrForm.supplierInfo.ncrNumber}`,
+            `New NCR Assigned: ${ncrForm.supplierInfo?.ncrNumber || "N/A"}`,
             ncrForm
         );
 
         queueNotification(
             user.email,
             "New NCR Assigned",
-            `You have been assigned NCR #${ncrForm.supplierInfo.ncrNumber}. Please review it.`
+            `You have been assigned NCR #${ncrForm.supplierInfo?.ncrNumber || "N/A"}. Please review it.`
         );
     });
 }
 
 // Function to determine the next role to notify
-function determineNextRole(ncrForm) {
-    const submitterRole = ncrForm.reportDetails.submitterRole;
-    if (submitterRole === 'Quality Inspector') return 'Engineering';
-    if (submitterRole === 'Engineering') return 'Operations Manager';
-    return null;
-}
+// function determineNextRole(ncrForm) {
+//     if (!ncrForm?.reportDetails?.submitterRole) {
+//         console.error("Submitter role is missing in NCR form.");
+//         return null;
+//     }
 
-export { sendEmailNotification, queueNotification, notifyRoleUsers, determineNextRole };
+//     const submitterRole = ncrForm.reportDetails.submitterRole;
+//     if (submitterRole === 'Quality Inspector') return 'Engineering';
+//     if (submitterRole === 'Engineering') return 'Operations Manager';
+
+//     console.warn("No next role determined for submitterRole:", submitterRole);
+//     return null;
+// }
+

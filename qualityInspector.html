@@ -170,12 +170,21 @@
             </form>
         </main>
     </div>
-    <script src="scripts/session.js"></script>
+    <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+(function(){
+  emailjs.init({
+    publicKey: "v11zkRvHEyRxW0Icf",
+  });
+})();
+</script>    <script src="scripts/session.js"></script>
     <script src="scripts/homeLogin.js"></script>
     <script src="scripts/app.js"></script>
 
     <script src="scripts/notif.js"></script>
     <script src="scripts/storeNCR.js"></script>
+    <script src="scripts/email.js"></script>
 
     <script>
 
