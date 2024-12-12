@@ -330,6 +330,8 @@ function editNCR(index) {
 }
 
 
+
+
 // Function to seed NCRs if there are none, if none found, it'll give us ten of them as mark requested.
 function seedNCRs() {
     let storedNCRs = JSON.parse(localStorage.getItem('storedNCRs')) || [];
@@ -339,26 +341,52 @@ function seedNCRs() {
         return;
     }
 
+    const suppliers = [
+        "Acme Corp", "Global Suppliers Inc.", "Precision Parts Ltd.", 
+        "TechGears Co.", "MegaTools International", "Nova Supplies",
+        "Pioneer Equipment", "Vertex Components", "Infinity Tools", "Prime Materials"
+    ];
+
+    const defectDescriptions = [
+        "Cracked housing on the unit.",
+        "Misaligned drilling on component.",
+        "Paint scratches on surface.",
+        "Missing screws in assembly package.",
+        "Incorrect dimensions for the bracket.",
+        "Electrical wiring exposed.",
+        "Sealant improperly applied.",
+        "Surface corrosion observed.",
+        "Packaging damage resulting in scratches.",
+        "Labeling errors on shipment."
+    ];
+
+    const processOptions = ['recInsp', 'WIP'];
+    const statuses = ['Open', 'Closed'];
+
     for (let i = 1; i <= 10; i++) {
+        const randomIndex = Math.floor(Math.random() * suppliers.length);
+        const randomProcess = processOptions[Math.floor(Math.random() * processOptions.length)];
+        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+
         const newNCR = {
             supplierInfo: {
                 ncrNumber: generateNCRNumber(),
-                supplierName: `Supplier ${i}`,
+                supplierName: suppliers[randomIndex],
                 poOrProductNumber: `${1000 + i}`,
                 salesOrderNumber: `${10000000 + i}`,
-                quantityReceived: Math.floor(Math.random() * 100) + 1,
-                quantityDefective: Math.floor(Math.random() * 10),
+                quantityReceived: Math.floor(Math.random() * 100) + 10, // Received between 10 and 100
+                quantityDefective: Math.floor(Math.random() * 10) + 1,  // Defective between 1 and 10
             },
             reportDetails: {
-                processApplicable: 'recInsp',
+                processApplicable: randomProcess,
                 sapNo: `${3000 + i}`,
-                itemDescription: `Item description ${i}`,
-                descriptionOfDefect: `Defect description ${i}`,
+                itemDescription: `Item ${i}: High-quality widget.`,
+                descriptionOfDefect: defectDescriptions[randomIndex],
                 nonConformityImage: `image${i}.jpg`
             },
             nonConformanceDetails: {
-                isNonConforming: 'Yes',
-                dateOfReport: new Date().toISOString().split('T')[0],
+                isNonConforming: randomStatus,
+                dateOfReport: new Date(Date.now() - Math.random() * 1e9).toISOString().split('T')[0], // Random date in the past
                 qualityRepresentativeName: `Rep ${i}`,
             }
         };
@@ -369,6 +397,7 @@ function seedNCRs() {
     localStorage.setItem('storedNCRs', JSON.stringify(storedNCRs));
     console.log("NCRs seeded successfully.");
 }
+
 // Function to view NCR details
 // I used to have a lot more code here but I broke it out into a separate JS file (ViewNCR.js) for better
 // functionality across pages.
