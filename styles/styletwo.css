@@ -16,15 +16,15 @@ body {
 #logoutButton {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #ff4d4d;
-    color: #fff;
+    background-color: #FF57AB;
+    color: #000000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 #logoutButton:hover {
-    background-color: #e60000;
+    background-color: #FF6666;
 }
 
 nav {
@@ -116,7 +116,7 @@ nav ul li a:hover .button-lines div {
 }
 
 .modal-content {
-    background-color: #5897c9;
+    background-color: #023E97;
     margin: 15% auto;
     padding: 10px;
     border: 2px solid #888;
@@ -191,7 +191,7 @@ form {
 }
 
 #form-sections fieldset {
-    border: 4px solid #5897c9;
+    border: 4px solid #023E97;
     border-radius: 5px;
     padding: 25px;
     margin: 5px;

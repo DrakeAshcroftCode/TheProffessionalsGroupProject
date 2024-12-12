@@ -34,7 +34,7 @@ body {
 }
 
 .modal-content {
-    background-color: #5897c9;
+    background-color: #023E97;
     margin: 15% auto;
     padding: 10px;
     border: 2px solid #888;
@@ -308,8 +308,8 @@ textarea::-webkit-scrollbar-thumb:hover {
 #logoutButton {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #dc3545;
-    color: #fff;
+    background-color: #FF57AB;
+    color: #000000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -318,7 +318,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 #logoutButton:hover {
-    background-color: #e60000;
+    background-color: #FF6666;
 }
 @media (max-width: 1200px) {
     #form-sections {

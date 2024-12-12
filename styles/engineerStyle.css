@@ -18,8 +18,8 @@ body {
 #logoutButton {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #dc3545;
-    color: #fff;
+    background-color: #FF57AB;
+    color: #000000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -28,7 +28,7 @@ body {
 }
 
 #logoutButton:hover {
-    background-color: #e60000;
+    background-color: #FF6666;
 }
 #notifIcon {
     position: fixed;
@@ -127,7 +127,7 @@ nav ul li a:hover .button-lines div {
 }
 
 .modal-content {
-    background-color: #5897c9;
+    background-color: #87B4D9;
     margin: 15% auto;
     padding: 10px;
     border: 2px solid #888;
@@ -160,7 +160,7 @@ header img {
     padding: 10px;
     cursor: pointer;
     font-weight: bold;
-    border: 2px solid #5897c9;
+    border: 2px solid #87B4D9;
     border-radius: 5px;
     margin-bottom: 5px;
     text-align: center;
@@ -170,7 +170,7 @@ header img {
     display: none; /* Initially hidden */
     padding: 10px;
     background-color: #c9c9c9;
-    border: 2px solid #5897c9;
+    border: 2px solid #87B4D9;
     border-radius: 5px;
     margin-bottom: 10px;
 }
@@ -219,7 +219,7 @@ form {
 }
 
 #form-sections fieldset {
-    border: 4px solid #5897c9;
+    border: 4px solid #87B4D9;
     border-radius: 5px;
     padding: 10px;
     margin: 0;
@@ -242,7 +242,7 @@ form {
 #form-sections select {
     width: 100%;
     background-color: #ffffff;
-    border: 2px solid #5897c9;
+    border: 2px solid #87B4D9;
     border-radius: 8px;
     padding: 10px;
     box-sizing: border-box;
@@ -352,7 +352,7 @@ textarea::-webkit-scrollbar-thumb:hover {
     box-sizing: border-box;
     padding: 10px;
     background-color: #ffffff;
-    border: 2px solid #5897c9;
+    border: 2px solid #87B4D9;
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -384,7 +384,7 @@ details {
 details summary {
     padding: 10px;
     font-size: 1.2em;
-    background-color: #5897c9;
+    background-color: #87B4D9;
     border: 1px solid #ccc;
     cursor: pointer;
     width: 100%;  
@@ -449,7 +449,7 @@ details[open] summary {
 #popout-form-sections textarea {
     width: 100%;
     background-color: #ffffff;
-    border: 2px solid #5897c9;
+    border: 2px solid #87B4D9;
     border-radius: 8px;
     padding: 10px;
     box-sizing: border-box;
@@ -471,7 +471,7 @@ details[open] summary {
 
 
 #popout-form-sections fieldset {
-    border: 4px solid #5897c9;
+    border: 4px solid #87B4D9;
     border-radius: 5px;
     width: 100%;                       
     padding: 10px;
@@ -524,7 +524,7 @@ details[open] summary {
 #popout-form-sections select {
     width: 100%;
     background-color: #ffffff;
-    border: 2px solid #5897c9;
+    border: 2px solid #87B4D9;
     border-radius: 8px;
     padding: 10px;
     box-sizing: border-box;
@@ -535,7 +535,7 @@ details[open] summary {
 #defectDescription {
     width: 100%;
     background-color: #ffffff;
-    border: 2px solid #5897c9;
+    border: 2px solid #87B4D9;
     border-radius: 8px;
     padding: 10px;
     box-sizing: border-box;
@@ -572,7 +572,7 @@ details[open] summary {
     text-align: center;
     font-size: 18px;                 
     border: 2px solid #444;
-    background-color: #5897c9;
+    background-color: #87B4D9;
     color: #000;
     border-radius: 10px;             
     outline: none;
@@ -581,10 +581,10 @@ details[open] summary {
 }
 
 #Engineer-forms button:hover{
-    background-color: #000;
-    border-color: #222;
+    background-color: #baa6dc;
+    border-color: #baa6dc;
     cursor: pointer;
-    color: #fff;
+    color: #000000;
 }
 #Engineer-forms > div {
     flex: 1 1 48%;                           
@@ -595,7 +595,7 @@ details[open] summary {
 
 
 #Engineer-forms fieldset {
-    border: 4px solid #5897c9;
+    border: 4px solid #87B4D9;
     border-radius: 5px;
     width: 100%;                             
     padding: 10px;
@@ -616,7 +616,7 @@ details[open] summary {
 #Engineer-forms select {
     width: 100%;
     background-color: #ffffff;
-    border: 2px solid #5897c9;
+    border: 2px solid #87B4D9;
     border-radius: 8px;
     padding: 10px;
     box-sizing: border-box;
