@@ -389,14 +389,39 @@ document.getElementById("btnSave").addEventListener("click", function (event) {
 // Clear button click event
 document.getElementById("btnClear").addEventListener("click", function (event) {
     event.preventDefault();
-    document.querySelector('form').reset();
+
+    const userChoice = confirm(
+        "Do you want to keep the current NCR number?\n\n" +
+        "Press OK to keep the current NCR number.\n" +
+        "Press Cancel to generate a new NCR number."
+    );
+
+    const ncrField = document.getElementById('ncrNo');
+    let ncrNumberToKeep = '';
+
+    if (ncrField) {
+        ncrNumberToKeep = ncrField.value;
+
+        document.querySelector('form').reset();
+
+        if (userChoice) {
+            ncrField.value = ncrNumberToKeep;
+        } else {
+            ncrField.value = generateNCRNumber();
+        }
+    }
+
     const errorElements = document.querySelectorAll('span[id$="Error"]');
     errorElements.forEach(function (element) {
         element.textContent = "";
     });
+
     lastCheckedRadioIPA = null;
     lastCheckedRadioConforming = null;
+
+    console.log(`Form cleared. NCR number ${userChoice ? "retained" : "regenerated"}.`);
 });
+
 
 // Auto-expand text areas (thus the name)
 function autoExpandTextarea(textarea) {
