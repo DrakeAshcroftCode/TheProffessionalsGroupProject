@@ -82,26 +82,32 @@
                                     <div>
                                         <label for="supName">Supplier Name*</label>
                                         <input id="supName" name="supName" placeholder="Pepsi Co.." type="text" required>
+                                        <span id="supNameError" style="color: red;"></span>
                                     </div>
                                     <div>
                                         <label for="ncrNo">NCR No.*</label>
                                         <input id="ncrNo" name="ncrNo" placeholder="65789" type="text" required >
+                                        <span id="ncrNoError" style="color: red;"></span>
                                     </div>
                                     <div>
                                         <label for="prodNo">PO or Prod. No.*</label>
                                         <input id="prodNo" name="prodNo" placeholder="product number" type="text" required>
+                                        <span id="prodNoError" style="color: red;"></span>
                                     </div>
                                     <div>
                                         <label for="saleOrderNo">Sales Order No.*</label>
                                         <input id="saleOrderNo" name="saleOrderNo" placeholder="9998877" type="text" required>
+                                        <span id="saleOrderNoError" style="color: red;"></span>
                                     </div>
                                     <div>
                                         <label for="quantityR">Quantity Received:*</label>
                                         <input id="quantityR" name="quantityR" placeholder="10" type="text" required>
+                                        <span id="quantityRError" style="color: red;"></span>
                                     </div>
                                     <div>
                                         <label for="quantityD">Quantity Defective*</label>
                                         <input id="quantityD" name="quantityD" placeholder="15" type="text" required>
+                                        <span id="quantityDError" style="color: red;"></span>
                                     </div>
                                 </fieldset>
                             </div>
@@ -115,14 +121,17 @@
                                         <input type="radio" id="rdoConformingYes" name="conforming" value="Yes">
                                         <label for="rdoConformingNo">No</label>
                                         <input type="radio" id="rdoConformingNo" name="conforming" value="No">
+                                        <span id="rdoConformingError" style="color: red;"></span>
                                     </div>
                                     <div>
                                         <label for="reportDate">Date of Report*</label>
                                         <input id="reportDate" name="reportDate" type="date" required>
+                                        <span id="reportDateError" style="color: red;"></span>
                                     </div>
                                     <div>
                                         <label for="repName">Quality Representative's Name:*</label>
                                         <input type="text" id="repName" name="repName" placeholder="John Wick" required>
+                                        <span id="repNameError" style="color: red;"></span>
                                     </div>
                                 </fieldset>
                             </div>
@@ -142,14 +151,18 @@
                                 <div>
                                     <label for="sapNo">SAP No.*</label>
                                     <input id="sapNo" name="sapNo" placeholder="SAP No. here" type="text" required>
+                                    <span id="sapNoError" style="color: red;"></span>
                                 </div>
+                                <span id="rdoIPAError" style="color: red;"></span>
                                 <div >
                                     <label for="itemDescription">Description of Item*</label>
                                     <textarea id="itemDescription" name="itemDescription" placeholder="Please describe the item here" required></textarea>
+                                    <span id="itemDescriptionError" style="color: red;"></span>
                                 </div>
                                 <div>
                                     <label for="defectDescription">Description of Defect*</label>
                                     <textarea id="defectDescription" name="defectDescription" placeholder="In as much detail possible, describe the item's defect" required></textarea>
+                                    <span id="defectDescriptionError" style="color: red;"></span>
                                 </div>
                             </fieldset>
                         </div>
@@ -258,10 +271,8 @@
 
                if (index !=-1){
                 var ncr = storedNCRs[index];
-                }
-                
-                //console.log('Index: ' + index);
-                //console.log(ncr);
+                }               
+              
 
                 if (ncr) {
                     document.getElementById('supName').value = ncr.supplierInfo.supplierName;
@@ -271,7 +282,9 @@
                     document.getElementById('quantityR').value = ncr.supplierInfo.quantityReceived;
                     document.getElementById('quantityD').value = ncr.supplierInfo.quantityDefective;
                     document.getElementById('sapNo').value = ncr.reportDetails.sapNo;
-                    // Populating Report Details (Non-Conforming and Redraw)
+                    document.getElementById('repName').value = ncr.nonConformanceDetails.qualityRepresentativeName;
+
+                    // Populating Report Details (Conforming and Redraw)
                     if (ncr.reportDetails.isNonConforming === 'Yes') {
                         document.getElementById('rdoConformingYes').checked = true;
                     } else {
@@ -298,11 +311,11 @@
                         console.log(formattedDate); // Check the formatted date
 
                         // Setting the value directly to input[type="date"]
-                        document.getElementById('reportDate').value = formattedDate;
-
+                        document.getElementById('rprtDate').value = formattedDate;
                         // This should update the calendar and text display for date pickers
+                        console.log(reportDate)
                     }
-                    document.getElementById('repName').value = ncr.reportDetails.qualityRepresentativeName;        
+                           
                     
 
                     // Populating Description Fields

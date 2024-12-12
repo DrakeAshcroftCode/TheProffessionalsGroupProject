@@ -13,7 +13,7 @@ function saveSendFunction() {
     var salesOrderNumber = document.getElementById('saleOrderNo').value;
     var quantityReceived = document.getElementById('quantityR').value;
     var quantityDefective = document.getElementById('quantityD').value;
-
+    var repName = document.getElementById('repName').value;
     
     var sapNo = document.getElementById('sapNo').value;
 
@@ -27,7 +27,7 @@ function saveSendFunction() {
     var rdoConformingYes = document.getElementById('rdoConformingYes');
     var rdoConformingNo = document.getElementById('rdoConformingNo');
     var reportDate = document.getElementById('reportDate').value;
-    var repName = document.getElementById('repName').value;
+    
 
     
     if (session.role === 'Engineering' && window.location.pathname === '/engineering.html'){
@@ -35,11 +35,12 @@ function saveSendFunction() {
     var selectDisposition = document.getElementById('selectDisposition').value;
     var selectNotification = document.getElementById('selectNotification').value;
     
-    var origRevNum = document.getElementById('txtUpRevNo').value;
+    var origRevNum = document.getElementById('txtOrgRevNo').value;
     var updatedRevNum = document.getElementById('txtUpRevNo').value;
     var revisionDate = document.getElementById('revisionDateDate').value;
     var engineerName = document.getElementById('txtEngName').value;
     var status = document.getElementById('status').value;
+
     }
 
     if (session.role ==='Operations Manager' && window.location.pathname === '/operations.html'){
@@ -55,9 +56,10 @@ function saveSendFunction() {
         var inspectorDate = document.getElementById('finalInspectorDate').value;
         var qualityName = document.getElementById('txtQualityName').value;
         var qualityDate = document.getElementById('qualityDate').value;
+        var requirFollowUp = document.getElementById('txtFollowUp').value;
 }
     var rdoOneValue = '';
-    if(window.location.pathname === '/qualityInspector.html' || '/engineering.html'){
+    if(window.location.pathname === '/qualityInspector.html' || '/engineering.html' || '/operations.html'){
         var rdoRecInsp = document.getElementById('rdoRecInsp');
         var rdoWIP = document.getElementById('rdoWIP');
         if (rdoRecInsp && rdoRecInsp.checked) {
@@ -66,7 +68,6 @@ function saveSendFunction() {
             rdoOneValue = 'rdoWIP';
         }
     }
-   console.log(rdoOneValue);
 
     var rdoTwoValue = '';
     if (rdoConformingYes.checked) {
@@ -115,7 +116,8 @@ function saveSendFunction() {
             updatedRevNum: updatedRevNum,
             revisionDate: revisionDate,
             engineerName: engineerName,
-            submitterRole: submitterRole,           
+            submitterRole: submitterRole,
+            requirFollowUp: requirFollowUp,           
         },
         nonConformanceDetails: {
             isNonConforming: rdoTwoValue,
@@ -137,8 +139,7 @@ function saveSendFunction() {
         },
        engineeringDetails:{           
             needRedraw: rdoThreeValue,
-            isNonConforming: rdoTwoValue,
-            origRevNum: origRevNum,
+            isNonConforming: rdoTwoValue,           
             updatedRevNum: updatedRevNum,
             revisionDate: revisionDate,
             engineerName: engineerName,
@@ -181,7 +182,7 @@ function validation(ncrForm) {
     
 
     // Clear error messages
-    if(window.location.pathname === '/qualityInspector.html'){
+    if(window.location.pathname === '/qualityInspector.html' || '/engineering.html'){
         supNameError.textContent = "";
         ncrNoError.textContent = "";
         prodNoError.textContent = "";
@@ -195,7 +196,7 @@ function validation(ncrForm) {
         reportDateError.textContent = "";
         rdoIPAError.textContent = "";
         rdoConformingError.textContent = "";
-        nrcImageError.textContent = "";
+        //nrcImageError.textContent = "";
     }
     
 

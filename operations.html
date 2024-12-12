@@ -108,11 +108,13 @@
                             <div>
                                 <label>Identify Process applicable:</label>
                                 <br>
-                                <label for="rdoIPA">Supplier or Rec-Insp*</label>
-                                <input type="radio" id="rdoIPA" name="rdoIPA" value="recInsp" required>
-
-                                <label for="rdoIPA">WIP(Production Order)*</label>
-                                <input type="radio" id="rdoIPA" name="rdoIPA" value="WIP" required>
+                                <div>
+                                    <label for="rdoIPA">Supplier or Rec-Insp*</label>
+                                    <input type="radio" id="rdoIPA" name="rdoRecWIP" value="recInsp">
+                                
+                                    <label for="rdoWIP">WIP(Production Order)*</label>
+                                    <input type="radio" id="rdoWIP" name="rdoRecWIP" value="WIP">
+                                </div>
                                 <span id="rdoIPAError" style="color: red;"></span> <!-- Error span -->
                             </div>
                             <br>
@@ -133,12 +135,7 @@
                                     placeholder="In as much detail possible, describe the item's defect"
                                     required></textarea>
                                 <span id="defectDescriptionError" style="color: red;"></span> <!-- Error span -->
-                            </div>
-                            <div>
-                                <label for="nrcImage">Choose a Nonconformity image to upload*</label>
-                                <input type="file" id="nrcImage" name="nrcImage" accept="image/*" required>
-                                <span id="nrcImageError" style="color: red;"></span> <!-- Error span -->
-                            </div>
+                            </div>                            
                         </fieldset>
 
                         <fieldset>
@@ -258,6 +255,11 @@
                                 </select>
                             </div>
                             <div>
+                                <label for="txtFollowUp">If "Yes" suplly type of follow up and expected date</label>
+                                <input type="text" id="txtFollowUp" name="newNCRNO" placeholder="Type of follow up and expected date">
+                            </div>                    
+                            
+                            <div>
                                 <label for="txtOpName">Operations Manager*</label>
                                 <input type="text" id="txtOpName" name="txtOpName" placeholder="(ex)Imma DaBoss"
                                     required>
@@ -359,12 +361,9 @@
                     document.getElementById('quantityR').value = ncr.supplierInfo.quantityReceived;
                     document.getElementById('quantityD').value = ncr.supplierInfo.quantityDefective;
                     document.getElementById('sapNo').value = ncr.reportDetails.sapNo;
-
-                    if(ncr.reportDetails.processApplicable === 'recIsp'){
-                        document.getElementById('rdoRecInsp').checked =true;
-                    }else { document.getElementbyId('rdoWIP').checked = true
-                        
-                    }
+                    document.getElementById('repName').value = ncr.nonConformanceDetails.qualityRepresentativeName;
+                    
+                    
 
                     // Populating Report Details (Non-Conforming and Redraw)
                     if (ncr.reportDetails.isNonConforming === 'Yes') {
@@ -384,6 +383,7 @@
                     }else {
                         document.getElementById('rdoWIP').checked = true;
                     }
+
                     // Populating Date and Name
                     const reportDate = ncr.reportDetails.reportDate;
                     if (reportDate) {
@@ -396,7 +396,7 @@
 
                         // This should update the calendar and text display for date pickers
                     }
-                    document.getElementById('repName').value = ncr.reportDetails.qualityRepresentativeName;        
+                    
                     
 
                     // Populating Description Fields
@@ -407,7 +407,17 @@
                     document.getElementById('dispositionDescription').value = ncr.reportDetails.dispositionDescription;
                     document.getElementById('selectDisposition').value = ncr.reportDetails.selectDisposition;
                     document.getElementById('selectNotification').value = ncr.reportDetails.selectNotification;
-                    document.getElementById('origRevNum').value = ncr.value = ncr.engineeringDetails.origRevNum;
+                    document.getElementById('origRevNum').value = ncr.engineeringDetails.origRevNum;
+                    document.getElementById('txtEngName').value = ncr.engineeringDetails.engineerName;
+                    document.getElementById('status').value = ncr.engineeringDetails.status;
+                    document.getElementById('txtOrgRevNo').value = ncr.reportDetails.origRevNum;
+                    document.getElementById('txtupRevNo').value = ncr.reportDetails.updateRevNum;
+
+                    if(ncr.engineeringDetails.needRedraw === 'yes'){
+                        document.getElemetById('rdoRedrawYes').checked = true;
+                    }else{
+                        document.getElementById('rdoRedrawNo').checked = true;
+                    }
                 }
             }
         });
