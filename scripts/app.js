@@ -12,8 +12,13 @@ function saveSendFunction() {
     var quantityReceived = document.getElementById('quantityR').value;
     var quantityDefective = document.getElementById('quantityD').value;
 
+    var repName = document.getElementById('repName').value;
+    
+
+
     var rdoRecInsp = document.getElementById('rdoRecInsp');
     var rdoWIP = document.getElementById('rdoWIP');
+
     var sapNo = document.getElementById('sapNo').value;
 
     var itemDescription = document.getElementById('itemDescription').value;
@@ -23,13 +28,47 @@ function saveSendFunction() {
     var rdoConformingYes = document.getElementById('rdoConformingYes');
     var rdoConformingNo = document.getElementById('rdoConformingNo');
     var reportDate = document.getElementById('reportDate').value;
-    var repName = document.getElementById('repName').value;
+    
 
+
+    
+    if (session.role === 'Engineering' && window.location.pathname === '/engineering.html'){
+    var dispositionDescription = document.getElementById('dispositionDescription').value;
+    var selectDisposition = document.getElementById('selectDisposition').value;
+    var selectNotification = document.getElementById('selectNotification').value;
+    
+    var origRevNum = document.getElementById('txtOrgRevNo').value;
+    var updatedRevNum = document.getElementById('txtUpRevNo').value;
+    var revisionDate = document.getElementById('revisionDateDate').value;
+    var engineerName = document.getElementById('txtEngName').value;
+    var status = document.getElementById('status').value;
+
+    }
+
+    if (session.role ==='Operations Manager' && window.location.pathname === '/operations.html'){
+        var purchDecision = document.getElementById('purchDecision').value;       
+        var car = document.getElementById('CAR').value;
+        var carNum = document.getElementById('carNumber').value;
+        var followUp = document.getElementById('followUp').value;
+        var txtOpName = document.getElementById('txtOpName').value;
+        var revisionDate = document.getElementById('operationsDate').value;
+        var reInspect = document.getElementById('reInspect').value;
+        var newNCRNum = document.getElementById('newNCRnumber').value;
+        
+        var inspectorDate = document.getElementById('finalInspectorDate').value;       
+        var qualityDate = document.getElementById('qualityDate').value;
+        var requirFollowUp = document.getElementById('txtFollowUp').value;       
+}
     var rdoOneValue = '';
-    if (rdoRecInsp.checked) {
-        rdoOneValue = 'recInsp';
-    } else if (rdoWIP.checked) {
-        rdoOneValue = 'WIP';
+    if(window.location.pathname === '/qualityInspector.html' || '/engineering.html' || '/operations.html'){
+        var rdoRecInsp = document.getElementById('rdoRecInsp');
+        var rdoWIP = document.getElementById('rdoWIP');
+        if (rdoRecInsp && rdoRecInsp.checked) {
+            rdoOneValue = 'rdoRecInsp';
+        } else if (rdoWIP && rdoWIP.checked) {
+            rdoOneValue = 'rdoWIP';
+        }
+
     }
 
     var rdoTwoValue = '';
@@ -54,12 +93,47 @@ function saveSendFunction() {
             itemDescription: itemDescription,
             descriptionOfDefect: defectDescription,
             nonConformityImage: ncrImage,
+
+            selectDisposition: selectDisposition,
+            dispositionDescription: dispositionDescription,
+            selectNotification: selectNotification,
+            needRedraw: rdoThreeValue,
+            origRevNum: origRevNum,
+            updatedRevNum: updatedRevNum,
+            revisionDate: revisionDate,
+            engineerName: engineerName,
+            submitterRole: submitterRole,
+            requirFollowUp: requirFollowUp,           
+
         },
         nonConformanceDetails: {
             isNonConforming: rdoTwoValue,
             dateOfReport: reportDate,
             qualityRepresentativeName: repName,
-        }
+
+            status: status,
+            purchDecision: purchDecision,
+            car: car,
+            carNum: carNum,
+            followUp: followUp,
+            txtOpName: txtOpName,
+            revisionDate: revisionDate,
+            reInspect: reInspect,
+            newNCRNum: newNCRNum,
+            //inspectorName: inspectorName,
+            inspectorDate: inspectorDate,
+            //qualityName: qualityName,
+            qualityDate: qualityDate,
+        },
+       engineeringDetails:{           
+            needRedraw: rdoThreeValue,
+            isNonConforming: rdoTwoValue,           
+            updatedRevNum: updatedRevNum,
+            revisionDate: revisionDate,
+            engineerName: engineerName,            
+            
+       }
+
     };
 
     return ncrForm;
@@ -87,20 +161,25 @@ function validation(ncrForm) {
     const nrcImageError = document.getElementById('nrcImageError');
 
     // Clear error messages
-    supNameError.textContent = "";
-    ncrNoError.textContent = "";
-    prodNoError.textContent = "";
-    saleOrderNoError.textContent = "";
-    quantityRError.textContent = "";
-    quantityDError.textContent = "";
-    sapNoError.textContent = "";
-    itemDescriptionError.textContent = "";
-    defectDescriptionError.textContent = "";
-    repNameError.textContent = "";
-    reportDateError.textContent = "";
-    rdoIPAError.textContent = "";
-    rdoConformingError.textContent = "";
-    nrcImageError.textContent = "";
+
+    if(window.location.pathname === '/qualityInspector.html' || '/engineering.html'){
+        supNameError.textContent = "";
+        ncrNoError.textContent = "";
+        prodNoError.textContent = "";
+        saleOrderNoError.textContent = "";
+        quantityRError.textContent = "";
+        quantityDError.textContent = "";
+        sapNoError.textContent = "";
+        itemDescriptionError.textContent = "";
+        defectDescriptionError.textContent = "";
+        repNameError.textContent = "";
+        reportDateError.textContent = "";
+        rdoIPAError.textContent = "";
+        rdoConformingError.textContent = "";
+        //nrcImageError.textContent = "";
+    }
+    
+
 
     // Validation checks
     if (ncrForm.supplierInfo.supplierName === "") {
